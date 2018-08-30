@@ -68,7 +68,7 @@ body{
 }
 .navbar{
 	font-size: 18px;
-	background-color: #333333;
+	background-color: #330000;
   	padding-bottom: 10px;
 }
 #main-nav{
@@ -135,8 +135,8 @@ body{
 #home-page-text,
 #home-page-signup-text
 	{
-		font-weight: bold;
-		font-size: 2.3rem;
+		font-weight: lighter;
+		font-size: 2.1rem;
 	}
 .button{
 	justify-content: center;
@@ -213,7 +213,7 @@ body{
 }
 .footer{
 	padding-left: 5px;
-	background-color: #262626;
+	background-color: #330000;
 }
 
 /*sign up page style*/
@@ -228,8 +228,8 @@ body{
   	border-top: 0px;
   	border-right: 0px;
   	border-left: 0px;
-  	border-bottom: 0.1px solid #737373;
-  	background-color: rgba(0,0,0,0.6);
+  	/*border-bottom: 0.1px solid #737373;*/
+  	/*background-color: rgba(0,0,0,0.6);*/
   	height: 70px;
   	align-items: center;
   }  

@@ -159,7 +159,7 @@ html,body{
 	height: 200px;
 	object-fit: cover;
 }
-#food-details ul{
+.food-details ul{
 	display: inline;
 	list-style-type: none;
 }

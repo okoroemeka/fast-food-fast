@@ -51,13 +51,13 @@ html,body{
 .col-12{
 	width: 100%
 }
-/*.container{
+.container{
 	width: 100%;
-	min-height: 100%;
+	min-height: 100vh;
 	overflow: auto;
 	margin: auto;
-	background-color: rgba(0,0,0,1);
-}*/
+	background-color: rgba(230, 230, 255,0.7);
+}
 .navbar{
 	font-size: 18px;
 	background-color: #330000;
@@ -215,6 +215,91 @@ html,body{
 	padding-left: 5px;
 	background-color: #330000;
 }
+/* Dashboard style */
+#dashbord-container{
+	margin: auto;
+	padding: 0;
+}
+#dashbord{
+	padding-top: 10px;
+	padding-left: 30px;
+	background-color: #ffffff;
+}
+#dashbord-word{
+	font-size: 25px;
+}
+#glyhpicons{
+	float: right;
+	padding-right: 20px;
+}
+#email-glyph{
+	padding-right: 15px;
+}
+/*#admin-menu{
+	width: 100%;
+}*/
+#admin-menu,#accepted-oders,
+#admin-action{
+	width: 100%;
+	padding: 20px;
+}
+.menu-card,
+.order-card{
+	width: 100%;
+	margin: 15px 0px;
+	padding: 15px;
+	border: 0px;
+	background-color: #ffffff;
+	box-shadow: 0 0 10px 5px #e7e7e7;
+}
+.add-menu-item,
+.order-body{
+	width: 100%;
+	/*max-width: 100%;*/
+}
+.table{
+	width: 100%;
+	/*max-width:100%;*/
+	margin-bottom: 20px;
+}
+table{
+	/*table-layout: fixed;*/
+	/*max-width: 100%;*/
+	width: 100% !important;
+	display: table;
+	border-color: gray;
+	background-color: transparent;
+	/*border-spacing: 0;*/
+	border-collapse: collapse;
+}
+thead,th,td{
+	text-align: left;
+	padding: 15px;
+	border-bottom: 1px solid #e6e6ff;
+	border-collapse: collapse;
+	/*border-color: inherit;*/
+}
+.menu-card-button button,
+.accept-button,
+.reject-button{
+	color: #ffffff;
+	padding: 8px 20px;
+	border: 0px;
+	border-radius: 3px;
+	box-shadow: 0px 3px 2px #e7e7e7;
+	transition-duration: 0.5s;
+}
+.accept-button,
+.reject-button,
+.menu-card-button button:hover{
+	cursor: pointer;
+}
+.accept-button{
+ background-color: #0066cc;	
+}
+.reject-button{
+	background-color: #ff0000;
+}
 @media screen and (min-width: 768px){
   .navbar{
   	display: flex;
@@ -257,8 +342,18 @@ html,body{
   /*menu style*/
   .food-card{
 	width: 25%;
- }
- .order-button button:hover{
+  }
+  .order-button button:hover{
 	background-color:#0066ff;
+  }
+ /*Admin page*/
+  #admin-menu{
+ 	width: 33.33%;
+  }
+  #accepted-oders{
+  	width: 41.66%;
+ }
+ #admin-action{
+ 	width: 66.66%;
  }
 }

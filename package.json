@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build && npm run serve",
-    "start:dev": "nodemon server/bin/www.js --exec babel-node --presets env",
+    "start:dev": "nodemon server/app.js --exec babel-node --presets env",
     "build": "babel server -d server/dist --presets env",
     "serve": "node server/dist/app.js",
     "test": "nyc mocha --compilers js:babel-register server/test --exit --timeout 20000"

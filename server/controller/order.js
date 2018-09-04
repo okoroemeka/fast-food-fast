@@ -65,5 +65,40 @@ class Order {
       message: 'All feilds are required',
     });
   }
+
+  /**
+   * @returns {object} updateOrderStatus
+   * @param {*} req
+   * @param {*} res
+   */
+  static updateOrderStatus(req, res) {
+    const { orderId } = req.params;
+    const { status } = req.body;
+    const order = seed.find(iterator => parseInt(iterator.order_id, 10) === parseInt(orderId, 10));
+    if (!order) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'Order not found',
+      });
+    }
+    if (status !== undefined && status.trim().length !== 0) {
+      if (status === 'accept' || status === 'decline') {
+        seed[orderId].status = status;
+        return res.status(200).json({
+          status: 'success',
+          message: 'Order status updated successfully',
+          data: seed[orderId],
+        });
+      }
+      return res.status(400).json({
+        status: 'fail',
+        message: 'Status need to be either "accept" or "decline"',
+      });
+    }
+    return res.status(400).json({
+      status: 'fail',
+      message: 'All feilds are required',
+    });
+  }
 }
 export default Order;

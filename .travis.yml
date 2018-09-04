@@ -1,0 +1,20 @@
+languege: node_js
+
+node_js:
+  - "stable"
+install:
+  - npm install
+
+cache: bundler
+
+sudo: false
+
+dist: trusty
+
+services:
+  - postgresql
+
+script:
+  - npm run test
+after_success:
+  - npm run coverage

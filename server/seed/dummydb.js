@@ -5,11 +5,5 @@ const order = [
     price: '#1500',
     status: 'pending',
   },
-  {
-    order_id: 2,
-    food: 'ofada rice',
-    price: '#2500',
-    status: 'pending',
-  },
 ];
 export default order;

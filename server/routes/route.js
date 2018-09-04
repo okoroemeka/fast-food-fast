@@ -8,4 +8,5 @@ const router = express.Router();
 router.get('/order', order.getAllOrder);
 router.get('/order/:orderId', order.getSpecificOrder);
 router.post('/order', order.createOrder);
+router.put('/order/:orderId', order.updateOrderStatus);
 export default router;

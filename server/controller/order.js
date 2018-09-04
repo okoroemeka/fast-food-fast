@@ -76,7 +76,7 @@ class Order {
     const { status } = req.body;
     const order = seed.find(iterator => parseInt(iterator.order_id, 10) === parseInt(orderId, 10));
     if (!order) {
-      return res.status(400).json({
+      return res.status(404).json({
         status: 'fail',
         message: 'Order not found',
       });

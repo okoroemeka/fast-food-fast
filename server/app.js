@@ -22,5 +22,5 @@ app.all('*', (req, res) => res.status(404).json({
   message: 'Not found',
 }));
 
-app.listen(port, () => console.log(`listening on ${port}`));
+app.listen(port, () => console.log(`listening on port ${port}`));
 export default app;

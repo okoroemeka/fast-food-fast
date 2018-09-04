@@ -2,12 +2,14 @@ const order = [
   {
     order_id: 1,
     food: 'fried rice',
-    amount: '#1500',
+    price: '#1500',
+    status: 'pending',
   },
   {
     order_id: 2,
     food: 'ofada rice',
-    amount: '#2500',
+    price: '#2500',
+    status: 'pending',
   },
 ];
 export default order;

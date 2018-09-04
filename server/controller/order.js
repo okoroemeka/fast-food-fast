@@ -38,5 +38,32 @@ class Order {
       message: 'No order found',
     });
   }
+
+  /**
+   * @return {object} createOrder
+   * @param {*} req
+   * @param {*} res
+   */
+  static createOrder(req, res) {
+    const { food, price } = req.body;
+    const order = {
+      food,
+      price,
+      status: 'Pending',
+    };
+    if ((food !== undefined && food.trim().length !== 0)
+      && (price !== undefined && price.trim().length !== 0)) {
+      seed.push(order);
+      return res.status(201).json({
+        status: 'success',
+        message: `your order for ${food} was placed successfully`,
+        data: { food, price },
+      });
+    }
+    return res.status(400).json({
+      status: 'fail',
+      message: 'All feilds are required',
+    });
+  }
 }
 export default Order;

@@ -45,19 +45,32 @@ class Order {
    * @param {*} res
    */
   static createOrder(req, res) {
-    const { food, price } = req.body;
+    const {
+      food, price, fullName, address,
+    } = req.body;
     const order = {
+      fullName,
+      address,
+      order_id: (seed.length + 1),
       food,
       price,
       status: 'Pending',
     };
     if ((food !== undefined && food.trim().length !== 0)
-      && (price !== undefined && price.trim().length !== 0)) {
+      && (price !== undefined && price.trim().length !== 0)
+      && (fullName !== undefined && fullName.trim().length !== 0)
+      && (address !== undefined && address.trim().length !== 0)) {
       seed.push(order);
       return res.status(201).json({
         status: 'success',
         message: `your order for ${food} was placed successfully`,
-        data: { food, price },
+        data: {
+          fullName,
+          address,
+          order_id: order.order_id,
+          food,
+          price,
+        },
       });
     }
     return res.status(400).json({

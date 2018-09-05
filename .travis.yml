@@ -1,3 +1,7 @@
+env:
+  global:
+   - CC_TEST_REPORTER_ID=383a4773c229b6cb77703723947432475a69cd89d2b6b0d8d5a6e4726e6b2626
+
 languege: node_js
 
 node_js:
@@ -13,6 +17,11 @@ dist: trusty
 
 services:
   - postgresql
+
+before_script:
+  - curl -L http://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 
 script:
   - npm run test

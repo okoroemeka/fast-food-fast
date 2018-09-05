@@ -83,11 +83,12 @@ class Order {
     }
     if (status !== undefined && status.trim().length !== 0) {
       if (status === 'accept' || status === 'decline') {
-        seed[orderId].status = status;
+        // seed[orderId - 1] = Object.assign(seed[orderId - 1], req.body);
+        seed[orderId - 1].status = status;
         return res.status(200).json({
           status: 'success',
           message: 'Order status updated successfully',
-          data: seed[orderId],
+          data: seed[orderId - 1],
         });
       }
       return res.status(400).json({

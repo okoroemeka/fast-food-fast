@@ -27,10 +27,10 @@ A template for fast-food-fast app with the features below.
 
 |Verb   |Enpoints                           | Action               | Description                    |
 |:------|:----------------------------------|:---------------------|:-------------------------------|
-|GET    |/order                             |fetch all orders      |Get all available order         |
-|POST   |/order                             |create order          |creates a new order             |
-|GET    |/order/:orderId                    |fetch specific order  |view specific order             |
-|PUT    |/order/:orderId                    |update an order status|modify a particular order status|
+|GET    |/orders                            |fetch all orders      |Get all available order         |
+|POST   |/orders                            |create order          |creates a new order             |
+|GET    |/orders/:orderId                   |fetch specific order  |view specific order             |
+|PUT    |/orders/:orderId                   |update an order status|modify a particular order status|
 
 ## Setting up Locally
 

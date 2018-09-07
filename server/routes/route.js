@@ -5,8 +5,8 @@ import order from '../controller/order';
 const router = express.Router();
 
 // Routing
-router.get('/order', order.getAllOrder);
-router.get('/order/:orderId', order.getSpecificOrder);
-router.post('/order', order.createOrder);
-router.put('/order/:orderId', order.updateOrderStatus);
+router.get('/orders', order.getAllOrder);
+router.get('/orders/:orderId', order.getSpecificOrder);
+router.post('/orders', order.createOrder);
+router.put('/orders/:orderId', order.updateOrderStatus);
 export default router;

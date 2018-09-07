@@ -56,8 +56,6 @@ describe('GET request for api/v1/order', () => {
 describe('POST request for api/v1/order', () => {
   it('should return 201 for new order created', (done) => {
     const order = {
-      fullName: 'okoro emeka',
-      address: '2 allen avn, ikeja',
       food: 'fufu and egusi',
       price: '#1500',
     };
@@ -177,11 +175,7 @@ describe('PUT request for api/v1/order/:orderId', () => {
       status: 'accept',
     };
     chai.request(app)
-<<<<<<< HEAD
       .put('/api/v1/orders/2')
-=======
-      .put('/api/v1/order/3')
->>>>>>> develop
       .send(order)
       .type('form')
       .end((err, res) => {

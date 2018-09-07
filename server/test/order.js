@@ -11,7 +11,7 @@ chai.use(chaiHttp);
 describe('GET request for api/v1/order', () => {
   it('should return 200 for get all order request', (done) => {
     chai.request(app)
-      .get('/api/v1/order')
+      .get('/api/v1/orders')
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.an('object');
@@ -24,7 +24,7 @@ describe('GET request for api/v1/order', () => {
   });
   it('should return 200 for get all order request', (done) => {
     chai.request(app)
-      .get('/api/v1/order/1')
+      .get('/api/v1/orders/1')
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.an('object');
@@ -37,7 +37,7 @@ describe('GET request for api/v1/order', () => {
   });
   it('should return 404 for get all order request', (done) => {
     chai.request(app)
-      .get('/api/v1/order/2')
+      .get('/api/v1/orders/2')
       .end((err, res) => {
         res.should.have.status(404);
         res.body.should.be.an('object');
@@ -60,7 +60,7 @@ describe('POST request for api/v1/order', () => {
       price: '#1500',
     };
     chai.request(app)
-      .post('/api/v1/order')
+      .post('/api/v1/orders')
       .send(order)
       .type('form')
       .end((err, res) => {
@@ -84,7 +84,7 @@ describe('POST request for api/v1/order', () => {
       price: '#1500',
     };
     chai.request(app)
-      .post('/api/v1/order')
+      .post('/api/v1/orders')
       .send(order)
       .type('form')
       .end((err, res) => {
@@ -109,7 +109,7 @@ describe('PUT request for api/v1/order/:orderId', () => {
       status: 'decline',
     };
     chai.request(app)
-      .put('/api/v1/order/1')
+      .put('/api/v1/orders/1')
       .send(order)
       .type('form')
       .end((err, res) => {
@@ -133,7 +133,7 @@ describe('PUT request for api/v1/order/:orderId', () => {
       status: 'rejected',
     };
     chai.request(app)
-      .put('/api/v1/order/1')
+      .put('/api/v1/orders/1')
       .send(order)
       .type('form')
       .end((err, res) => {
@@ -154,7 +154,7 @@ describe('PUT request for api/v1/order/:orderId', () => {
       status: '',
     };
     chai.request(app)
-      .put('/api/v1/order/1')
+      .put('/api/v1/orders/1')
       .send(order)
       .type('form')
       .end((err, res) => {
@@ -175,7 +175,7 @@ describe('PUT request for api/v1/order/:orderId', () => {
       status: 'accept',
     };
     chai.request(app)
-      .put('/api/v1/order/2')
+      .put('/api/v1/orders/2')
       .send(order)
       .type('form')
       .end((err, res) => {

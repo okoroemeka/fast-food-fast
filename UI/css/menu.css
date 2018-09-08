@@ -4,10 +4,11 @@
     -ms-box-sizing: border-box;
     box-sizing: border-box;
 }
-html,body{
-	min-height: 100vh;
+body{
+	/* min-height: 100vh; */
 	margin: 0 auto;
 	padding: 0px;
+	font-family: Tahoma, sans-serif;
 }
 .row{
 	max-width: 100%;
@@ -104,12 +105,13 @@ html,body{
 }
 #menu-banner{
 	height: 400px;
-	background-color: #333333; 
+	background-color: #333333;
 	background-image:  url('../image/pizza.jpg');
+	/* background: linear-gradient(rgba(0, 130, 170, 0.5),rgba(0,130,170, 0.5)),url('../image/pizza.jpg'), no-repeat, center; */
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	font-family: Tahoma, sans-serif; 
+	/* font-family: Tahoma, sans-serif;  */
 }
 #banner-caption-container{
 	width: 100%;
@@ -117,7 +119,7 @@ html,body{
 	color: white;
 	font-size: 2.5rem;
 	position: relative;
-	background-color: rgba(0, 0, 0, 0.2);
+	background-color: rgba(0,0,0, 0.6);
 }
 #banner-caption{
 	position: absolute;
@@ -136,13 +138,7 @@ html,body{
 }
 .food-card{
 	width: 100%;
-	/*background-color: #330000;*/
-	/*overflow: hidden;*/
-	padding: 5px;
-	/*color: #ffffff;
-	margin-bottom: 10px;
-	box-shadow: 5px 5px 3px 0px rgba(153,153,153,0.9);
-	border-radius: 10px;*/
+	padding: 10px;
 }
 .food-card-child{
 	background-color: #330000;
@@ -211,14 +207,6 @@ html,body{
 
 /* Add a grey background color on mouse-over */
 .pagination a:hover:not(.active) {background-color: #ddd;}
-/*style for footer*/
-.footer-container{
-	padding: 0px;
-}
-.footer{
-	padding-left: 5px;
-	background-color: #330000;
-}
 /* Dashboard style */
 #dashbord-container{
 	margin: auto;
@@ -322,7 +310,8 @@ thead,th,td{
 	text-align: center;
 }
 #profile-button button,
- #edit-profile-save-button,#edit-profile-cancel{
+ #edit-profile-save-button,
+ #edit-profile-cancel{
 	width: 100px;
 	height: 40px;
 	color: #ffffff;
@@ -343,7 +332,7 @@ thead,th,td{
 .edit-address input {
 	width: 100%;
 	height: 40px;
-	padding: 2px;
+	padding: 5px;
 	/*border: 1px solid #eaeae1;*/
 	border-radius: 3px;
 }
@@ -363,9 +352,23 @@ thead,th,td{
 #edit-profile-cancel{
 	background-color: #800000;
 }
-@media (min-width: 768px) and (max-width: 1024px){
+/*style for footer*/
+.footer-container{
+	padding: 0px;
+}
+.footer{
+	padding: 10px 10px;
+	background-color: #330000;
+}
+@media only screen and (min-width: 768px) and (max-width: 1024px){
+	.profile-picture-container{
+		width: 50%
+	}
 	.food-card{
 		width: 50%;
+	}
+	.profile-heading h1{
+		font-size: 2rem;
 	}
 }
 @media only screen and (min-width: 1025px){
@@ -388,8 +391,8 @@ thead,th,td{
   }
   #main-nav li{
   	margin: 0;
-  	font-size: 1.5rem;
-  	font-family: 'Cookie', cursive; 
+  	font-size: 1rem;
+  	/* font-family: 'Cookie', cursive;  */
   }
   .nav-links{
   	margin-left: 40px;
@@ -402,9 +405,9 @@ thead,th,td{
   	margin-top: 0;
   	padding: 4px 3px;
   	text-align: center;
-  	font-size: 2.0rem;
+  	font-size: 1.5rem;
   	border-radius: 1px;
-	font-family: 'Cookie', cursive; 
+	/* font-family: 'Cookie', cursive;  */
   	border: 1px solid white;
   }
   /*menu style*/
@@ -427,6 +430,9 @@ thead,th,td{
  #admin-action{
  	width: 66.66%;
  }
+ .profile-heading h1{
+	font-size: 2rem;
+ } 
  #profile-button button:hover{
  	cursor: pointer;
  	background-color: #0033cc;
@@ -450,8 +456,3 @@ thead,th,td{
  	background: #0033cc;
  }
 }
-/*@media only screen and (min-width: 768px){
-	.food-card{
-		width: 50%;
-	}
-}*/

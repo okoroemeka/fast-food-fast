@@ -272,18 +272,20 @@ thead,th,td{
 }
 .menu-card-button button,
 .accept-button,
-.reject-button{
+.reject-button,
+#add-button{
 	color: #ffffff;
-	padding: 8px 20px;
+	padding: 5px 20px;
 	border: 0px;
 	border-radius: 3px;
-	box-shadow: 0px 3px 2px #e7e7e7;
+	box-shadow: 5px 5px 3px 0px rgba(0,0,0,0.7);
 	transition-duration: 0.5s;
 }
 span input[type=checkbox]:hover,
 .accept-button:hover,
 .reject-button:hover,
-.menu-card-button button:hover{
+.menu-card-button button:hover,
+#add-button{
 	cursor: pointer;
 }
 .accept-button{
@@ -361,6 +363,66 @@ span input[type=checkbox]:hover,
 	padding: 10px 10px;
 	background-color: #330000;
 }
+
+/* pop up Area style */
+/* The Modal (background) */
+.modal {
+    display: none; 
+    position: fixed; 
+	z-index: 1; 
+	left: 0;
+    top: 0;
+	padding-top: 100px;
+	padding-left: 15px;
+	padding-right: 15px; 
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4); 
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+	border: 1px solid #888;
+	width: 100%;
+    height: auto;
+}
+.form-input input{
+	width: 100%;
+	height: 30px;
+	color: #000;
+	padding-left: 3px;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	border-bottom: 1px solid #888;
+	margin-bottom: 5px;
+	border-radius: 2px;
+}
+.form-input p{
+	font-size: 15px;
+	font-weight: bold;
+}
+#add-button{
+	margin-top: 10px;
+}
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
 @media only screen and (min-width: 768px) and (max-width: 1024px){
 	.profile-picture-container{
 		width: 50%
@@ -370,6 +432,9 @@ span input[type=checkbox]:hover,
 	}
 	.profile-heading h1{
 		font-size: 2rem;
+	}
+	.modal-content{
+		width: 50%;
 	}
 }
 @media only screen and (min-width: 1025px){
@@ -446,6 +511,9 @@ span input[type=checkbox]:hover,
 }
  .profile-details-sub-container{
  	margin-bottom: 15px;
+ }
+ .modal-content{
+	 width: 25%;
  }
  /*edit profile*/
  #edit-profile-cancel:hover{

@@ -88,7 +88,7 @@
                             </table>
                         </div>
                         <div class="menu-card-button">
-                            <button style="background-color: #0066cc">Add</button>
+                            <button style="background-color: #0066cc" id="add-item-menu">Add</button>
                             <button style="background-color: #009933">Edit</button>
                             <button style="background-color: #ff0000">Delete</button>
                         </div>
@@ -261,6 +261,45 @@
                                     </tr>
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <!-- Trigger/Open The Modal -->
+                    <div id="myModal" class="row modal">
+                        <!-- Modal content -->
+                        <div class="col-3 modal-content">
+                            <span class="close">&times;</span>
+                            <form>
+                                <div class="row">
+                                    <div class="col-12" style="text-align: center">
+                                        <h3>Add Item</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 form-input">
+                                        <p>Item picture</p>
+                                        <input type="file" name="picture" placeholder="Enter picture" required="required">
+                                    </div>
+                                </div>
+                                <div class="row password-input">
+                                    <div class="col-12 form-input">
+                                        <p>Item name</p>
+                                        <input type="text" name="item-name" placeholder="Enter item name" required="required">
+                                    </div>
+                                </div>
+                                <div class="row password-input">
+                                    <div class="col-12 form-input">
+                                        <p>Item price</p>
+                                        <input type="number" name="item-price" placeholder="Enter item price" required="required">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 form-input">
+                                        <button type="submit" id="add-button" style="background-color: #0066cc">Add Item</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

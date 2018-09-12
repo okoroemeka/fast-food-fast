@@ -59,13 +59,25 @@ class Menu {
       }
       return res.status(404).json({
         status: 'fail',
-        message: 'unable to update, item not found',
+        message: 'unable to update item, item not found',
       });
     }
     return res.status(400).json({
       status: 'fail',
       message: 'All field are required',
     });
+  }
+  static deleteMenuItem(req, res){
+    const {itemId} = req.params;
+    const menuItem = menuDummyDb.find(item => parseInt(itemId, 10) === parseInt(item.menuItem_id,10));
+    if (menuItem) {
+      menuDummyDb.splice((parseInt(itemId, 10) - 1), 1);
+      return res.status(204).json();
+    }
+    return res.status(404).json({
+      status: 'fail',
+      message: 'Unable to delete item, item not found',
+    })
   }
 }
 export default Menu;

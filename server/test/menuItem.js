@@ -127,7 +127,35 @@ describe('PUT request for api/v1/menuItems', () => {
         assert.isString(res.body.status);
         assert.isString(res.body.message);
         assert.equal(res.body.status, 'fail');
-        assert.equal(res.body.message, 'unable to update, item not found');
+        assert.equal(res.body.message, 'unable to update item, item not found');
+        done();
+      });
+  });
+});
+
+// delete item test
+describe('DELETE request for api/v1/menuItems/:itemId', () => {
+  it('should return 204 after deleting a certain bmenu item', (done) => {
+    chai.request(app)
+      .delete('/api/v1/menuItems/1')
+      .end((err, res) => {
+        res.should.have.status(204);
+        done();
+      });
+  });
+  it('should return 404 after after trying to delete a certain menu item which does not exist', (done) => {
+    chai.request(app)
+      .delete('/api/v1/menuItems/4')
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.be.an('object');
+        expect(res.body).be.an('object');
+        expect(res.body.status).be.a('string');
+        expect(res.body.message).be.a('string');
+        assert.isString(res.body.status);
+        assert.isString(res.body.message);
+        assert.equal(res.body.status, 'fail');
+        assert.equal(res.body.message, 'Unable to delete item, item not found');
         done();
       });
   });

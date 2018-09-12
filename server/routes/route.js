@@ -12,4 +12,5 @@ router.post('/orders', order.createOrder);
 router.put('/orders/:orderId', order.updateOrderStatus);
 router.post('/menuItems', menuItem.createMenuItem);
 router.put('/menuItems/:itemId', menuItem.upadeMenuItem);
+router.delete('/menuItems/:itemId', menuItem.deleteMenuItem);
 export default router;

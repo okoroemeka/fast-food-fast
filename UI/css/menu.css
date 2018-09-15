@@ -98,6 +98,9 @@ body{
   color: rgba(255, 255, 255, 1);
 }
 /*menu style*/
+.fa-shopping-cart{
+	font-size:20px;
+}
 .menu-container,
 #overlay-container{
 	margin: 0px;
@@ -288,21 +291,34 @@ span input[type=checkbox]:hover,
 #add-button{
 	cursor: pointer;
 }
+#add-item,
 .accept-button{
  background-color: #0066cc;
  margin-bottom: 2px;
 }
+#edit-item{
+	background-color: #009933;
+}
+#delete-item,
 .reject-button{
 	background-color: #ff0000;
 }
 
-/*profile stle*/
+/*profile style*/
 .profile-container{
 	justify-content: center;
+}
+.down-rule,
+.upper-rule{
+	margin: 30px 0px;
+	 border: 1px solid #d0d0d0;
 }
 .profile-picture-container,
 .profile-details-container{
 	width: 100%;
+}
+.profile-details-container{
+	padding: 0px 10px;
 }
 .image-container{
 	width: 100%;
@@ -326,7 +342,15 @@ span input[type=checkbox]:hover,
 	background-color: #005ce6;
 	transition-duration: 0.5s;
 }
-
+#profile-button a{
+	text-decoration: none;
+}
+.users-name{
+	text-align: center;
+}
+.order-body table{
+	width: 100%;
+}
 /*edit profile*/
 .edit-first-name input,
 .edit-last-name input,
@@ -349,11 +373,23 @@ span input[type=checkbox]:hover,
 	color: #000000;
 	font-weight: bold;
 }
+.address-container{
+	margin-bottom: 20px;
+}
+.edit-profile-button-area-container{
+	margin-bottom: 30px;
+}
+#edit-profile-save-button{
+	margin-bottom: 10px;
+}
 .edit-address{
 	padding: 5px;
 }
 #edit-profile-cancel{
 	background-color: #800000;
+}
+.change-photo-text{
+	margin-bottom: 10px
 }
 /*style for footer*/
 .footer-container{
@@ -362,8 +398,12 @@ span input[type=checkbox]:hover,
 .footer{
 	padding: 10px 10px;
 	background-color: #330000;
+	color: #ffffff;
 }
-
+.footer p a{
+	text-decoration: none;
+	color: #ffffff;
+}
 /* pop up Area style */
 /* The Modal (background) */
 .modal {

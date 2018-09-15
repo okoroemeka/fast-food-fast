@@ -229,8 +229,12 @@ body{
 .footer{
 	padding: 10px 10px;
 	background-color: #330000;
+	color: #ffffff;
 }
-
+.footer p a{
+	text-decoration: none;
+	color: #ffffff;
+}
 /*sign up page style*/
 .sub-container{
 	margin-bottom: 10%;

@@ -10,7 +10,7 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="//normalize-css.googlecode.com/svn/trunk/normalize.css">
     <link rel="stylesheet" href="css/menu.css">
-    <title>Menu</title>
+    <title>Admin</title>
 </head>
 
 <body>
@@ -45,7 +45,7 @@
             </div>
             <!-- Menu table -->
             <div class="row">
-                <div class="col-4" id="admin-menu">
+                <div class="col-5" id="admin-menu">
                     <div class="menu-card">
                         <div class="card-header">
                             <h4>MENU LIST</h4>
@@ -57,47 +57,70 @@
                                     <tr>
                                         <th>Item</th>
                                         <th>Price</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>Fried rice and chicken</td>
                                         <td>#2500</td>
+                                        <td>
+                                            <button class="edit-item">Edit</button>
+                                            <button class="delete-item">Delete</button>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Ofada rice</td>
                                         <td>#1500</td>
+                                        <td>
+                                            <button class="edit-item">Edit</button>
+                                            <button class="delete-item">Delete</button>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Coke</td>
                                         <td>#500</td>
+                                        <td>
+                                            <button class="edit-item">Edit</button>
+                                            <button class="delete-item">Delete</button>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Jellof rice and chicken</td>
                                         <td>#2500</td>
+                                        <td>
+                                            <button class="edit-item">Edit</button>
+                                            <button class="delete-item">Delete</button>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Fufu and Egusi</td>
                                         <td>#2500</td>
+                                        <td>
+                                            <button class="edit-item">Edit</button>
+                                            <button class="delete-item">Delete</button>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Pizza</td>
                                         <td>#4500</td>
+                                        <td>
+                                            <button class="edit-item">Edit</button>
+                                            <button class="delete-item">Delete</button>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="menu-card-button">
-                            <button id="add-item">Add</button>
-                            <button id="edit-item">Edit</button>
-                            <button id="delete-item">Delete</button>
+                            <button class="item-modal" id="add-item">Add</button>
                         </div>
 
                     </div>
                 </div>
 
                 <!-- Online order List -->
-                <div class="col-8" id="admin-action">
+                <div class="col-7" id="admin-action">
                     <div class="order-card">
                         <div class="order-header">
                             <h4>ONLINE ORDER LIST</h4>
@@ -309,8 +332,8 @@
     <footer>
         <div class="row footer-container">
             <div class="col-12 footer">
-                <p style="color: #ffffff">Designed by:okoro Emeka © 2018
-                    <a href="index.html" style="text-decoration: none; color: #ffffff;"> Fast-food-fast </a>
+                <p >Designed by:okoro Emeka © 2018
+                    <a href="index.html"> Fast-food-fast </a>
                 </p>
             </div>
         </div>

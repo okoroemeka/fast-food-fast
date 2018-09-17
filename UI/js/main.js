@@ -17,7 +17,7 @@ navbarToggle.addEventListener('click',function(){
 let modal = document.getElementById('myModal');
 
 // Get the button that opens the modal
-let btn = document.getElementById("add-item-menu");
+let btn = document.getElementById("add-item");
 
 // Get the <span> element that closes the modal
 const span = document.getElementsByClassName("close")[0];

@@ -273,22 +273,34 @@ thead,th,td{
 	border-collapse: collapse;
 	/*border-color: inherit;*/
 }
-.menu-card-button button,
+
 .accept-button,
 .reject-button,
-#add-button{
+.delete-item,
+.edit-item,
+#add-button,
+#add-item
+{
 	color: #ffffff;
-	padding: 5px 20px;
+	width: 60px;
+    height: 30px;
+	padding: 5px 0px;
 	border: 0px;
 	border-radius: 3px;
-	box-shadow: 5px 5px 3px 0px rgba(0,0,0,0.7);
+	box-shadow: 5px 5px 3px 0px rgba(0,0,0,0.5);
 	transition-duration: 0.5s;
+}
+#add-item,
+.delete-item,
+.edit-item{
+	width: 60px;
 }
 span input[type=checkbox]:hover,
 .accept-button:hover,
 .reject-button:hover,
-.menu-card-button button:hover,
-#add-button{
+.delete-item:hover,
+.edit-item:hover,
+#add-item:hover{
 	cursor: pointer;
 }
 #add-item,
@@ -296,10 +308,11 @@ span input[type=checkbox]:hover,
  background-color: #0066cc;
  margin-bottom: 2px;
 }
-#edit-item{
+.edit-item{
 	background-color: #009933;
+	margin-bottom: 5px;
 }
-#delete-item,
+.delete-item,
 .reject-button{
 	background-color: #ff0000;
 }
@@ -448,6 +461,8 @@ span input[type=checkbox]:hover,
 }
 #add-button{
 	margin-top: 10px;
+	width: 80px;
+    height: 30px;
 }
 /* The Close Button */
 .close {
@@ -528,13 +543,13 @@ span input[type=checkbox]:hover,
   }
  /*Admin page*/
   #admin-menu{
- 	width: 33.33%;
+ 	width: 41.66%;
   }
   #accepted-oders{
   	width: 41.66%;
  }
  #admin-action{
- 	width: 66.66%;
+ 	width: 58.33%;
  }
  .profile-heading h1{
 	font-size: 2rem;

@@ -208,7 +208,7 @@ body{
 	padding-bottom: 20px;
 }
 #login-form-alt p a{
-	color: #ffffff;
+	color: #0099cc;
 	text-decoration: none;
 }
 #signup-page-button,
@@ -293,7 +293,10 @@ body{
 	}
 	#logIn-button:hover{
 		cursor: pointer;
-	  background-color:#e68a00;
+	    background-color:#e68a00;
+	}
+	#login-form-alt p a:hover{
+		cursor: pointer;
 	}
 	/*Login page styles*/
 	.signup-container,

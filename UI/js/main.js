@@ -18,10 +18,9 @@ let modal = document.getElementById('myModal');
 
 // Get the button that opens the modal
 let btn = document.getElementById("add-item");
-
 // Get the <span> element that closes the modal
-const span = document.getElementsByClassName("close")[0];
-
+// const span = document.getElementsByClassName("close")[0];
+const span = document.getElementById("close");
 // When the user clicks the button, open the modal 
 btn.onclick = function() {
     modal.style.display = "block";

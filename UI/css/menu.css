@@ -278,7 +278,9 @@ thead,th,td{
 .reject-button,
 .delete-item,
 .edit-item,
+#modal-order-button,
 #add-button,
+#modal-order-button,
 #add-item
 {
 	color: #ffffff;
@@ -295,11 +297,15 @@ thead,th,td{
 .edit-item{
 	width: 60px;
 }
+#modal-order-button{
+	margin: 20px auto;
+}
 span input[type=checkbox]:hover,
 .accept-button:hover,
 .reject-button:hover,
 .delete-item:hover,
 .edit-item:hover,
+#modal-order-button,
 #add-item:hover{
 	cursor: pointer;
 }
@@ -357,6 +363,9 @@ span input[type=checkbox]:hover,
 }
 #profile-button a{
 	text-decoration: none;
+}
+.edit-profile-button-area{
+	margin: 20px auto;
 }
 .users-name{
 	text-align: center;
@@ -465,7 +474,7 @@ span input[type=checkbox]:hover,
     height: 30px;
 }
 /* The Close Button */
-.close {
+#close {
     color: #aaaaaa;
     float: right;
     font-size: 28px;

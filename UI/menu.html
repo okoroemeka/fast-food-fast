@@ -59,7 +59,7 @@
                                     </ul>
                                     <div class="row">
                                         <div class="col-6 order-button">
-                                            <button type="submit">Order now</button>
+                                            <button class="order-now" type="submit">Order now</button>
                                         </div>
                                         <div class="col-6 add-to-cart-button">
                                             <button type="submit">Add to cart</button>
@@ -81,7 +81,7 @@
                                     </ul>
                                     <div class="row">
                                         <div class="col-6 order-button">
-                                            <button type="submit">Order now</button>
+                                            <button class="order-now" type="submit">Order now</button>
                                         </div>
                                         <div class="col-6 add-to-cart-button">
                                             <button type="submit">Add to cart</button>
@@ -103,7 +103,7 @@
                                     </ul>
                                     <div class="row">
                                         <div class="col-6 order-button">
-                                            <button type="submit">Order now</button>
+                                            <button class="order-now" type="submit">Order now</button>
                                         </div>
                                         <div class="col-6 add-to-cart-button">
                                             <button type="submit">Add to cart</button>
@@ -125,7 +125,7 @@
                                     </ul>
                                     <div class="row">
                                         <div class="col-6 order-button">
-                                            <button type="submit">Order now</button>
+                                            <button class="order-now" type="submit">Order now</button>
                                         </div>
                                         <div class="col-6 add-to-cart-button">
                                             <button type="submit">Add to cart</button>
@@ -149,7 +149,7 @@
                                     </ul>
                                     <div class="row">
                                         <div class="col-6 order-button">
-                                            <button type="submit">Order now</button>
+                                            <button class="order-now" type="submit">Order now</button>
                                         </div>
                                         <div class="col-6 add-to-cart-button">
                                             <button type="submit">Add to cart</button>
@@ -171,7 +171,7 @@
                                     </ul>
                                     <div class="row">
                                         <div class="col-6 order-button">
-                                            <button type="submit">Order now</button>
+                                            <button class="order-now" type="submit">Order now</button>
                                         </div>
                                         <div class="col-6 add-to-cart-button">
                                             <button type="submit">Add to cart</button>
@@ -193,7 +193,7 @@
                                     </ul>
                                     <div class="row">
                                         <div class="col-6 order-button">
-                                            <button type="submit">Order now</button>
+                                            <button class="order-now" type="submit">Order now</button>
                                         </div>
                                         <div class="col-6 add-to-cart-button">
                                             <button type="submit">Add to cart</button>
@@ -215,7 +215,7 @@
                                     </ul>
                                     <div class="row">
                                         <div class="col-6 order-button">
-                                            <button type="submit">Order now</button>
+                                            <button class="order-now" type="submit">Order now</button>
                                         </div>
                                         <div class="col-6 add-to-cart-button">
                                             <button type="submit">Add to cart</button>
@@ -238,6 +238,47 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-5">
+                            <!-- Trigger/Open The Modal -->
+                            <div id="myModal" class="row modal">
+                                <!-- Modal content -->
+                                <div class="col-3 modal-content">
+                                    <span id="close">&times;</span>
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-12" style="text-align: center">
+                                                <h3>Enter Address</h3>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 form-input">
+                                                <p>City</p>
+                                                <input type="text" name="picture" placeholder="Enter city" required="required">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 form-input">
+                                                <p>Street</p>
+                                                <input type="text" name="picture" placeholder="Enter street" required="required">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 form-input">
+                                                <p>Telephone</p>
+                                                <input type="number" name="item-price" placeholder="Enter phone number" required="required">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 form-input">
+                                                <button type="submit" id="modal-order-button" style="background-color: #0066cc">Order</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -253,6 +294,7 @@
         </div>
     </footer>
     <script src="js/main.js"></script>
+    <script src="js/menu.js"></script>
 </body>
 
 </html>

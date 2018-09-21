@@ -46,20 +46,22 @@ class Order {
    */
   static createOrder(req, res) {
     const {
-      food, price, fullName, address,
+      food, price, fullName, address, telephone,
     } = req.body;
     const order = {
       fullName,
       address,
+      telephone,
       order_id: (seed.length + 1),
       food,
-      price,
+      price: parseInt(price, 10),
       status: 'Pending',
     };
     if ((food !== undefined && food.trim().length !== 0)
       && (price !== undefined && price.trim().length !== 0)
       && (fullName !== undefined && fullName.trim().length !== 0)
-      && (address !== undefined && address.trim().length !== 0)) {
+      && (address !== undefined && address.trim().length !== 0)
+      && (telephone !== undefined && telephone.trim().length !== 0)) {
       seed.push(order);
       return res.status(201).json({
         status: 'success',
@@ -67,6 +69,7 @@ class Order {
         data: {
           fullName,
           address,
+          telephone,
           order_id: order.order_id,
           food,
           price,
@@ -96,8 +99,8 @@ class Order {
     }
     if (status !== undefined && status.trim().length !== 0) {
       if (status === 'accept' || status === 'decline') {
-        // seed[orderId - 1] = Object.assign(seed[orderId - 1], req.body);
-        seed[orderId - 1].status = status;
+        seed[orderId - 1] = Object.assign(seed[orderId - 1], req.body);
+        // seed[orderId - 1].status = status;
         return res.status(200).json({
           status: 'success',
           message: 'Order status updated successfully',
@@ -112,6 +115,20 @@ class Order {
     return res.status(400).json({
       status: 'fail',
       message: 'All feilds are required',
+    });
+  }
+
+  static getHomePage(req, res) {
+    return res.status(200).json({
+      status: 'success',
+      message: 'Welcome to fast-food-fast resturant',
+    });
+  }
+
+  static catchEveryOtherRoute(req, res) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'Does not exist',
     });
   }
 }

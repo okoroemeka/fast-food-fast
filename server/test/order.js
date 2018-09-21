@@ -58,6 +58,7 @@ describe('POST request for api/v1/order', () => {
     const order = {
       fullName: 'okoro emeka',
       address: '24 iju road',
+      telephone: '080637896',
       food: 'fufu and egusi',
       price: '#1500',
     };

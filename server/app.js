@@ -15,14 +15,5 @@ app.use(logger('dev'));
 app.use('/api/v1', router);
 app.set('port', port);
 
-app.get('/', (req, res) => res.status(200).json({
-  status: 'success',
-  message: 'Welcome to fast-food-fast resturant',
-}));
-app.all('*', (req, res) => res.status(404).json({
-  status: 'fail',
-  message: 'Not found',
-}));
-
 app.listen(port, () => console.log(`listening on port ${port}`));
 export default app;

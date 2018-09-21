@@ -347,6 +347,9 @@ span input[type=checkbox]:hover,
 .profile-heading{
 	text-align: center;
 }
+.col-12.profile-details {
+    margin-bottom: 15%;
+}
 #profile-button button,
  #edit-profile-save-button,
  #edit-profile-cancel{
@@ -412,6 +415,9 @@ span input[type=checkbox]:hover,
 }
 .change-photo-text{
 	margin-bottom: 10px
+}
+.col-12.edit-telephone {
+    margin-bottom: 12%;
 }
 /*style for footer*/
 .footer-container{

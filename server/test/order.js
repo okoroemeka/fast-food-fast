@@ -60,7 +60,8 @@ describe('POST request for api/v1/order', () => {
       address: '24 iju road',
       telephone: '080637896',
       food: 'fufu and egusi',
-      price: '#1500',
+      quantity: 2,
+      price: 1500,
     };
     chai.request(app)
       .post('/api/v1/orders')
@@ -84,7 +85,7 @@ describe('POST request for api/v1/order', () => {
   it('should return 400 for empty input fields', (done) => {
     const order = {
       food: '',
-      price: '#1500',
+      price: '1500',
     };
     chai.request(app)
       .post('/api/v1/orders')

@@ -145,6 +145,7 @@ body{
 .button{
 	justify-content: center;
 }
+#explore-menu,
 #sign-up,
 #logIn-button
 	{
@@ -155,7 +156,7 @@ body{
 		color: #ffffff;
 		padding-top:10px;
 		padding-bottom: 10px;
-		border: 0px;
+		border: none;
 		border-radius: 2px;
 		background-color: #0099cc;
 		transition-duration: 0.5s;
@@ -164,6 +165,14 @@ body{
 	}
 #logIn-button{
 	background-color: #ff9900;
+}
+#explore-menu{
+	background-color: #330000;
+}
+#explore-menu:hover{
+	border: none;
+	cursor: pointer;
+	background-color: #250202;
 }
 /*Log in page style*/
 .sub-container{

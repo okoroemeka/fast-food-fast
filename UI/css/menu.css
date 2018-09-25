@@ -110,11 +110,9 @@ body{
 	height: 400px;
 	background-color: #333333;
 	background-image:  url('../image/pizza.jpg');
-	/* background: linear-gradient(rgba(0, 130, 170, 0.5),rgba(0,130,170, 0.5)),url('../image/pizza.jpg'), no-repeat, center; */
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	/* font-family: Tahoma, sans-serif;  */
 }
 #banner-caption-container{
 	width: 100%;
@@ -152,13 +150,18 @@ body{
 	padding: 5px;
 	color: #ffffff;
 	margin-bottom: 10px;
-	box-shadow: 5px 5px 3px 0px rgba(153,153,153,0.9);
+	box-shadow: 5px 5px 3px 0px rgba(153,153,153,0.3);
 	border-radius: 10px;
 }
 .food-image{
 	width: 100%;
 	height: 200px;
 	object-fit: cover;
+	transition: 0.5s;
+}
+.food-image:hover{
+	cursor: pointer;
+	/* transform: scale(1%); */
 }
 .food-details ul{
 	display: inline;
@@ -223,13 +226,13 @@ body{
 #dashbord-word{
 	font-size: 25px;
 }
-#glyhpicons{
+/* #glyhpicons{
 	float: right;
 	padding-right: 20px;
 }
 #email-glyph{
 	padding-right: 15px;
-}
+} */
 /*#admin-menu{
 	width: 100%;
 }*/
@@ -289,13 +292,16 @@ thead,th,td{
 	padding: 5px 0px;
 	border: 0px;
 	border-radius: 3px;
-	box-shadow: 5px 5px 3px 0px rgba(0,0,0,0.5);
-	transition-duration: 0.5s;
+	/* box-shadow: 0 0 1px 3px #e7e7e7; */
+	box-shadow: 0 4px 4px 0px rgba(134, 130, 130, 0.4);
+	transition-duration: 0.4s;
 }
 #add-item,
 .delete-item,
 .edit-item{
 	width: 60px;
+	margin-left: 3px;
+    margin-top: 3px;
 }
 #modal-order-button{
 	margin: 20px auto;
@@ -348,7 +354,7 @@ span input[type=checkbox]:hover,
 	text-align: center;
 }
 .col-12.profile-details {
-    margin-bottom: 15%;
+    margin-bottom: 23%;
 }
 #profile-button button,
  #edit-profile-save-button,
@@ -359,7 +365,7 @@ span input[type=checkbox]:hover,
 	font-size: 1rem;
 	border: 0px;
 	margin-right: 10px;
-	box-shadow: 5px 5px 3px 0px rgba(0,0,0,0.7);
+	box-shadow: 0px 5px 3px 0px rgba(116, 113, 113, 0.5);
 	border-radius: 5px;
 	background-color: #005ce6;
 	transition-duration: 0.5s;
@@ -375,6 +381,9 @@ span input[type=checkbox]:hover,
 }
 .order-body table{
 	width: 100%;
+}
+.profile-button-main{
+	margin-bottom: 5%;
 }
 /*edit profile*/
 .edit-first-name input,

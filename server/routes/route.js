@@ -9,7 +9,7 @@ router.get('/orders', order.getAllOrder);
 router.get('/orders/:orderId', order.getSpecificOrder);
 router.post('/orders', order.createOrder);
 router.put('/orders/:orderId', order.updateOrderStatus);
-router.get('/', order.getHomePage);
-router.all('*', order.catchEveryOtherRoute);
+// router.get('/', order.getHomePage);
+// router.all('*', order.catchEveryOtherRoute);
 
 export default router;

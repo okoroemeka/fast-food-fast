@@ -46,22 +46,26 @@ class Order {
    */
   static createOrder(req, res) {
     const {
-      food, price, fullName, address, telephone,
+      food, fullName, address, telephone,
     } = req.body;
+    const price = parseInt(req.body.price, 10);
+    const quantity = parseInt(req.body.quantity, 10);
     const order = {
       fullName,
       address,
       telephone,
       order_id: (seed.length + 1),
       food,
-      price: parseInt(price, 10),
+      price,
+      quantity,
       status: 'Pending',
     };
     if ((food !== undefined && food.trim().length !== 0)
-      && (price !== undefined && price.trim().length !== 0)
+      && (price !== undefined && req.body.price.trim().length !== 0)
       && (fullName !== undefined && fullName.trim().length !== 0)
       && (address !== undefined && address.trim().length !== 0)
-      && (telephone !== undefined && telephone.trim().length !== 0)) {
+      && (telephone !== undefined && telephone.trim().length !== 0)
+      && (quantity !== undefined && req.body.quantity.trim().length !== 0)) {
       seed.push(order);
       return res.status(201).json({
         status: 'success',
@@ -73,6 +77,8 @@ class Order {
           order_id: order.order_id,
           food,
           price,
+          quantity,
+          total: price * quantity,
         },
       });
     }
@@ -115,20 +121,6 @@ class Order {
     return res.status(400).json({
       status: 'fail',
       message: 'All feilds are required',
-    });
-  }
-
-  static getHomePage(req, res) {
-    return res.status(200).json({
-      status: 'success',
-      message: 'Welcome to fast-food-fast resturant',
-    });
-  }
-
-  static catchEveryOtherRoute(req, res) {
-    return res.status(404).json({
-      status: 'fail',
-      message: 'Does not exist',
     });
   }
 }

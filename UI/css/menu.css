@@ -157,11 +157,11 @@ body{
 	width: 100%;
 	height: 200px;
 	object-fit: cover;
-	transition: 0.5s;
+	transition: all 0.5s;
 }
 .food-image:hover{
 	cursor: pointer;
-	/* transform: scale(1%); */
+	transform: scale(1.1);
 }
 .food-details ul{
 	display: inline;
@@ -467,6 +467,10 @@ span input[type=checkbox]:hover,
 	width: 100%;
     height: auto;
 }
+#total-amount{
+	margin-top: 7%;
+	justify-content: center;
+}
 .form-input input{
 	width: 100%;
 	height: 30px;
@@ -501,6 +505,9 @@ span input[type=checkbox]:hover,
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+#modal-order-button{
+ float :right;
 }
 @media only screen and (min-width: 768px) and (max-width: 1024px){
 	.profile-picture-container{

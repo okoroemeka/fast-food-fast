@@ -1,9 +1,11 @@
 # fast-food-fast
 
-[![Build Status](https://travis-ci.org/okoroemeka/fast-food-fast.svg?branch=develop)](https://travis-ci.org/okoroemeka/fast-food-fast)  [![Coverage Status](https://coveralls.io/repos/github/okoroemeka/fast-food-fast/badge.svg)](https://coveralls.io/github/okoroemeka/fast-food-fast)
+[![Build Status](https://travis-ci.org/okoroemeka/fast-food-fast.svg?branch=develop)](https://travis-ci.org/okoroemeka/fast-food-fast)  [![Coverage Status](https://coveralls.io/repos/github/okoroemeka/fast-food-fast/badge.svg)](https://coveralls.io/github/okoroemeka/fast-food-fast)  [![Maintainability](https://api.codeclimate.com/v1/badges/110dddcd1a88478f06b0/maintainability)](https://codeclimate.com/github/okoroemeka/fast-food-fast/maintainability)
 
 fast-food-fast app is a food delivery service app for a restaurant.
 
+[UI link]: https://okoroemeka.github.io/fast-food-fast/UI
+[server side link]://https://fast-food-fast-12.herokuapp.com
 ## Project overview 
 
 A template for fast-food-fast app with the features below.

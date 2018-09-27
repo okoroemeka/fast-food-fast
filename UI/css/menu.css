@@ -99,7 +99,22 @@ body{
 }
 /*menu style*/
 .fa-shopping-cart{
-	font-size:20px;
+	/* line-height: 2rem;
+	padding: 5px; */
+	font-size: 25px;
+}
+#shoppingcart-icon{
+	position: relative;
+}
+#item-count{
+	position: absolute;
+	top: -10px;
+	right: 140px;
+	height: 20px;
+	width: 20px;
+	border-radius: 100%;
+	background-color: #ff9900;
+	color: #fff;
 }
 .menu-container,
 #overlay-container{
@@ -226,16 +241,7 @@ body{
 #dashbord-word{
 	font-size: 25px;
 }
-/* #glyhpicons{
-	float: right;
-	padding-right: 20px;
-}
-#email-glyph{
-	padding-right: 15px;
-} */
-/*#admin-menu{
-	width: 100%;
-}*/
+
 #admin-menu,#accepted-oders,
 #admin-action{
 	width: 100%;
@@ -537,7 +543,7 @@ span input[type=checkbox]:hover,
   	align-items: center;
   }  
   #main-nav{
-  	display: flex !important;
+	display: flex !important;
   	margin-right: 30px;
   	flex-direction: row;
   }
@@ -566,6 +572,16 @@ span input[type=checkbox]:hover,
   .food-card{
 	width: 25%;
   }
+  /* #item-count{
+	position: absolute;
+	top:15px;
+	right:15px;
+	height: 20px;
+	width: 20px;
+	border-radius: 100%;
+	background-color: #ff9900;
+	color: #fff;
+} */
   .order-button button:hover{
 	background-color: #0033cc;
   }

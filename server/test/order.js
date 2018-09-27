@@ -100,7 +100,7 @@ describe('POST request for api/v1/order', () => {
         assert.isString(res.body.status);
         assert.isString(res.body.message);
         assert.equal(res.body.status, 'fail');
-        assert.equal(res.body.message, 'All feilds are required');
+        assert.equal(res.body.message, 'Check your inputs, and make sure no field is empty and they all have the required data types');
         done();
       });
   });
@@ -170,7 +170,7 @@ describe('PUT request for api/v1/order/:orderId', () => {
         assert.isString(res.body.status);
         assert.isString(res.body.message);
         assert.equal(res.body.status, 'fail');
-        assert.equal(res.body.message, 'All feilds are required');
+        assert.equal(res.body.message, 'status feild is required and must be a string');
         done();
       });
   });

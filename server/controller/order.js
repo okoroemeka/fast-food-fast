@@ -45,11 +45,18 @@ class Order {
    * @param {*} res
    */
   static createOrder(req, res) {
+
+    // using distructuring to get request values
     const {
-      food, fullName, address, telephone,
+      food, fullName, address,
     } = req.body;
+
+    // converting price,quantity and telephone to integer
     const price = parseInt(req.body.price, 10);
     const quantity = parseInt(req.body.quantity, 10);
+    const telephone = parseInt(req.body.telephone, 10);
+
+    // forming order object
     const order = {
       fullName,
       address,
@@ -60,12 +67,14 @@ class Order {
       quantity,
       status: 'Pending',
     };
-    if ((food !== undefined && food.trim().length !== 0)
-      && (price !== undefined && req.body.price.trim().length !== 0)
-      && (fullName !== undefined && fullName.trim().length !== 0)
-      && (address !== undefined && address.trim().length !== 0)
-      && (telephone !== undefined && telephone.trim().length !== 0)
-      && (quantity !== undefined && req.body.quantity.trim().length !== 0)) {
+
+    // performing input validations
+    if ((food !== undefined && food.trim().length > 1 && typeof food === 'string')
+      && (price !== undefined && req.body.price.trim().length !== 0 && Number.isInteger(price))
+      && (fullName !== undefined && fullName.trim().length > 1 && typeof fullName === 'string')
+      && (address !== undefined && address.trim().length > 1 && typeof address === 'string')
+      && (telephone !== undefined && req.body.telephone.trim().length !== 0 && Number.isInteger(telephone))
+      && (quantity !== undefined && req.body.quantity.trim().length !== 0 && Number.isInteger(quantity))) {
       seed.push(order);
       return res.status(201).json({
         status: 'success',
@@ -84,7 +93,7 @@ class Order {
     }
     return res.status(400).json({
       status: 'fail',
-      message: 'All feilds are required',
+      message: 'Check your inputs, and make sure no field is empty and they all have the required data types',
     });
   }
 
@@ -103,7 +112,7 @@ class Order {
         message: 'Order not found',
       });
     }
-    if (status !== undefined && status.trim().length !== 0) {
+    if (status !== undefined && status.trim().length !== 0 && typeof status === 'string') {
       if (status === 'accept' || status === 'decline') {
         seed[orderId - 1] = Object.assign(seed[orderId - 1], req.body);
         // seed[orderId - 1].status = status;
@@ -120,7 +129,7 @@ class Order {
     }
     return res.status(400).json({
       status: 'fail',
-      message: 'All feilds are required',
+      message: 'status feild is required and must be a string',
     });
   }
 }

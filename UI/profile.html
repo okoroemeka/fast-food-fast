@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="//normalize-css.googlecode.com/svn/trunk/normalize.css">
     <link rel="stylesheet" href="css/menu.css">
     <title>Profile</title>
 </head>
+
 <body>
     <header>
         <nav class="navbar">
-            <div id="navbar-toggle"> <i class="fas fa-bars"></i> </div>
-            <a href="index.html" id="logo">Fast-food-fast</a>
+            <div id="navbar-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <a href="index.html" id="logo">fast-food-fast</a>
             <ul id="main-nav">
-                <li><a class="nav-links" href="menu.html">Menu</a></li>
+                <li>
+                    <a class="nav-links" href="menu.html">menu</a>
+                </li>
             </ul>
         </nav>
     </header>
@@ -25,12 +32,14 @@
             <!-- Profile  -->
             <div class="row profile-container">
                 <div class="col-12">
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-12 profile-heading">
                             <h1>User Profile</h1>
                         </div>
+                    </div> -->
+                    <div class="row">
+                        <div class="col-12 upper-rule"></div>
                     </div>
-                    <div class="row"><div class="col-12" style="margin:30px 0px; border: 1px solid #d0d0d0"></div></div>
                     <div class="row">
                         <div class="col-3 profile-picture-container">
                             <div class="row">
@@ -39,131 +48,116 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-12" style="text-align: center;" >
-                                    <h4>OKORO EMEKA</h4>
+                                <div class="col-12 users-name">
+                                    <h4>Okoro Emeka</h4>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-8 profile-details-container" style="padding: 0px 10px">
+                        <div class="col-8 profile-details-container">
                             <div class="row profile-details-sub-container">
                                 <div class="col-12 profile-details">
-                                    <p><span class="profile-details-fact">First Name:</span> <span>Okoro</span></p>
-                                    <p><span class="profile-details-fact">Last Name:</span> <span>Emeka</span></p>
-                                    <p><span class="profile-details-fact">Email:</span> <span>Okoroemka@gmail.com</span></p>
-                                    <p><span class="profile-details-fact">Address:</span> <span>28 Ikorodu Road</span></p>
-                                    <p><span class="profile-details-fact">Telephone:</span> <span>0801234890</span></p>
+                                    <p>
+                                        <span class="profile-details-fact">Full Name:</span>
+                                        <span>Okoro Emeka</span>
+                                    </p>
+                                    <p>
+                                        <span class="profile-details-fact">Email:</span>
+                                        <span>Okoroemka@gmail.com</span>
+                                    </p>
+                                    <!-- <p>
+                                        <span class="profile-details-fact">Address:</span>
+                                        <span>28 Ikorodu Road</span>
+                                    </p> -->
+                                    <p>
+                                        <span class="profile-details-fact">Telephone:</span>
+                                        <span>0801234890</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row profile-button-main">
+                                <div class="col-12" id="profile-button">
+                                    <a href="edit-profile.html">
+                                        <button type="submit">Edit</button>
+                                    </a>
                                 </div>
                             </div>
                             <div class="row">
-                            <div class="col-12 order-history-box">
-                                <div class="order-card">
-                                    <div class="order-header">
-                                        <h4>ORDER HISTORY</h4>
-                                    </div>
-                                    <div class="order-body">
-                                        <!-- <table class="table table-responsive"> -->
-                                            <table style="width:100%">
+                                <div class="col-12 order-history-box">
+                                    <div class="order-card">
+                                        <div class="order-header">
+                                            <h4>ORDER HISTORY</h4>
+                                        </div>
+                                        <div class="order-body">
+                                            <!-- <table class="table table-responsive"> -->
+                                            <table>
                                                 <tr>
                                                     <th>Product</th>
-                                                    <th>Id</th> 
+                                                    <th>Id</th>
                                                     <th>Date</th>
                                                     <th>Status</th>
                                                     <th>Price</th>
                                                 </tr>
                                                 <tr>
                                                     <td>Fried rice</td>
-                                                    <td>#101</td>
-                                                    <td>1/2/18</td>
+                                                    <td>101</td>
+                                                    <td>31/12/17</td>
+                                                    <!-- <td>1/2/18</td> -->
                                                     <td>accepted</td>
-                                                    <td>#2000</td>
+                                                    <td>&#8358; 2000</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Ofada rice</td>
-                                                    <td>#123</td>
-                                                    <td>31/12/17</td>
-                                                    <td>fulfilled</td> 
-                                                    <td>#2500</td>
+                                                    <td>123</td>
+                                                    <td>1/2/18</td>
+                                                    <td>fulfilled</td>
+                                                    <td>&#8358; 2500</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Pizza</td>
-                                                    <td>#143</td>
+                                                    <td>143</td>
                                                     <td>14/5/18</td>
-                                                    <td>pending</td> 
-                                                    <td>#3000</td>
+                                                    <td>pending</td>
+                                                    <td>&#8358; 3000</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Fried rice</td>
-                                                    <td>#122</td>
+                                                    <td>122</td>
                                                     <td>4/6/18</td>
-                                                    <td>rejected</td> 
-                                                    <td>#3500</td>
+                                                    <td>declined</td>
+                                                    <td>&#8358; 3500</td>
                                                 </tr>
                                             </table>
-                                            <!-- <thead>
-                                                <tr>
-                                                    <th>Product</th>
-                                                    <th>Order Id</th>
-                                                    <th>Price</th>
-                                                    <th>Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Ofada rice</td>
-                                                    <td>#2345</td>
-                                                    <td>#2500</td>
-                                                    <td>Rejected</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Ofada rice</td>
-                                                    <td>#2345</td>
-                                                    <td>#2500</td>
-                                                    <td>Rejected</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Fried rice and chicken</td>
-                                                    <td>#2345</td>
-                                                    <td>#2500</td>
-                                                    <td>fulfilled</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Fufu and egusi</td>
-                                                    <td>#2345</td>
-                                                    <td>#2500</td>
-                                                    <td>pending</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Pizza</td>
-                                                    <td>#2345</td>
-                                                    <td>#2500</td>
-                                                    <td>fulfilled</td>
-                                                </tr>
-                                            </tbody> -->
-                                        <!-- </table> -->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                            <div class="row profile-button-main">
+                            <!-- <div class="row profile-button-main">
                                 <div class="col-12" id="profile-button">
-                                    <a href="edit-profile.html" style="text-decoration: none;"><button type="submit">Edit</button></a>
-                                    
+                                    <a href="edit-profile.html">
+                                        <button type="submit">Edit</button>
+                                    </a>
+
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
-                    <div class="row"><div class="col-12" style="margin:30px 0px; border: 1px solid #d0d0d0"></div></div>
+                    <div class="row">
+                        <div class="col-12 down-rule"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
     <footer>
-    <div class="row footer-container">
-        <div class="col-12 footer">
-            <p style="color: #ffffff">Designed by:okoro Emeka © 2018<a href="index.html" style="text-decoration: none; color: #ffffff;"> Fast-food-fast </a></p>
+        <div class="row footer-container">
+            <div class="col-12 footer">
+                <p>Designed by:okoro Emeka © 2018
+                    <a href="index.html"> Fast-food-fast </a>
+                </p>
+            </div>
         </div>
-    </div>
     </footer>
     <script src="js/main.js"></script>
 </body>
-</html> 
+
+</html>

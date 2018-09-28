@@ -4,10 +4,11 @@
     -ms-box-sizing: border-box;
     box-sizing: border-box;
 }
-html,body{
-	min-height: 100vh;
+body{
+	/* min-height: 100vh; */
 	margin: 0 auto;
 	padding: 0px;
+	font-family: Tahoma, sans-serif;
 }
 .row{
 	max-width: 100%;
@@ -97,6 +98,24 @@ html,body{
   color: rgba(255, 255, 255, 1);
 }
 /*menu style*/
+.fa-shopping-cart{
+	/* line-height: 2rem;
+	padding: 5px; */
+	font-size: 25px;
+}
+#shoppingcart-icon{
+	position: relative;
+}
+#item-count{
+	position: absolute;
+	top: -10px;
+	right: 140px;
+	height: 20px;
+	width: 20px;
+	border-radius: 100%;
+	background-color: #ff9900;
+	color: #fff;
+}
 .menu-container,
 #overlay-container{
 	margin: 0px;
@@ -104,12 +123,11 @@ html,body{
 }
 #menu-banner{
 	height: 400px;
-	background-color: #333333; 
+	background-color: #333333;
 	background-image:  url('../image/pizza.jpg');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	font-family: Tahoma, sans-serif; 
 }
 #banner-caption-container{
 	width: 100%;
@@ -117,10 +135,11 @@ html,body{
 	color: white;
 	font-size: 2.5rem;
 	position: relative;
-	background-color: rgba(0, 0, 0, 0.2);
+	background-color: rgba(0,0,0, 0.6);
 }
 #banner-caption{
 	position: absolute;
+	text-shadow: 2px 2px 1px #333333;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%,-50%);
@@ -135,13 +154,7 @@ html,body{
 }
 .food-card{
 	width: 100%;
-	/*background-color: #330000;*/
-	/*overflow: hidden;*/
-	padding: 5px;
-	/*color: #ffffff;
-	margin-bottom: 10px;
-	box-shadow: 5px 5px 3px 0px rgba(153,153,153,0.9);
-	border-radius: 10px;*/
+	padding: 10px;
 }
 .food-card-child{
 	background-color: #330000;
@@ -152,13 +165,18 @@ html,body{
 	padding: 5px;
 	color: #ffffff;
 	margin-bottom: 10px;
-	box-shadow: 5px 5px 3px 0px rgba(153,153,153,0.9);
+	box-shadow: 5px 5px 3px 0px rgba(153,153,153,0.3);
 	border-radius: 10px;
 }
 .food-image{
 	width: 100%;
 	height: 200px;
 	object-fit: cover;
+	transition: all 0.5s;
+}
+.food-image:hover{
+	cursor: pointer;
+	transform: scale(1.1);
 }
 .food-details ul{
 	display: inline;
@@ -210,14 +228,6 @@ html,body{
 
 /* Add a grey background color on mouse-over */
 .pagination a:hover:not(.active) {background-color: #ddd;}
-/*style for footer*/
-.footer-container{
-	padding: 0px;
-}
-.footer{
-	padding-left: 5px;
-	background-color: #330000;
-}
 /* Dashboard style */
 #dashbord-container{
 	margin: auto;
@@ -231,16 +241,7 @@ html,body{
 #dashbord-word{
 	font-size: 25px;
 }
-#glyhpicons{
-	float: right;
-	padding-right: 20px;
-}
-#email-glyph{
-	padding-right: 15px;
-}
-/*#admin-menu{
-	width: 100%;
-}*/
+
 #admin-menu,#accepted-oders,
 #admin-action{
 	width: 100%;
@@ -258,23 +259,22 @@ html,body{
 .add-menu-item,
 .order-body{
 	width: 100%;
+	overflow-x: auto;
 	/*max-width: 100%;*/
 }
 .table{
 	width: 100%;
-	/*max-width:100%;*/
-	margin-bottom: 20px;
-}
-table{
-	/*table-layout: fixed;*/
-	/*max-width: 100%;*/
-	width: 100%;
 	display: table;
 	border-color: gray;
 	background-color: transparent;
-	/*border-spacing: 0;*/
 	border-collapse: collapse;
+	margin-bottom: 20px;
 }
+/* table{ */
+	/*table-layout: fixed;*/
+	/*max-width: 100%;*/
+	
+/* } */
 thead,th,td{
 	text-align: left;
 	padding: 15px;
@@ -282,35 +282,74 @@ thead,th,td{
 	border-collapse: collapse;
 	/*border-color: inherit;*/
 }
-.menu-card-button button,
-.accept-button,
-.reject-button{
-	color: #ffffff;
-	padding: 8px 20px;
-	border: 0px;
-	border-radius: 3px;
-	box-shadow: 0px 3px 2px #e7e7e7;
-	transition-duration: 0.5s;
-}
+
 .accept-button,
 .reject-button,
-.menu-card-button button:hover{
+.delete-item,
+.edit-item,
+#modal-order-button,
+#add-button,
+#modal-order-button,
+#add-item
+{
+	color: #ffffff;
+	width: 60px;
+    height: 30px;
+	padding: 5px 0px;
+	border: 0px;
+	border-radius: 3px;
+	/* box-shadow: 0 0 1px 3px #e7e7e7; */
+	box-shadow: 0 4px 4px 0px rgba(134, 130, 130, 0.4);
+	transition-duration: 0.4s;
+}
+#add-item,
+.delete-item,
+.edit-item{
+	width: 60px;
+	margin-left: 3px;
+    margin-top: 3px;
+}
+#modal-order-button{
+	margin: 20px auto;
+}
+span input[type=checkbox]:hover,
+.accept-button:hover,
+.reject-button:hover,
+.delete-item:hover,
+.edit-item:hover,
+#modal-order-button,
+#add-item:hover{
 	cursor: pointer;
 }
+#add-item,
 .accept-button{
- background-color: #0066cc;	
+ background-color: #0066cc;
+ margin-bottom: 2px;
 }
+.edit-item{
+	background-color: #009933;
+	margin-bottom: 5px;
+}
+.delete-item,
 .reject-button{
 	background-color: #ff0000;
 }
 
-/*profile stle*/
+/*profile style*/
 .profile-container{
 	justify-content: center;
+}
+.down-rule,
+.upper-rule{
+	margin: 30px 0px;
+	 border: 1px solid #d0d0d0;
 }
 .profile-picture-container,
 .profile-details-container{
 	width: 100%;
+}
+.profile-details-container{
+	padding: 0px 10px;
 }
 .image-container{
 	width: 100%;
@@ -320,20 +359,38 @@ thead,th,td{
 .profile-heading{
 	text-align: center;
 }
+.col-12.profile-details {
+    margin-bottom: 23%;
+}
 #profile-button button,
- #edit-profile-save-button,#edit-profile-cancel{
+ #edit-profile-save-button,
+ #edit-profile-cancel{
 	width: 100px;
 	height: 40px;
 	color: #ffffff;
 	font-size: 1rem;
 	border: 0px;
 	margin-right: 10px;
-	box-shadow: 5px 5px 3px 0px rgba(0,0,0,0.7);
+	box-shadow: 0px 5px 3px 0px rgba(116, 113, 113, 0.5);
 	border-radius: 5px;
 	background-color: #005ce6;
 	transition-duration: 0.5s;
 }
-
+#profile-button a{
+	text-decoration: none;
+}
+.edit-profile-button-area{
+	margin: 20px auto;
+}
+.users-name{
+	text-align: center;
+}
+.order-body table{
+	width: 100%;
+}
+.profile-button-main{
+	margin-bottom: 5%;
+}
 /*edit profile*/
 .edit-first-name input,
 .edit-last-name input,
@@ -342,7 +399,7 @@ thead,th,td{
 .edit-address input {
 	width: 100%;
 	height: 40px;
-	padding: 2px;
+	padding: 5px;
 	/*border: 1px solid #eaeae1;*/
 	border-radius: 3px;
 }
@@ -356,14 +413,119 @@ thead,th,td{
 	color: #000000;
 	font-weight: bold;
 }
+.address-container{
+	margin-bottom: 20px;
+}
+.edit-profile-button-area-container{
+	margin-bottom: 30px;
+}
+#edit-profile-save-button{
+	margin-bottom: 10px;
+}
 .edit-address{
 	padding: 5px;
 }
 #edit-profile-cancel{
 	background-color: #800000;
 }
-@media (min-width: 768px) and (max-width: 1024px){
+.change-photo-text{
+	margin-bottom: 10px
+}
+.col-12.edit-telephone {
+    margin-bottom: 12%;
+}
+/*style for footer*/
+.footer-container{
+	padding: 0px;
+}
+.footer{
+	padding: 10px 10px;
+	background-color: #330000;
+	color: #ffffff;
+}
+.footer p a{
+	text-decoration: none;
+	color: #ffffff;
+}
+/* pop up Area style */
+/* The Modal (background) */
+.modal {
+    display: none; 
+    position: fixed; 
+	z-index: 1; 
+	left: 0;
+    top: 0;
+	padding-top: 100px;
+	padding-left: 15px;
+	padding-right: 15px; 
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4); 
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+	border: 1px solid #888;
+	width: 100%;
+    height: auto;
+}
+#total-amount{
+	margin-top: 7%;
+	justify-content: center;
+}
+.form-input input{
+	width: 100%;
+	height: 30px;
+	color: #000;
+	padding-left: 3px;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	border-bottom: 1px solid #888;
+	margin-bottom: 5px;
+	border-radius: 2px;
+}
+.form-input p{
+	font-size: 15px;
+	font-weight: bold;
+}
+#add-button{
+	margin-top: 10px;
+	width: 80px;
+    height: 30px;
+}
+/* The Close Button */
+#close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#close:hover,
+#close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+#modal-order-button{
+ float :right;
+}
+@media only screen and (min-width: 768px) and (max-width: 1024px){
+	.profile-picture-container{
+		width: 50%
+	}
 	.food-card{
+		width: 50%;
+	}
+	.profile-heading h1{
+		font-size: 2rem;
+	}
+	.modal-content{
 		width: 50%;
 	}
 }
@@ -381,14 +543,14 @@ thead,th,td{
   	align-items: center;
   }  
   #main-nav{
-  	display: flex !important;
+	display: flex !important;
   	margin-right: 30px;
   	flex-direction: row;
   }
   #main-nav li{
   	margin: 0;
-  	font-size: 1.5rem;
-  	font-family: 'Cookie', cursive; 
+  	font-size: 1rem;
+  	/* font-family: 'Cookie', cursive;  */
   }
   .nav-links{
   	margin-left: 40px;
@@ -401,31 +563,44 @@ thead,th,td{
   	margin-top: 0;
   	padding: 4px 3px;
   	text-align: center;
-  	font-size: 2.0rem;
+  	font-size: 1.5rem;
   	border-radius: 1px;
-	font-family: 'Cookie', cursive; 
+	/* font-family: 'Cookie', cursive;  */
   	border: 1px solid white;
   }
   /*menu style*/
   .food-card{
 	width: 25%;
   }
+  /* #item-count{
+	position: absolute;
+	top:15px;
+	right:15px;
+	height: 20px;
+	width: 20px;
+	border-radius: 100%;
+	background-color: #ff9900;
+	color: #fff;
+} */
   .order-button button:hover{
 	background-color: #0033cc;
   }
   .add-to-cart-button button:hover{
-  	background-color: #e68a00;
+  	background-color: #e68a00ad;
   }
  /*Admin page*/
   #admin-menu{
- 	width: 33.33%;
+ 	width: 41.66%;
   }
   #accepted-oders{
   	width: 41.66%;
  }
  #admin-action{
- 	width: 66.66%;
+ 	width: 58.33%;
  }
+ .profile-heading h1{
+	font-size: 2rem;
+ } 
  #profile-button button:hover{
  	cursor: pointer;
  	background-color: #0033cc;
@@ -439,6 +614,9 @@ thead,th,td{
  .profile-details-sub-container{
  	margin-bottom: 15px;
  }
+ .modal-content{
+	 width: 25%;
+ }
  /*edit profile*/
  #edit-profile-cancel:hover{
  	cursor: pointer;
@@ -449,8 +627,3 @@ thead,th,td{
  	background: #0033cc;
  }
 }
-/*@media only screen and (min-width: 768px){
-	.food-card{
-		width: 50%;
-	}
-}*/

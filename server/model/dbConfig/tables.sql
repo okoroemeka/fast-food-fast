@@ -14,20 +14,22 @@ CREATE TABLE users(
 	createdAt timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updatedAt timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+INSERT INTO users(fullname,email,telephone,password,status) VALUES('EMEKA OKORO', 'okoroEmeka@gmail.com','08062680531','Wise214@','admin');
+
 CREATE TABLE menus(
     id SERIAL PRIMARY KEY,
     food VARCHAR NOT NULL,
     price INT NOT NULL,
-    picture VARCHAR NOT NULL,
+    food_image VARCHAR NOT NULL,
     createdAt timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updatedAt timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TYPE order_status AS ENUM('New','Processing','Cancelled','Complete');
 CREATE TABLE orders(
     id SERIAL PRIMARY KEY,
-    food VARCHAR NOT NULL,
-    price INT NOT NULL,
-    address VARCHAR NOT NULL,
-    status VARCHAR DEFAULT 'pending', 
+    delivary_address VARCHAR NOT NULL,
+    order_status VARCHAR DEFAULT 'New', 
     user_id INT REFERENCES users(id) ON DELETE CASCADE,
     menu_id INT REFERENCES menus(id) ON DELETE CASCADE,
     createdAt timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,

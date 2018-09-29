@@ -48,13 +48,6 @@ const validation = {
         message: 'please an email is required, make sure it follows this format[example@whatever.com]',
       });
     }
-    if (password === undefined || password.trim().length < 6
-    || typeof password !== 'string' || passwordValidation(password) !== 100) {
-      return res.status(400).json({
-        status: 'fail',
-        message: 'password length must greater than 6 and should contain uppercase,lowercase, number and any of this character[$@#&!]',
-      });
-    }
     return next();
   },
 };

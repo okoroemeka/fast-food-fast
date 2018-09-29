@@ -89,9 +89,6 @@ class Users {
           return res.status(400).json({
             status: 'fail',
             message: 'Wrong email or password',
-            data: user.rows[0].password,
-            pass: req.body.password.trim(),
-            password: bcrypt.compareSync(user.rows[0].password, req.body.password.trim()),
           });
         })
         .catch(error => res.status(500).json({
@@ -103,6 +100,17 @@ class Users {
       status: 'fail',
       message: 'All feilds are required',
     });
+  }
+
+  static updateUserStatus(req, res) {
+    const { status } = req.body;
+    const updateUserQuery = {
+      text: 'UPDATE users SET status=$1 WHERE id=$2 RETURNING *',
+      values: [status.trim(), parseInt(req.params.userId, 10)],
+    };
+    dbConnection.query(updateUserQuery)
+      .then(data => res.status(200).json(data.rows[0]))
+      .catch(err => res.status(500).json(err));
   }
 }
 export default Users;

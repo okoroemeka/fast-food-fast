@@ -38,5 +38,17 @@ const validation = {
     }
     return next();
   },
+  signInValidation: (req, res, next) => {
+    const {
+      email, password,
+    } = req.body;
+    if (email === undefined || email.trim().length < 1 || !(/\S+@\S+\.\S+/.test(email))) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'please an email is required, make sure it follows this format[example@whatever.com]',
+      });
+    }
+    return next();
+  },
 };
 export default validation;

@@ -1,12 +1,12 @@
 import express from 'express';
 import userController from '../controller/dbController/users';
-import signupValidation from '../utils/validation';
+import validation from '../utils/validation';
 // Express subrouter
 const router = express.Router();
 
 // Routing
-router.post('/auth/signup', signupValidation.signupValidation, userController.signUp);
-// router.post('/auth/signin', userController.signIn);
+router.post('/auth/signup', validation.signupValidation, userController.signUp);
+router.post('/auth/signin', validation.signInValidation, userController.signIn);
 // router.post('/auth/signin', users.signIn);
 // router.get('/orders', order.getAllOrder);
 // router.get('/orders/:orderId', order.getSpecificOrder);

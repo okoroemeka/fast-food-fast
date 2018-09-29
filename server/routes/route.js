@@ -1,13 +1,16 @@
 import express from 'express';
-import userController from '../controller/dbController/users';
+import user from '../controller/dbController/users';
+import menu from '../controller/dbController/menu';
+import authentication from '../utils/auth';
 import validation from '../utils/validation';
 // Express subrouter
 const router = express.Router();
 
 // Routing
-router.post('/auth/signup', validation.signupValidation, userController.signUp);
-router.post('/auth/signin', validation.signInValidation, userController.signIn);
-// router.post('/auth/signin', users.signIn);
+router.post('/auth/signup', validation.signupValidation, user.signUp);
+router.post('/auth/signin', validation.signInValidation, user.signIn);
+router.put('/updateuser/:userId', user.updateUserStatus);
+router.post('/menu', validation.createMenuValidation, authentication, menu.createMenuItem);
 // router.get('/orders', order.getAllOrder);
 // router.get('/orders/:orderId', order.getSpecificOrder);
 // router.post('/orders', order.createOrder);

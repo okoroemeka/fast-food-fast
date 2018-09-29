@@ -50,5 +50,28 @@ const validation = {
     }
     return next();
   },
+  createMenuValidation: (req, res, next) => {
+    const { food, foodImage } = req.body;
+    const price = parseInt(req.body.price, 10);
+    if (food === undefined || food.trim().length < 1 || typeof food !== 'string') {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'food name is required',
+      });
+    }
+    if (price === undefined || req.body.price.trim().length < 1 || isNaN(price)) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'price is needed and must be an integer',
+      });
+    }
+    if (foodImage === undefined || foodImage.trim().length < 1 || typeof foodImage !== 'string') {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'food Image is required',
+      });
+    }
+    return next();
+  },
 };
 export default validation;

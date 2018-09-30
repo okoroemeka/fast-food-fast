@@ -17,7 +17,7 @@ router.get('/menu', authentication, menu.getMenu);
 router.get('/orders', authentication, order.getAllOrder);
 router.get('/orders/:orderId', authentication, order.getSpecificOrder);
 router.post('/orders', validation.createOrderValidation, authentication, order.createOrder);
-// router.put('/orders/:orderId', order.updateOrderStatus);
+router.put('/orders/:orderId', authentication, order.updateOrderStatus);
 
 
 export default router;

@@ -52,7 +52,7 @@ class Order {
   }
 
   /**
-     * @return {object} createOrder
+     * @return {object} getAllorders
      * @param {*} req
      * @param {*} res
      */

@@ -73,5 +73,49 @@ const validation = {
     }
     return next();
   },
+  createOrderValidation: (req, res, next) => {
+    const {
+      food, street, city, telephone, price, quantity,
+    } = req.body;
+    if (food === undefined || food.trim().length < 1 || typeof food !== 'string') {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'food name is required',
+      });
+    }
+    if (street === undefined || street.trim().length < 1 || typeof street !== 'string') {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'street address is required',
+      });
+    }
+    if (city === undefined || city.trim().length < 1 || typeof city !== 'string') {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'city name is required',
+      });
+    }
+    if (telephone === undefined || telephone.trim().length < 1
+    || !Number.isInteger(parseInt(telephone, 10))) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'telephone number is required',
+      });
+    }
+    if ((quantity === undefined || req.body.quantity.trim().length === 0
+    || !Number.isInteger(parseInt(quantity, 10)))) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'quantiy is required and must be an integer',
+      });
+    }
+    if (price === undefined || req.body.price.trim().length < 1 || !Number.isInteger(parseInt(quantity, 10))) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'price is needed and must be an integer',
+      });
+    }
+    return next();
+  },
 };
 export default validation;

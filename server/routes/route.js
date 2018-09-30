@@ -18,6 +18,7 @@ router.get('/orders', authentication, order.getAllOrder);
 router.get('/orders/:orderId', authentication, order.getSpecificOrder);
 router.post('/orders', validation.createOrderValidation, authentication, order.createOrder);
 router.put('/orders/:orderId', authentication, order.updateOrderStatus);
+router.get('/users/:userId/orders', authentication, order.getOrderHistory);
 
 
 export default router;

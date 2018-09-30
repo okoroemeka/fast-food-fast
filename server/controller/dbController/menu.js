@@ -14,7 +14,7 @@ class Menu {
     };
     if (req.decoded.status === 'admin') {
       return dbConnection.query(createItemQuery)
-        .then(menuItem => res.status(200).json({
+        .then(menuItem => res.status(201).json({
           status: 'success',
           message: 'menu item created successfully',
           data: menuItem.rows[0],

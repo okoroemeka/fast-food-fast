@@ -10,16 +10,15 @@ class Users {
    */
   static signUp(req, res) {
     const {
-      fullname, email, telephone, password,
+      fullname, email, password,
     } = req.body;
     const getUserQuery = {
       text: 'SELECT * FROM users WHERE email = $1',
       values: [email],
     };
     const createUserQuery = {
-      text: 'INSERT INTO users(fullname,email,telephone,password) VALUES($1, $2, $3, $4) RETURNING *',
-      values: [fullname, email, telephone,
-        bcrypt.hashSync(password, 10)],
+      text: 'INSERT INTO users(fullname,email,password) VALUES($1, $2, $3) RETURNING *',
+      values: [fullname, email, bcrypt.hashSync(password, 10)],
     };
 
     dbConnection.query(getUserQuery)
@@ -71,6 +70,7 @@ class Users {
           if (bcrypt.compareSync(req.body.password, user.rows[0].password)) {
             const token = jwt.sign(
               {
+                name: user.rows[0].fullname,
                 user_id: user.rows[0].id,
                 email: user.rows[0].email,
                 status: user.rows[0].status,

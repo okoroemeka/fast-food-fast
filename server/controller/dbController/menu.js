@@ -29,5 +29,28 @@ class Menu {
       message: 'You are not authorised to perform this action',
     });
   }
+
+  static getMenu(req, res) {
+    const getMenuQuery = {
+      text: 'SELECT * FROM menus',
+    };
+    dbConnection.query(getMenuQuery)
+      .then((menu) => {
+        if (menu.rowCount > 0) {
+          return res.status(200).json({
+            status: 'success',
+            data: menu.rows,
+          });
+        }
+        return res.status(404).json({
+          status: 'fail',
+          message: 'No food in the menu',
+        });
+      })
+      .catch(err => res.status(500).json({
+        status: 'error',
+        message: 'Internal server error, please try again later',
+      }));
+  }
 }
 export default Menu;

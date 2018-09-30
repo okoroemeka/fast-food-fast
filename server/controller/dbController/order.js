@@ -50,5 +50,39 @@ class Order {
         message: 'Internal server error, please try again later',
       }));
   }
+
+  /**
+     * @return {object} getAllorders
+     * @param {*} req
+     * @param {*} res
+     */
+  static getAllOrder(req, res) {
+    const getAllOrdersQuery = {
+      text: 'SELECT * FROM orders',
+    };
+    if (req.decoded.status !== 'admin') {
+      return res.status(403).json({
+        status: 'fail',
+        message: 'You are not autthorized to perform this action',
+      });
+    }
+    return dbConnection.query(getAllOrdersQuery)
+      .then((orders) => {
+        if (orders.rowCount !== 0) {
+          return res.status(200).json({
+            status: 'success',
+            data: orders.rows,
+          });
+        }
+        return res.status(404).json({
+          status: 'fail',
+          mesage: 'No available order',
+        });
+      })
+      .catch(() => res.status(500).json({
+        status: 'error',
+        message: 'Internal server error, please try again later',
+      }));
+  }
 }
 export default Order;

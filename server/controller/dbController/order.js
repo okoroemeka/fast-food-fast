@@ -179,5 +179,41 @@ class Order {
       message: 'status field can not be empty',
     });
   }
+
+  /**
+ *  @returns {object} getOrderHistory
+ * @param {*} req
+ * @param {*} res
+ */
+  static getOrderHistory(req, res) {
+    const { userId } = req.params;
+    const getOrderHistoryQuery = {
+      text: 'SELECT * FROM orders WHERE user_id=$1',
+      values: [parseInt(userId, 10)],
+    };
+    if (req.decoded.status !== 'admin') {
+      return res.status(403).json({
+        status: 'fail',
+        message: 'You are not authorized to perform this action',
+      });
+    }
+    return dbConnection.query(getOrderHistoryQuery)
+      .then((orders) => {
+        if (orders.rowCount === 0) {
+          return res.status(404).json({
+            status: 'fail',
+            message: 'User has no order history',
+          });
+        }
+        return res.status(200).json({
+          status: 'success',
+          data: orders.rows[0],
+        });
+      })
+      .catch(() => res.status(500).json({
+        status: 'error',
+        message: 'Internal server error',
+      }));
+  }
 }
 export default Order;

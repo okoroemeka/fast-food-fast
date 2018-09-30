@@ -76,7 +76,7 @@ class Order {
         }
         return res.status(404).json({
           status: 'fail',
-          mesage: 'order',
+          mesage: 'order not found',
         });
       })
       .catch(() => res.status(500).json({

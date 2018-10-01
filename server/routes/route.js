@@ -14,6 +14,7 @@ router.post('/auth/signin', validation.signInValidation, user.signIn);
 router.put('/updateuser/:userId', user.updateUserStatus);
 router.post('/menu', validation.createMenuValidation, authentication, menu.createMenuItem);
 router.get('/menu', authentication, menu.getMenu);
+router.delete('/menu/:menuId', authentication, menu.deleteMenuItem);
 router.get('/orders', authentication, order.getAllOrder);
 router.get('/orders/:orderId', authentication, order.getSpecificOrder);
 router.post('/orders', validation.createOrderValidation, authentication, order.createOrder);

@@ -52,5 +52,50 @@ class Menu {
         message: 'Internal server error, please try again later',
       }));
   }
+
+  /**
+   * @return {object} deleteMenuItem
+   * @param {*} req
+   * @param {*} res
+   */
+  static deleteMenuItem(req, res) {
+    const { menuId } = req.params;
+    const deleteQuery = {
+      text: 'DELETE FROM menus WHERE id=$1',
+      values: [parseInt(menuId, 10)],
+    };
+    const selectQuery = {
+      text: 'SELECT * FROM menus WHERE id=$1',
+      values: [parseInt(menuId, 10)],
+    };
+    if (req.decoded.status !== 'admin') {
+      return res.status(403).json({
+        status: 'fail',
+        message: 'You are not authorized to perform this action',
+      });
+    }
+    return dbConnection.query(selectQuery)
+      .then((data) => {
+        if (data.rowCount !== 1) {
+          return res.status(404).json({
+            status: 'The menu Item you want to delete does not exist',
+          });
+        }
+        return dbConnection.query(deleteQuery)
+          .then(deletedData => res.status(200).json({
+            status: 'success',
+            message: 'Menu item deleted successfully',
+            deletedData,
+          }))
+          .catch(() => res.status(500).json({
+            status: 'error',
+            message: 'Internal server error, please try again later',
+          }));
+      })
+      .catch(() => res.status(500).json({
+        status: 'error',
+        message: 'Internal server error, please try again later',
+      }));
+  }
 }
 export default Menu;

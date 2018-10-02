@@ -76,7 +76,7 @@ class Order {
         }
         return res.status(404).json({
           status: 'fail',
-          mesage: 'order not found',
+          mesage: 'No availabe order',
         });
       })
       .catch(() => res.status(500).json({
@@ -207,7 +207,7 @@ class Order {
         }
         return res.status(200).json({
           status: 'success',
-          data: orders.rows[0],
+          data: orders.rows,
         });
       })
       .catch(() => res.status(500).json({

@@ -4,7 +4,7 @@ import logger from 'morgan';
 import errorhandler from 'errorhandler';
 import swaggerUi from 'swagger-ui-express';
 import router from './routes/route';
-import swaggerDocument from '../docs/swagger.json';
+// import swaggerDocument from '../docs/swagger.json';
 
 const app = express();
 const port = parseInt(process.env.PORT, 10) || 8080;
@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(errorhandler());
 app.use(logger('dev'));
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/v1', router);
 app.set('port', port);
 

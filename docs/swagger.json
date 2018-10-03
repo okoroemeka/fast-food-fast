@@ -1,0 +1,386 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "fast-food-fast",
+    "description": "A simple API for an online resturant"
+  },
+  "schemes": [
+    "http"
+  ],
+  "host": "fast-food-fast-12.herokuapp.com",
+  "basePath": "/api/v1",
+  "paths": {
+    "/menu": {
+      "get": {
+        "tags": [
+          "menu"
+        ],
+        "summary": "Gets all menu items",
+        "description": "Returns a list containing all menu items.",
+        "parameters": [
+          {
+            "name": "menuitemSize",
+            "in": "query",
+            "description": "Number of menu item returned",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of menu items"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "menu"
+        ],
+        "summary": "Creates a menu item",
+        "description": "Adds a new menu item to the list of menu items.",
+        "parameters": [
+          {
+            "name": "food name",
+            "in": "body",
+            "description": "The name of food.",
+            "schema": {
+              "required": [
+                "food name",
+                "food image",
+                "food price"
+              ],
+              "properties": {
+                "foodName": {
+                  "type": "string"
+                },
+                "FoodImage": {
+                  "type": "string"
+                },
+                "foodPrice": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Menu Item succesfully created."
+          },
+          "400": {
+            "description": "Menu item couldn't have been created."
+          }
+        }
+      }
+    },
+    "/menu/{menuItemId}": {
+      "delete": {
+        "tags": [
+          "menu"
+        ],
+        "summary": "Delete menu item by ID",
+        "description": "For valid response try integer IDs with positive integer value.         Negative or non-integer values will generate API errors",
+        "operationId": "menuItemID",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "menuItemId",
+            "in": "path",
+            "description": "ID of the menu item that needs to be deleted",
+            "required": true,
+            "type": "integer",
+            "minimum": 1,
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "menu item not found"
+          }
+        }
+      }
+    },
+    "/orders/{orderId}": {
+      "get": {
+        "tags": [
+          "order"
+        ],
+        "summary": "Gets an order",
+        "description": "Returns an order.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "description": "The order's id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A food order",
+            "schema": {
+              "required": [
+                "orderId"
+              ],
+              "properties": {
+                "fullName": {
+                  "type": "string"
+                },
+                "customerAdress": {
+                  "type": "string"
+                },
+                "userId": {
+                  "type": "integer"
+                },
+                "foodPrice": {
+                  "type": "integer"
+                },
+                "quantity": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The Order does not exists."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "order"
+        ],
+        "summary": "Updated order status",
+        "description": "This can only be done by the caterer",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "description": "food order",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "status",
+            "description": "Updated order status",
+            "required": true,
+            "schema": {
+              "required": [
+                "orderId"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfull update"
+          },
+          "404": {
+            "description": "Order not found"
+          }
+        }
+      }
+    },
+    "/order": {
+      "get": {
+        "tags": [
+          "order"
+        ],
+        "summary": "Gets all order",
+        "description": "Returns a list containing all orders.",
+        "parameters": [
+          {
+            "name": "orderSize",
+            "in": "query",
+            "description": "Number of orders returned",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of orders"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "order"
+        ],
+        "summary": "Creates an order",
+        "description": "Adds a new order to the list order.",
+        "parameters": [
+          {
+            "name": "order details",
+            "in": "body",
+            "description": "The details of the order.",
+            "schema": {
+              "required": [
+                "food name",
+                "customers address",
+                "food price",
+                "telephone"
+              ],
+              "properties": {
+                "foodName": {
+                  "type": "string"
+                },
+                "customerAdress": {
+                  "type": "string"
+                },
+                "foodPrice": {
+                  "type": "integer"
+                },
+                "telephone": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "order succesfully placed."
+          },
+          "400": {
+            "description": "order couldn't have been placed."
+          }
+        }
+      }
+    },
+    "/user/{userId}/orders": {
+      "get": {
+        "tags": [
+          "order"
+        ],
+        "summary": "get all order for a specific user",
+        "description": "",
+        "operationId": "getUserOrders",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID of user to whose order will be fetched",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/auth/signup": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Creates new user",
+        "description": "",
+        "operationId": "signupUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "fullname",
+            "in": "query",
+            "description": "The user full name for sign up",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "description": "The email for signup in clear text",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "description": "The password for signup in clear text",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "confirm password",
+            "in": "query",
+            "description": "The confirm password for signup in clear text",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "user successful creation",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "Invalid inputs"
+          }
+        }
+      }
+    },
+    "/auth/signin": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Logs user into the system",
+        "description": "",
+        "operationId": "loginUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "description": "The user name for login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "description": "The password for login in clear text",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "Invalid username/password supplied"
+          }
+        }
+      }
+    }
+  }
+}

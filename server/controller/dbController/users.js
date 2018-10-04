@@ -77,7 +77,7 @@ class Users {
               },
               process.env.SECRET_KEY,
               {
-                expiresIn: '24hr',
+                expiresIn: '168hr',
               },
             );
             return res.status(200).json({

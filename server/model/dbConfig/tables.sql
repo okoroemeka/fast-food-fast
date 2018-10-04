@@ -27,13 +27,12 @@ CREATE TABLE menus(
 
 CREATE TABLE orders(
     id SERIAL PRIMARY KEY,
-    customer_name VARCHAR NOT NULL,
-    food VARCHAR NOT NULL,
     delivary_address VARCHAR NOT NULL,
     telephone text NOT NULL,
     quantity INT  NOT NULL,
     order_status VARCHAR DEFAULT 'New', 
     user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    menu_id INT REFERENCES menus(id) ON DELETE CASCADE,
     createdAt timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updatedAt timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

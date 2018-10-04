@@ -10,7 +10,7 @@
     "start:dev": "nodemon server/app.js --exec babel-node --presets env",
     "build": "babel server -d server/dist --presets env",
     "serve": "node server/dist/app.js",
-    "test": "npm run testMigrate && cross-env NODE_ENV=test mocha --compilers js:babel-register server/test --exit --timeout 20000",
+    "test": "npm run testMigrate && cross-env NODE_ENV=test nyc mocha --compilers js:babel-register server/test --exit --timeout 20000",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {

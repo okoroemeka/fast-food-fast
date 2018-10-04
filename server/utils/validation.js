@@ -11,19 +11,37 @@ const validation = {
     const {
       fullname, email, password, confirmPassword,
     } = req.body;
-    if (email === undefined || email.trim().length < 1 || !(/\S+@\S+\.\S+/.test(email))) {
+    if(email === undefined){
       return res.status(400).json({
         status: 'fail',
-        message: 'please an email is required, make sure it follows this format[example@whatever.com]',
+        message: 'please an email is required',
       });
     }
-    if (fullname === undefined || fullname.trim().length < 1 || typeof fullname !== 'string') {
+    if (email.trim().length < 1 || !(/\S+@\S+\.\S+/.test(email))) {
       return res.status(400).json({
         status: 'fail',
-        message: 'full name is needed and must be a string',
+        message: 'please email can not be empty and must follow this format[example@whatever.com]',
       });
     }
-    if (password === undefined || password.trim().length < 6
+    if (fullname === undefined) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'full name is required',
+      });
+    }
+    if (fullname.trim().length < 1 || typeof fullname !== 'string') {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'full name can not be empty and must be a string',
+      });
+    }
+    if (password === undefined) {
+        return res.status(400).json({
+        status: 'fail',
+        message: 'password is needed',
+      });
+    }
+    if (password.trim().length < 6
     || typeof password !== 'string' || passwordValidation(password) !== 100) {
       return res.status(400).json({
         status: 'fail',
@@ -53,19 +71,37 @@ const validation = {
   createMenuValidation: (req, res, next) => {
     const { food, foodImage } = req.body;
     const price = parseInt(req.body.price, 10);
-    if (food === undefined || food.trim().length < 1 || typeof food !== 'string') {
+    if (food === undefined) {
       return res.status(400).json({
         status: 'fail',
         message: 'food name is required',
       });
     }
-    if (price === undefined || req.body.price.trim().length < 1 || isNaN(price)) {
+    if (food.trim().length < 1 || typeof food !== 'string') {
       return res.status(400).json({
         status: 'fail',
-        message: 'price is needed and must be an integer',
+        message: 'food name can not be empty',
       });
     }
-    if (foodImage === undefined || foodImage.trim().length < 1 || typeof foodImage !== 'string') {
+    if (req.body.price === undefined ) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'price is needed',
+      });
+    }
+    if ( req.body.price.trim().length < 1 || isNaN(price)) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'price feild can not be empty and must be an integer',
+      });
+    }
+    if (foodImage === undefined) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'food Image is required',
+      });
+    }
+    if (foodImage.trim().length < 1 || typeof foodImage !== 'string') {
       return res.status(400).json({
         status: 'fail',
         message: 'food Image is required',
@@ -77,44 +113,74 @@ const validation = {
     const {
       food, street, city, telephone, price, quantity,
     } = req.body;
-    if (food === undefined || food.trim().length < 1 || typeof food !== 'string') {
+    if (food === undefined) {
       return res.status(400).json({
         status: 'fail',
         message: 'food name is required',
       });
     }
-    if (street === undefined || street.trim().length < 1 || typeof street !== 'string') {
+    if (food.trim().length < 1 || typeof food !== 'string') {
       return res.status(400).json({
+        status: 'fail',
+        message: 'food feild is required',
+      });
+    }
+    if (street === undefined) {
+       return res.status(400).json({
         status: 'fail',
         message: 'street address is required',
       });
     }
-    if (city === undefined || city.trim().length < 1 || typeof city !== 'string') {
+    if (street.trim().length < 1 || typeof street !== 'string') {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'street can not be empty',
+      });
+    }
+    if (city === undefined) {
       return res.status(400).json({
         status: 'fail',
         message: 'city name is required',
       });
     }
-    if (telephone === undefined || telephone.trim().length < 1
-    || !Number.isInteger(parseInt(telephone, 10))) {
+    if (city.trim().length < 1 || typeof city !== 'string') {
       return res.status(400).json({
+        status: 'fail',
+        message: 'city name can not be empty',
+      });
+    }
+    if (telephone === undefined) {
+       return res.status(400).json({
         status: 'fail',
         message: 'telephone number is required',
       });
     }
-    if ((quantity === undefined || req.body.quantity.trim().length === 0
-    || !Number.isInteger(parseInt(quantity, 10)))) {
+    if (telephone.trim().length < 1
+    || !Number.isInteger(parseInt(telephone, 10))) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'telephone feild can not be empty',
+      });
+    }
+    if (quantity === undefined) {
       return res.status(400).json({
         status: 'fail',
         message: 'quantiy is required and must be an integer',
       });
     }
-    if (price === undefined || req.body.price.trim().length < 1 || !Number.isInteger(parseInt(quantity, 10))) {
+    if (req.body.quantity.trim().length === 0
+    || !Number.isInteger(parseInt(quantity, 10))) {
       return res.status(400).json({
         status: 'fail',
-        message: 'price is needed and must be an integer',
+        message: 'quantiy is required and must be an integer',
       });
     }
+    // if (price === undefined || req.body.price.trim().length < 1 || !Number.isInteger(parseInt(quantity, 10))) {
+    //   return res.status(400).json({
+    //     status: 'fail',
+    //     message: 'price is needed and must be an integer',
+    //   });
+    // }
     return next();
   },
 };

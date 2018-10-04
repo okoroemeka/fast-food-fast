@@ -8,19 +8,17 @@ class Order {
      */
   static createOrder(req, res) {
     const {
-      food, quantity, telephone, price,
+      food, quantity, telephone,
     } = req.body;
     const address = `${req.body.street}, ${req.body.city}`;
     const getMenuQuery = {
       text: 'SELECT * FROM menus WHERE food=$1',
       values: [food.trim()],
     };
-    const createOrderQuery = {
-      text: 'INSERT INTO orders(customer_name,food,delivary_address,telephone,quantity,user_id) VALUES($1, $2, $3, $4, $5,$6) RETURNING *',
-      values: [req.decoded.name, food.trim(), address,
-        telephone.trim(),
-        parseInt(quantity.trim(), 10), req.decoded.user_id],
-    };
+    // const createOrderQuery = {
+    //   text: 'INSERT INTO orders(delivary_address,telephone,quantity,user_id) VALUES($1, $2, $3, $4) RETURNING *',
+    //   values: [address,telephone.trim(), parseInt(quantity.trim(), 10), req.decoded.user_id],
+    // };
     dbConnection.query(getMenuQuery)
       .then((menu) => {
         if (menu.rowCount < 1) {
@@ -29,6 +27,12 @@ class Order {
             message: 'Sorry, this food has been removed from the menu',
           });
         }
+        const price = menu.rows[0].price;
+        const menuId = menu.rows[0].id;
+        const createOrderQuery = {
+          text: 'INSERT INTO orders(delivary_address,telephone,quantity,user_id,menu_id) VALUES($1, $2, $3, $4, $5) RETURNING *',
+          values: [address,telephone.trim(), parseInt(quantity.trim(), 10), req.decoded.user_id,menuId],
+        };
         return dbConnection.query(createOrderQuery)
           .then(order => res.status(201).json({
             status: 'success',
@@ -58,7 +62,20 @@ class Order {
      */
   static getAllOrder(req, res) {
     const getAllOrdersQuery = {
-      text: 'SELECT * FROM orders',
+      text: `SELECT
+        fullname, 
+        delivary_address,
+        telephone,
+        quantity,
+        food,
+        price,
+        order_status
+        FROM
+        orders
+        INNER JOIN
+        menus ON menus.id = orders.menu_id
+        INNER JOIN
+        users ON users.id = orders.user_id`,
     };
     if (req.decoded.status !== 'admin') {
       return res.status(403).json({
@@ -71,6 +88,7 @@ class Order {
         if (orders.rowCount !== 0) {
           return res.status(200).json({
             status: 'success',
+            message: 'fetch orders was successful',
             data: orders.rows,
           });
         }
@@ -92,8 +110,23 @@ class Order {
  */
   static getSpecificOrder(req, res) {
     const { orderId } = req.params;
+    // orderId = parseInt(orderId, 10);
     const getSpecificOrderQuery = {
-      text: 'SELECT * FROM orders WHERE id=$1',
+      text: `SELECT
+        fullname, 
+        delivary_address,
+        telephone,
+        quantity,
+        food,
+        price,
+        order_status,
+        createdAt
+        FROM
+        (orders, or_io)
+        INNER JOIN
+        menus ON menus.id = or_io.menu_id
+        INNER JOIN
+        users ON users.id = or_io.user_id WHERE or_io.id=$1`,
       values: [parseInt(orderId, 10)],
     };
     if (req.decoded.status !== 'admin') {
@@ -103,22 +136,49 @@ class Order {
       });
     }
     return dbConnection.query(getSpecificOrderQuery)
-      .then((order) => {
-        if (order.rowCount !== 0) {
+      .then((orders) => {
+        if (orders.rowCount !== 0) {
           return res.status(200).json({
             status: 'success',
-            data: order.rows[0],
+            message: 'fetch orders was successful',
+            data: orders.rows[0],
           });
         }
         return res.status(404).json({
           status: 'fail',
-          message: 'Order not found',
+          mesage: 'order not found',
         });
       })
-      .catch(() => res.status(500).json({
+      .catch((err) => res.status(500).json({
         status: 'error',
         message: 'Internal server error, please try again later',
+        orderId,
+        err
       }));
+    // if (req.decoded.status !== 'admin') {
+    //   return res.status(403).json({
+    //     status: 'fail',
+    //     message: 'You are not autthorized to perform this action',
+    //   });
+    // }
+    // return dbConnection.query(getSpecificOrderQuery)
+    //   .then((order) => {
+    //     if (order.rowCount !== 0) {
+    //       return res.status(200).json({
+    //         status: 'success',
+    //         message: 'fetch specific order was successful',
+    //         data: order.rows[0],
+    //       });
+    //     }
+    //     return res.status(404).json({
+    //       status: 'fail',
+    //       message: 'Order not found',
+    //     });
+    //   })
+    //   .catch(() => res.status(500).json({
+    //     status: 'error',
+    //     message: 'Internal server error, please try again later',
+    //   }));
   }
 
   /**
@@ -188,15 +248,23 @@ class Order {
   static getOrderHistory(req, res) {
     const { userId } = req.params;
     const getOrderHistoryQuery = {
-      text: 'SELECT * FROM orders WHERE user_id=$1',
+      text: `SELECT
+        fullname, 
+        delivary_address,
+        telephone,
+        quantity,
+        food,
+        price,
+        order_status,
+        createdAt
+        FROM
+        orders
+        INNER JOIN
+        menus ON menus.id = orders.menu_id
+        INNER JOIN
+        users ON users.id = orders.user_id WHERE user_id=$1`,
       values: [parseInt(userId, 10)],
     };
-    if (req.decoded.status !== 'admin') {
-      return res.status(403).json({
-        status: 'fail',
-        message: 'You are not authorized to perform this action',
-      });
-    }
     return dbConnection.query(getOrderHistoryQuery)
       .then((orders) => {
         if (orders.rowCount === 0) {
@@ -207,6 +275,7 @@ class Order {
         }
         return res.status(200).json({
           status: 'success',
+          message: 'fetch order history was successful',
           data: orders.rows,
         });
       })

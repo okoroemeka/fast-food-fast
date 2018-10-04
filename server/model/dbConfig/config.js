@@ -4,11 +4,10 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const {
-  DB_USER, DB_NAME, DB_PASS, DB_PORT, DATABASE_URL,TESTDB_NAME,
+  DB_USER, DB_NAME, DB_PASS, DB_PORT, TESTDB_NAME,
 } = process.env;
 
-let connectionString;
-const ssl = true;
+let connection;
 
 const devConfig = {
   user: DB_USER,
@@ -27,11 +26,14 @@ const testConfig = {
   idleTimeoutMillis: 3000,
 };
 if (process.env.NODE_ENV === 'production') {
-  connectionString = { DATABASE_URL, ssl };
+  connection = {
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+  };
 } else if (process.env.NODE_ENV === 'test') {
-  connectionString = testConfig;
+  connection = testConfig;
 } else {
-  connectionString = devConfig;
+  connection = devConfig;
 }
-const dbConnection = new Pg.Pool(connectionString);
+const dbConnection = new Pg.Pool(connection);
 export default dbConnection;

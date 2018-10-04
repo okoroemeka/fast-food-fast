@@ -4,7 +4,7 @@ import logger from 'morgan';
 import errorhandler from 'errorhandler';
 import swaggerUi from 'swagger-ui-express';
 import router from './routes/route';
-// import swaggerDocument from '../docs/swagger.json';
+// const swaggerDocument = require'../docs/swagger.json';
 
 const app = express();
 const port = parseInt(process.env.PORT, 10) || 8080;

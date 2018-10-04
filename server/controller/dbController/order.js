@@ -40,14 +40,18 @@ class Order {
               totalCost: order.rows[0].quantity * parseInt(price, 10),
             },
           }))
-          .catch(() => res.status(500).json({
+          .catch(err => res.status(500).json({
             status: 'error',
             message: 'Internal server error, please try again later',
+            id: req.decoded.user_id,
+            menuId,
+            err,
           }));
       })
-      .catch(() => res.status(500).json({
+      .catch(err => res.status(500).json({
         status: 'error',
         message: 'Internal server error, please try again later',
+        err,
       }));
   }
 
@@ -127,30 +131,30 @@ class Order {
         users ON users.id = or_io.user_id WHERE or_io.id=$1`,
       values: [parseInt(orderId, 10)],
     };
-    if (req.decoded.status !== 'admin') {
-      return res.status(403).json({
-        status: 'fail',
-        message: 'You are not autthorized to perform this action',
-      });
-    }
-    return dbConnection.query(getSpecificOrderQuery)
-      .then((orders) => {
-        if (orders.rowCount !== 0) {
-          return res.status(200).json({
-            status: 'success',
-            message: 'fetch specific order was successful',
-            data: orders.rows[0],
+    if (req.decoded.status === 'admin') {
+      return dbConnection.query(getSpecificOrderQuery)
+        .then((orders) => {
+          if (orders.rowCount !== 0) {
+            return res.status(200).json({
+              status: 'success',
+              message: 'fetch specific order was successful',
+              data: orders.rows[0],
+            });
+          }
+          return res.status(404).json({
+            status: 'fail',
+            mesage: 'order not found',
           });
-        }
-        return res.status(404).json({
-          status: 'fail',
-          mesage: 'order not found',
-        });
-      })
-      .catch(err => res.status(500).json({
-        status: 'error',
-        message: 'Internal server error, please try again later',
-      }));
+        })
+        .catch(err => res.status(500).json({
+          status: 'error',
+          message: 'Internal server error, please try again later',
+        }));
+    }
+    return res.status(403).json({
+      status: 'fail',
+      message: 'You are not autthorized to perform this action',
+    });
   }
 
   /**

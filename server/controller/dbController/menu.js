@@ -12,22 +12,36 @@ class Menu {
       text: 'INSERT INTO menus(food,price,food_image) VALUES($1, $2, $3) RETURNING *',
       values: [food, parseInt(price, 10), foodImage],
     };
-    if (req.decoded.status === 'admin') {
-      return dbConnection.query(createItemQuery)
-        .then(menuItem => res.status(201).json({
-          status: 'success',
-          message: 'menu item created successfully',
-          data: menuItem.rows[0],
-        }))
-        .catch(err => res.status(500).json({
-          status: 'error',
-          message: 'Internal server error, please try again later',
-        }));
-    }
-    return res.status(403).json({
-      status: 'fail',
-      message: 'You are not authorised to perform this action',
-    });
+    const getMenuQuery = {
+      text: 'SELECT * FROM menus WHERE food=$1',
+      values: [food],
+    };
+    dbConnection.query(getMenuQuery)
+      .then((menu) => {
+        if (menu.rowCount !== 0) {
+          return res.status(409).json({
+            status: 'fail',
+            message: 'food is already on the menu',
+          });
+        }
+        if (req.decoded.status === 'admin') {
+          return dbConnection.query(createItemQuery)
+            .then(menuItem => res.status(201).json({
+              status: 'success',
+              message: 'menu item created successfully',
+              data: menuItem.rows[0],
+            }))
+            .catch(err => res.status(500).json({
+              status: 'error',
+              message: 'Internal server error, please try again later',
+            }));
+        }
+        return res.status(403).json({
+          status: 'fail',
+          message: 'You are not authorised to perform this action',
+        });
+      });
+    
   }
 
   static getMenu(req, res) {

@@ -19,11 +19,10 @@ services:
   - postgresql
 
 before_script:
+  - psql -c 'create database fast_food_fast_test_db' -U postgres
   - curl -L http://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
-  - psql -c 'create database fast_food_fast_test_db' -U postgres
-  # - npm run testMigrate
 
 script:
   - npm run test

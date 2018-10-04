@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS fast_food_fast_db;
-CREATE DATABASE fast_food_fast_db;
-\c fast_food_fast_db;
--- DROP TABLE IF EXISTS users;
+-- DROP DATABASE IF EXISTS fast_food_fast_db;
+-- CREATE DATABASE fast_food_fast_db;
+-- \c fast_food_fast_db;
+DROP TABLE IF EXISTS users;
 CREATE TABLE users(
 	id SERIAL PRIMARY KEY,
 	fullname VARCHAR NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE users(
 	updatedAt timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 -- INSERT INTO users(fullname,email,telephone,password,status) VALUES('EMEKA OKORO', 'okoroEmeka@gmail.com','08062680531','Wise214@','admin');
--- DROP TABLE IF EXISTS menus;
+DROP TABLE IF EXISTS menus;
 CREATE TABLE menus(
     id SERIAL PRIMARY KEY,
     food VARCHAR NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE menus(
 );
 
 -- CREATE TYPE order_status AS ENUM('New','Processing','Cancelled','Complete');
--- DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS orders;
 CREATE TABLE orders(
     id SERIAL PRIMARY KEY,
     delivary_address VARCHAR NOT NULL,

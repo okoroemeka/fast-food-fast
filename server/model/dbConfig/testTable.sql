@@ -1,5 +1,5 @@
--- DROP DATABASE IF EXISTS fast_food_fast_test_db;
--- CREATE DATABASE fast_food_fast_test_db;
+DROP DATABASE IF EXISTS fast_food_fast_test_db;
+CREATE DATABASE fast_food_fast_test_db;
 \c fast_food_fast_test_db;
 CREATE TABLE users(
 	id SERIAL PRIMARY KEY,

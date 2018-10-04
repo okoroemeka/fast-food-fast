@@ -34,6 +34,7 @@ class Users {
             status: 'success',
             message: 'Signup successfully, please proceed to login',
             data: {
+              id: newUser.rows[0].id,
               full_name: newUser.rows[0].fullname,
               email: newUser.rows[0].email,
               telephone: newUser.rows[0].telephone,
@@ -57,49 +58,42 @@ class Users {
       text: 'SELECT * FROM users WHERE email = $1',
       values: [req.body.email.trim()],
     };
-    if ((req.body.email !== undefined && req.body.email.trim().length !== 0)
-        && (req.body.password !== undefined && req.body.password.trim().length !== 0)) {
-      return dbConnection.query(getUserQuery)
-        .then((user) => {
-          if (user.rowCount === 0) {
-            return res.status(400).json({
-              status: 'fail',
-              message: 'User does not exist, please sign up to continue',
-            });
-          }
-          if (bcrypt.compareSync(req.body.password, user.rows[0].password)) {
-            const token = jwt.sign(
-              {
-                name: user.rows[0].fullname,
-                user_id: user.rows[0].id,
-                email: user.rows[0].email,
-                status: user.rows[0].status,
-              },
-              process.env.SECRET_KEY,
-              {
-                expiresIn: '168hr',
-              },
-            );
-            return res.status(200).json({
-              status: 'success',
-              message: 'welcome to fast-food-fast resturant',
-              token,
-            });
-          }
+    return dbConnection.query(getUserQuery)
+      .then((user) => {
+        if (user.rowCount === 0) {
           return res.status(400).json({
             status: 'fail',
-            message: 'Wrong email or password',
+            message: 'User does not exist, please sign up to continue',
           });
-        })
-        .catch(error => res.status(500).json({
-          status: 'error',
-          message: 'Internal server error, please try again later',
-        }));
-    }
-    return res.status(400).json({
-      status: 'fail',
-      message: 'All feilds are required',
-    });
+        }
+        if (bcrypt.compareSync(req.body.password, user.rows[0].password)) {
+          const token = jwt.sign(
+            {
+              name: user.rows[0].fullname,
+              user_id: user.rows[0].id,
+              email: user.rows[0].email,
+              status: user.rows[0].status,
+            },
+            process.env.SECRET_KEY,
+            {
+              expiresIn: '168hr',
+            },
+          );
+          return res.status(200).json({
+            status: 'success',
+            message: 'welcome to fast-food-fast resturant',
+            token,
+          });
+        }
+        return res.status(400).json({
+          status: 'fail',
+          message: 'Wrong email or password',
+        });
+      })
+      .catch(error => res.status(500).json({
+        status: 'error',
+        message: 'Internal server error, please try again later',
+      }));
   }
 
   static updateUserStatus(req, res) {

@@ -18,7 +18,7 @@ router.delete('/menu/:menuId', authentication, menu.deleteMenuItem);
 router.get('/orders', authentication, order.getAllOrder);
 router.get('/orders/:orderId', authentication, order.getSpecificOrder);
 router.post('/orders', validation.createOrderValidation, authentication, order.createOrder);
-router.put('/orders/:orderId', authentication, order.updateOrderStatus);
+router.put('/orders/:orderId', validation.validateStatus, authentication, order.updateOrderStatus);
 router.get('/users/:userId/orders', authentication, order.getOrderHistory);
 
 

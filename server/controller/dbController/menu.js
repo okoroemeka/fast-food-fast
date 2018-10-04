@@ -1,4 +1,5 @@
 import dbConnection from '../../model/dbConfig/config';
+import validateUserType from '../../utils/validation';
 
 class Menu {
   /**
@@ -24,12 +25,12 @@ class Menu {
             message: 'food is already on the menu',
           });
         }
-        if (req.decoded.status === 'admin') {
+        if (validateUserType.validate) {
           return dbConnection.query(createItemQuery)
             .then(menuItem => res.status(201).json({
               status: 'success',
               message: 'menu item created successfully',
-              data: menuItem.rows[0],
+              menu: menuItem.rows[0],
             }))
             .catch(err => res.status(500).json({
               status: 'error',
@@ -53,7 +54,7 @@ class Menu {
         if (menu.rowCount > 0) {
           return res.status(200).json({
             status: 'success',
-            data: menu.rows,
+            menu: menu.rows,
           });
         }
         return res.status(404).json({
@@ -82,7 +83,7 @@ class Menu {
       text: 'SELECT * FROM menus WHERE id=$1',
       values: [parseInt(menuId, 10)],
     };
-    if (req.decoded.status !== 'admin') {
+    if (!validateUserType.validate) {
       return res.status(403).json({
         status: 'fail',
         message: 'You are not authorized to perform this action',

@@ -1,4 +1,5 @@
 import dbConnection from '../../model/dbConfig/config';
+import validate from '../../utils/validation';
 
 class Order {
   /**
@@ -33,7 +34,7 @@ class Order {
           .then(order => res.status(201).json({
             status: 'success',
             message: 'Order placed successfully',
-            data: {
+            order: {
               food: order.rows[0].food,
               address,
               quantity: order.rows[0].quantity,
@@ -79,7 +80,7 @@ class Order {
         INNER JOIN
         users ON users.id = orders.user_id`,
     };
-    if (req.decoded.status !== 'admin') {
+    if (!validate.validate) {
       return res.status(403).json({
         status: 'fail',
         message: 'You are not autthorized to perform this action',
@@ -91,7 +92,7 @@ class Order {
           return res.status(200).json({
             status: 'success',
             message: 'fetch orders was successful',
-            data: orders.rows,
+            orders: orders.rows,
           });
         }
         return res.status(404).json({
@@ -131,14 +132,20 @@ class Order {
         users ON users.id = or_io.user_id WHERE or_io.id=$1`,
       values: [parseInt(orderId, 10)],
     };
-    if (req.decoded.status === 'admin') {
+    if (!validate.validateQueryParameter(orderId)) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'Wrong query parameter, use integers please',
+      });
+    }
+    if (validate.validate) {
       return dbConnection.query(getSpecificOrderQuery)
         .then((orders) => {
           if (orders.rowCount !== 0) {
             return res.status(200).json({
               status: 'success',
               message: 'fetch specific order was successful',
-              data: orders.rows[0],
+              order: orders.rows[0],
             });
           }
           return res.status(404).json({
@@ -173,46 +180,46 @@ class Order {
       text: 'UPDATE orders SET order_status=$1 WHERE id=$2 RETURNING *',
       values: [status.trim(), parseInt(orderId, 10)],
     };
-    if (req.decoded.status !== 'admin') {
+    if (!validate.validateQueryParameter(orderId)) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'Wrong query parameter, use integers please',
+      });
+    }
+    if (!validate.validate) {
       return res.status(403).json({
         status: 'fail',
         message: 'You are not authorized to perform this action',
       });
     }
-    if (status !== undefined && status.trim().length !== 0) {
-      if (status === 'Processing' || status === 'Cancelled' || status === 'Complete') {
-        return dbConnection.query(getSpecificOrderQuery)
-          .then((order) => {
-            if (order.rowCount !== 0) {
-              return dbConnection.query(updateOrderQuery)
-                .then(upDatedOrder => res.status(200).json({
-                  status: 'success',
-                  message: 'Order status updated successfully',
-                  data: upDatedOrder.rows[0],
-                }))
-                .catch(() => res.status(500).json({
-                  status: 'error',
-                  message: 'Internal server error, please try again later',
-                }));
-            }
-            return res.status(404).json({
-              status: 'fail',
-              message: 'order does not exist',
-            });
-          })
-          .catch(() => res.status(500).json({
-            status: 'error',
-            message: 'Internal server error, please try again later',
-          }));
-      }
-      return res.status(400).json({
-        status: 'fail',
-        message: 'Status need to be either "Processing","Complete" or "Cancelled"',
-      });
+    if (status === 'Processing' || status === 'Cancelled' || status === 'Complete') {
+      return dbConnection.query(getSpecificOrderQuery)
+        .then((order) => {
+          if (order.rowCount !== 0) {
+            return dbConnection.query(updateOrderQuery)
+              .then(upDatedOrder => res.status(200).json({
+                status: 'success',
+                message: 'Order status updated successfully',
+                order: upDatedOrder.rows[0],
+              }))
+              .catch(() => res.status(500).json({
+                status: 'error',
+                message: 'Internal server error, please try again later',
+              }));
+          }
+          return res.status(404).json({
+            status: 'fail',
+            message: 'order does not exist',
+          });
+        })
+        .catch(() => res.status(500).json({
+          status: 'error',
+          message: 'Internal server error, please try again later',
+        }));
     }
     return res.status(400).json({
       status: 'fail',
-      message: 'status field can not be empty',
+      message: 'Status need to be either "Processing","Complete" or "Cancelled"',
     });
   }
 
@@ -237,6 +244,12 @@ class Order {
         WHERE z.user_id=$1`,
       values: [parseInt(userId, 10)],
     };
+    if (!validate.validateQueryParameter(userId)) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'Wrong query parameter, use integers please',
+      });
+    }
     return dbConnection.query(getOrderHistoryQuery)
       .then((orders) => {
         if (orders.rowCount === 0) {
@@ -247,8 +260,8 @@ class Order {
         }
         return res.status(200).json({
           status: 'success',
-          message: 'fetch order history was successful',
-          data: orders.rows,
+          message: 'fetch order history successful',
+          orders: orders.rows,
         });
       })
       .catch(err => res.status(500).json({

@@ -11,7 +11,7 @@ const validation = {
     const {
       fullname, email, password, confirmPassword,
     } = req.body;
-    if(email === undefined){
+    if (email === undefined) {
       return res.status(400).json({
         status: 'fail',
         message: 'please an email is required',
@@ -36,7 +36,7 @@ const validation = {
       });
     }
     if (password === undefined) {
-        return res.status(400).json({
+      return res.status(400).json({
         status: 'fail',
         message: 'password is needed',
       });
@@ -66,6 +66,12 @@ const validation = {
         message: 'please an email is required, make sure it follows this format[example@whatever.com]',
       });
     }
+    if (password === undefined || password.trim().length < 1) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'password is required',
+      });
+    }
     return next();
   },
   createMenuValidation: (req, res, next) => {
@@ -83,13 +89,13 @@ const validation = {
         message: 'food name can not be empty',
       });
     }
-    if (req.body.price === undefined ) {
+    if (req.body.price === undefined) {
       return res.status(400).json({
         status: 'fail',
         message: 'price is needed',
       });
     }
-    if ( req.body.price.trim().length < 1 || isNaN(price)) {
+    if (req.body.price.trim().length < 1 || isNaN(price)) {
       return res.status(400).json({
         status: 'fail',
         message: 'price feild can not be empty and must be an integer',
@@ -111,7 +117,7 @@ const validation = {
   },
   createOrderValidation: (req, res, next) => {
     const {
-      food, street, city, telephone, price, quantity,
+      food, street, city, telephone, quantity,
     } = req.body;
     if (food === undefined) {
       return res.status(400).json({
@@ -126,7 +132,7 @@ const validation = {
       });
     }
     if (street === undefined) {
-       return res.status(400).json({
+      return res.status(400).json({
         status: 'fail',
         message: 'street address is required',
       });
@@ -146,11 +152,11 @@ const validation = {
     if (city.trim().length < 1 || typeof city !== 'string') {
       return res.status(400).json({
         status: 'fail',
-        message: 'city name can not be empty',
+        message: 'city name can not be empty and must be a string',
       });
     }
     if (telephone === undefined) {
-       return res.status(400).json({
+      return res.status(400).json({
         status: 'fail',
         message: 'telephone number is required',
       });
@@ -175,13 +181,35 @@ const validation = {
         message: 'quantiy is required and must be an integer',
       });
     }
-    // if (price === undefined || req.body.price.trim().length < 1 || !Number.isInteger(parseInt(quantity, 10))) {
-    //   return res.status(400).json({
-    //     status: 'fail',
-    //     message: 'price is needed and must be an integer',
-    //   });
-    // }
     return next();
+  },
+  validateStatus: (req, res, next) => {
+    const { status } = req.body;
+    if (status === undefined) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'status is required',
+      });
+    }
+    if (status.trim().length === 0 || typeof status !== 'string') {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'status can not be empty and must be a string',
+      });
+    }
+    return next();
+  },
+  validate: (req) => {
+    if (req.decoded.status === 'admin') {
+      return true;
+    }
+    return false;
+  },
+  validateQueryParameter: (id) => {
+    if (Number.isInteger(parseInt(id, 10))) {
+      return true;
+    }
+    return false;
   },
 };
 export default validation;

@@ -85,7 +85,6 @@ class Menu {
           .then(deletedData => res.status(200).json({
             status: 'success',
             message: 'Menu item deleted successfully',
-            deletedData,
           }))
           .catch(() => res.status(500).json({
             status: 'error',

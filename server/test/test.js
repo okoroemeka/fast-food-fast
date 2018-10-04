@@ -3,8 +3,8 @@ import chai from 'chai';
 import app from '../app';
 
 const { assert, should, expect } = chai;
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibWJhc28gc29tdG8iLCJ1c2VyX2lkIjoxLCJlbWFpbCI6Im9rb3JvQGdtYWlsLmNvbSIsInN0YXR1cyI6ImFkbWluIiwiaWF0IjoxNTM4Mzk4OTc0LCJleHAiOjE1Mzg0ODUzNzR9.hDrLmE94aVL8R9LTAOxTXdimhQy8HJpbJJidXP9e1Bg';
-const regToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibWJhc28gc29tdG8iLCJ1c2VyX2lkIjoyLCJlbWFpbCI6ImVtZWthQGdtYWlsLmNvbSIsInN0YXR1cyI6InJlZ3VsYXIiLCJpYXQiOjE1Mzg0MDI3NTgsImV4cCI6MTUzODQ4OTE1OH0.tos62gJvDMMESTvOzyXq2m3bKO2RZS9k_CvmQ9kDnq4';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoib2tvcm9lbWVrYSIsInVzZXJfaWQiOjEsImVtYWlsIjoib2tvcm9AZ21haWwuY29tIiwic3RhdHVzIjoiYWRtaW4iLCJpYXQiOjE1Mzg2Mjg2NDIsImV4cCI6MTUzOTIzMzQ0Mn0.n5oDTIt03VG5mz95e-caW0bVoeYi67b_QDsp63H5ehY';
+const regToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic29tdG8iLCJ1c2VyX2lkIjoyLCJlbWFpbCI6InNvbXRvQGdtYWlsLmNvbSIsInN0YXR1cyI6InJlZ3VsYXIiLCJpYXQiOjE1Mzg2Mjg4NTYsImV4cCI6MTUzOTIzMzY1Nn0.92jRS5tXZFYaDY56iiogCPSrCcRcuiuUPa8VGtvHUcc';
 should();
 chai.use(chaiHttp);
 
@@ -73,7 +73,7 @@ describe('POST request for api/vi/auth/signup', () => {
         expect(res.body.status).be.a('string');
         expect(res.body.message).be.a('string');
         assert.equal(res.body.status, 'fail');
-        assert.equal(res.body.message, 'full name is needed and must be a string');
+        assert.equal(res.body.message, 'full name can not be empty and must be a string');
         done();
       });
   });
@@ -95,7 +95,7 @@ describe('POST request for api/vi/auth/signup', () => {
         expect(res.body.status).be.a('string');
         expect(res.body.message).be.a('string');
         assert.equal(res.body.status, 'fail');
-        assert.equal(res.body.message, 'please an email is required, make sure it follows this format[example@whatever.com]');
+        assert.equal(res.body.message, 'please email can not be empty and must follow this format[example@whatever.com]');
         done();
       });
   });
@@ -263,7 +263,7 @@ describe('POST api/v1/menu', () => {
         expect(res.body.status).be.a('string');
         expect(res.body.message).be.a('string');
         assert.equal(res.body.status, 'fail');
-        assert.equal(res.body.message, 'food name is required');
+        assert.equal(res.body.message, 'food name can not be empty');
         done();
       });
   });
@@ -284,7 +284,7 @@ describe('POST api/v1/menu', () => {
         expect(res.body.status).be.a('string');
         expect(res.body.message).be.a('string');
         assert.equal(res.body.status, 'fail');
-        assert.equal(res.body.message, 'price is needed and must be an integer');
+        assert.equal(res.body.message, 'price feild can not be empty and must be an integer');
         done();
       });
   });

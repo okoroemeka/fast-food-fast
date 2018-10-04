@@ -15,10 +15,6 @@ class Order {
       text: 'SELECT * FROM menus WHERE food=$1',
       values: [food.trim()],
     };
-    // const createOrderQuery = {
-    //   text: 'INSERT INTO orders(delivary_address,telephone,quantity,user_id) VALUES($1, $2, $3, $4) RETURNING *',
-    //   values: [address,telephone.trim(), parseInt(quantity.trim(), 10), req.decoded.user_id],
-    // };
     dbConnection.query(getMenuQuery)
       .then((menu) => {
         if (menu.rowCount < 1) {
@@ -27,11 +23,11 @@ class Order {
             message: 'Sorry, this food has been removed from the menu',
           });
         }
-        const price = menu.rows[0].price;
+        const { price } = menu.rows[0];
         const menuId = menu.rows[0].id;
         const createOrderQuery = {
           text: 'INSERT INTO orders(delivary_address,telephone,quantity,user_id,menu_id) VALUES($1, $2, $3, $4, $5) RETURNING *',
-          values: [address,telephone.trim(), parseInt(quantity.trim(), 10), req.decoded.user_id,menuId],
+          values: [address, telephone.trim(), parseInt(quantity.trim(), 10), req.decoded.user_id, menuId],
         };
         return dbConnection.query(createOrderQuery)
           .then(order => res.status(201).json({
@@ -69,7 +65,9 @@ class Order {
         quantity,
         food,
         price,
-        order_status
+        order_status,
+        orders.createdAt,
+        orders.updatedAt
         FROM
         orders
         INNER JOIN
@@ -120,9 +118,9 @@ class Order {
         food,
         price,
         order_status,
-        createdAt
+        or_io.createdAt
         FROM
-        (orders, or_io)
+        orders or_io
         INNER JOIN
         menus ON menus.id = or_io.menu_id
         INNER JOIN
@@ -140,7 +138,7 @@ class Order {
         if (orders.rowCount !== 0) {
           return res.status(200).json({
             status: 'success',
-            message: 'fetch orders was successful',
+            message: 'fetch specific order was successful',
             data: orders.rows[0],
           });
         }
@@ -149,36 +147,10 @@ class Order {
           mesage: 'order not found',
         });
       })
-      .catch((err) => res.status(500).json({
+      .catch(err => res.status(500).json({
         status: 'error',
         message: 'Internal server error, please try again later',
-        orderId,
-        err
       }));
-    // if (req.decoded.status !== 'admin') {
-    //   return res.status(403).json({
-    //     status: 'fail',
-    //     message: 'You are not autthorized to perform this action',
-    //   });
-    // }
-    // return dbConnection.query(getSpecificOrderQuery)
-    //   .then((order) => {
-    //     if (order.rowCount !== 0) {
-    //       return res.status(200).json({
-    //         status: 'success',
-    //         message: 'fetch specific order was successful',
-    //         data: order.rows[0],
-    //       });
-    //     }
-    //     return res.status(404).json({
-    //       status: 'fail',
-    //       message: 'Order not found',
-    //     });
-    //   })
-    //   .catch(() => res.status(500).json({
-    //     status: 'error',
-    //     message: 'Internal server error, please try again later',
-    //   }));
   }
 
   /**
@@ -249,20 +221,16 @@ class Order {
     const { userId } = req.params;
     const getOrderHistoryQuery = {
       text: `SELECT
-        fullname, 
-        delivary_address,
-        telephone,
-        quantity,
+        z.quantity,
         food,
         price,
-        order_status,
-        createdAt
+        z.order_status,
+        z.createdAt
         FROM
-        orders
+        orders z
         INNER JOIN
-        menus ON menus.id = orders.menu_id
-        INNER JOIN
-        users ON users.id = orders.user_id WHERE user_id=$1`,
+        menus ON menus.id = z.menu_id
+        WHERE z.user_id=$1`,
       values: [parseInt(userId, 10)],
     };
     return dbConnection.query(getOrderHistoryQuery)
@@ -279,9 +247,10 @@ class Order {
           data: orders.rows,
         });
       })
-      .catch(() => res.status(500).json({
+      .catch(err => res.status(500).json({
         status: 'error',
         message: 'Internal server error',
+        err,
       }));
   }
 }

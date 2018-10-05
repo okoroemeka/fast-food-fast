@@ -20,7 +20,7 @@ class Order {
       .then((menu) => {
         if (menu.rowCount < 1) {
           return res.status(404).json({
-            status: 'fail',
+            status: 'Fail',
             message: 'Sorry, this food has been removed from the menu',
           });
         }
@@ -32,7 +32,7 @@ class Order {
         };
         return dbConnection.query(createOrderQuery)
           .then(order => res.status(201).json({
-            status: 'success',
+            status: 'Success',
             message: 'Order placed successfully',
             order: {
               food: order.rows[0].food,
@@ -42,7 +42,7 @@ class Order {
             },
           }))
           .catch(err => res.status(500).json({
-            status: 'error',
+            status: 'Error',
             message: 'Internal server error, please try again later',
             id: req.decoded.user_id,
             menuId,
@@ -50,7 +50,7 @@ class Order {
           }));
       })
       .catch(err => res.status(500).json({
-        status: 'error',
+        status: 'Error',
         message: 'Internal server error, please try again later',
         err,
       }));

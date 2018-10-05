@@ -111,7 +111,7 @@ class Users {
       .then((user) => {
         if (user.rowCount === 0) {
           return res.status(400).json({
-            status: 'fail',
+            status: 'Fail',
             message: 'User does not exist, please sign up to continue',
           });
         }
@@ -129,13 +129,13 @@ class Users {
             },
           );
           return res.status(200).json({
-            status: 'success',
-            message: 'welcome to fast-food-fast resturant',
+            status: 'Success',
+            message: 'Welcome to fast-food-fast resturant',
             token,
           });
         }
         return res.status(400).json({
-          status: 'fail',
+          status: 'Fail',
           message: 'Wrong email or password',
           data: user.rows[0].password,
           pass: req.body.password.trim(),
@@ -143,14 +143,9 @@ class Users {
         });
       })
       .catch(error => res.status(500).json({
-        status: 'error',
+        status: 'Error',
         message: 'Internal server error, please try again later',
       }));
-    // }
-    return res.status(400).json({
-      status: 'fail',
-      message: 'All feilds are required',
-    });
   }
 
   static updateUserStatus(req, res) {

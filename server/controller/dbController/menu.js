@@ -21,24 +21,24 @@ class Menu {
       .then((menu) => {
         if (menu.rowCount !== 0) {
           return res.status(409).json({
-            status: 'fail',
-            message: 'food is already on the menu',
+            status: 'Fail',
+            message: 'Food is already on the menu',
           });
         }
         if (validateUserType.validate) {
           return dbConnection.query(createItemQuery)
             .then(menuItem => res.status(201).json({
               status: 'success',
-              message: 'menu item created successfully',
+              message: 'Menu item created successfully',
               menu: menuItem.rows[0],
             }))
             .catch(err => res.status(500).json({
-              status: 'error',
+              status: 'Error',
               message: 'Internal server error, please try again later',
             }));
         }
         return res.status(403).json({
-          status: 'fail',
+          status: 'Fail',
           message: 'You are not authorised to perform this action',
         });
       });

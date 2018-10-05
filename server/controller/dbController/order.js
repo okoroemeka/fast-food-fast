@@ -82,7 +82,7 @@ class Order {
     };
     if (!validate.validate) {
       return res.status(403).json({
-        status: 'fail',
+        status: 'Fail',
         message: 'You are not autthorized to perform this action',
       });
     }
@@ -96,12 +96,12 @@ class Order {
           });
         }
         return res.status(404).json({
-          status: 'fail',
+          status: 'Fail',
           mesage: 'No availabe order',
         });
       })
       .catch(() => res.status(500).json({
-        status: 'error',
+        status: 'Error',
         message: 'Internal server error, please try again later',
       }));
   }
@@ -134,7 +134,7 @@ class Order {
     };
     if (!validate.validateQueryParameter(orderId)) {
       return res.status(400).json({
-        status: 'fail',
+        status: 'Fail',
         message: 'Wrong query parameter, use integers please',
       });
     }
@@ -143,23 +143,23 @@ class Order {
         .then((orders) => {
           if (orders.rowCount !== 0) {
             return res.status(200).json({
-              status: 'success',
-              message: 'fetch specific order was successful',
+              status: 'Success',
+              message: 'Fetch specific order was successful',
               order: orders.rows[0],
             });
           }
           return res.status(404).json({
-            status: 'fail',
-            mesage: 'order not found',
+            status: 'Fail',
+            mesage: 'Order not found',
           });
         })
         .catch(err => res.status(500).json({
-          status: 'error',
+          status: 'Error',
           message: 'Internal server error, please try again later',
         }));
     }
     return res.status(403).json({
-      status: 'fail',
+      status: 'Fail',
       message: 'You are not autthorized to perform this action',
     });
   }
@@ -182,13 +182,13 @@ class Order {
     };
     if (!validate.validateQueryParameter(orderId)) {
       return res.status(400).json({
-        status: 'fail',
+        status: 'Fail',
         message: 'Wrong query parameter, use integers please',
       });
     }
     if (!validate.validate) {
       return res.status(403).json({
-        status: 'fail',
+        status: 'Fail',
         message: 'You are not authorized to perform this action',
       });
     }
@@ -198,27 +198,27 @@ class Order {
           if (order.rowCount !== 0) {
             return dbConnection.query(updateOrderQuery)
               .then(upDatedOrder => res.status(200).json({
-                status: 'success',
+                status: 'Success',
                 message: 'Order status updated successfully',
                 order: upDatedOrder.rows[0],
               }))
               .catch(() => res.status(500).json({
-                status: 'error',
+                status: 'Error',
                 message: 'Internal server error, please try again later',
               }));
           }
           return res.status(404).json({
-            status: 'fail',
+            status: 'Fail',
             message: 'order does not exist',
           });
         })
         .catch(() => res.status(500).json({
-          status: 'error',
+          status: 'Error',
           message: 'Internal server error, please try again later',
         }));
     }
     return res.status(400).json({
-      status: 'fail',
+      status: 'Fail',
       message: 'Status need to be either "Processing","Complete" or "Cancelled"',
     });
   }
@@ -246,7 +246,7 @@ class Order {
     };
     if (!validate.validateQueryParameter(userId)) {
       return res.status(400).json({
-        status: 'fail',
+        status: 'Fail',
         message: 'Wrong query parameter, use integers please',
       });
     }
@@ -254,18 +254,18 @@ class Order {
       .then((orders) => {
         if (orders.rowCount === 0) {
           return res.status(404).json({
-            status: 'fail',
+            status: 'Fail',
             message: 'User has no order history',
           });
         }
         return res.status(200).json({
-          status: 'success',
+          status: 'Success',
           message: 'fetch order history successful',
           orders: orders.rows,
         });
       })
       .catch(err => res.status(500).json({
-        status: 'error',
+        status: 'Error',
         message: 'Internal server error',
         err,
       }));

@@ -165,7 +165,7 @@ body{
 	padding: 5px;
 	color: #ffffff;
 	margin-bottom: 10px;
-	box-shadow: 5px 5px 3px 0px rgba(153,153,153,0.3);
+	box-shadow: 3px 3px 3px 0px rgba(153,153,153,0.3);
 	border-radius: 10px;
 }
 .food-image{
@@ -229,111 +229,6 @@ body{
 /* Add a grey background color on mouse-over */
 .pagination a:hover:not(.active) {background-color: #ddd;}
 /* Dashboard style */
-#dashbord-container{
-	margin: auto;
-	padding: 0;
-}
-#dashbord{
-	padding-top: 10px;
-	padding-left: 30px;
-	background-color: #ffffff;
-}
-#dashbord-word{
-	font-size: 25px;
-}
-
-#admin-menu,#accepted-oders,
-#admin-action{
-	width: 100%;
-	padding: 20px;
-}
-.menu-card,
-.order-card{
-	width: 100%;
-	margin: 15px 0px;
-	padding: 15px;
-	border: 0px;
-	background-color: #ffffff;
-	box-shadow: 0 0 10px 5px #e7e7e7;
-}
-.add-menu-item,
-.order-body{
-	width: 100%;
-	overflow-x: auto;
-	/*max-width: 100%;*/
-}
-.table{
-	width: 100%;
-	display: table;
-	border-color: gray;
-	background-color: transparent;
-	border-collapse: collapse;
-	margin-bottom: 20px;
-}
-/* table{ */
-	/*table-layout: fixed;*/
-	/*max-width: 100%;*/
-	
-/* } */
-thead,th,td{
-	text-align: left;
-	padding: 15px;
-	border-bottom: 1px solid #e6e6ff;
-	border-collapse: collapse;
-	/*border-color: inherit;*/
-}
-
-.accept-button,
-.reject-button,
-.delete-item,
-.edit-item,
-#modal-order-button,
-#add-button,
-#modal-order-button,
-#add-item
-{
-	color: #ffffff;
-	width: 60px;
-    height: 30px;
-	padding: 5px 0px;
-	border: 0px;
-	border-radius: 3px;
-	/* box-shadow: 0 0 1px 3px #e7e7e7; */
-	box-shadow: 0 4px 4px 0px rgba(134, 130, 130, 0.4);
-	transition-duration: 0.4s;
-}
-#add-item,
-.delete-item,
-.edit-item{
-	width: 60px;
-	margin-left: 3px;
-    margin-top: 3px;
-}
-#modal-order-button{
-	margin: 20px auto;
-}
-span input[type=checkbox]:hover,
-.accept-button:hover,
-.reject-button:hover,
-.delete-item:hover,
-.edit-item:hover,
-#modal-order-button,
-#add-item:hover{
-	cursor: pointer;
-}
-#add-item,
-.accept-button{
- background-color: #0066cc;
- margin-bottom: 2px;
-}
-.edit-item{
-	background-color: #009933;
-	margin-bottom: 5px;
-}
-.delete-item,
-.reject-button{
-	background-color: #ff0000;
-}
 
 /*profile style*/
 .profile-container{

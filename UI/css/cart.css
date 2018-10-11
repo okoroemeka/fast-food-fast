@@ -115,6 +115,9 @@ body{
 	margin: 5% auto;
 	/* overflow: auto; */
 }
+.fa-remove{
+	font-size: 26px;
+}
 .table{
 	width: 100%;
 	display: table;

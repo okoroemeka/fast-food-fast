@@ -163,7 +163,7 @@ body{
 		margin-right: 5px;
 		margin-bottom: 10px;
 	}
-#logIn-button{
+/* #logIn-button{
 	background-color: #ff9900;
 }
 #explore-menu{
@@ -173,7 +173,7 @@ body{
 	border: none;
 	cursor: pointer;
 	background-color: #250202;
-}
+} */
 /*Log in page style*/
 .sub-container{
 	justify-content: center;

@@ -38,4 +38,32 @@ window.onclick = function(event) {
     }
 }
 
+// Admin add menu item
+let addMenu = document.getElementById("add-menu-button");
+let adminAction = document.getElementById("admin-menu");
+addMenu.addEventListener('click',function(){
+
+    if(this.classList.contains('active')){
+        adminAction.style.display="block";
+        this.classList.remove('active');
+    }
+    else{
+        adminAction.style.display="none";
+        this.classList.add('active');
+    }
+});
+// online order list 
+let orderList = document.getElementById("order-list-button");
+let orderListAction = document.getElementById("admin-action");
+orderList.addEventListener('click',function(){
+
+    if(this.classList.contains('active')){
+        orderListAction.style.display="block";
+        this.classList.remove('active');
+    }
+    else{
+        orderListAction.style.display="none";
+        this.classList.add('active');
+    }
+})
 console.log("connected");

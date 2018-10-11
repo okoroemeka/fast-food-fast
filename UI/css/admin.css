@@ -341,7 +341,7 @@ span input[type=checkbox]:hover,
 .modal-content{
     width: 50%;
 }
-#admin-action,
+#accepted-oders,
 #admin-menu{
     display: none;
 }

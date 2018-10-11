@@ -53,8 +53,8 @@ addMenu.addEventListener('click',function(){
     }
 });
 // online order list 
-let orderList = document.getElementById("order-list-button");
-let orderListAction = document.getElementById("admin-action");
+let orderList = document.getElementById("accepted-list-button");
+let orderListAction = document.getElementById("accepted-oders");
 orderList.addEventListener('click',function(){
 
     if(this.classList.contains('active')){

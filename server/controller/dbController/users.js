@@ -20,31 +20,48 @@ class Users {
       text: 'INSERT INTO users(fullname,email,password) VALUES($1, $2, $3) RETURNING *',
       values: [fullname, email, bcrypt.hashSync(password, 10)],
     };
-
     dbConnection.query(getUserQuery)
       .then((users) => {
         if (users.rowCount !== 0) {
           return res.status(409).send({
             status: 'fail',
-            message: 'user alredy exist',
+            message: 'user already exist',
           });
         }
         return dbConnection.query(createUserQuery)
-          .then(newUser => res.status(201).send({
-            status: 'success',
-            message: 'Signup successfully, please proceed to login',
-            data: {
-              id: newUser.rows[0].id,
-              full_name: newUser.rows[0].fullname,
-              email: newUser.rows[0].email,
-              telephone: newUser.rows[0].telephone,
-            },
-          }))
-          .catch(error => res.status(500).send(error));
+          .then((newUser) => {
+            const token = jwt.sign(
+              {
+                name: newUser.rows[0].fullname,
+                userId: newUser.rows[0].id,
+                email: newUser.rows[0].email,
+                status: newUser.rows[0].status,
+              },
+              process.env.SECRET_KEY,
+              {
+                expiresIn: '480hr',
+              },
+            );
+            return res.status(201).send({
+              status: 'success',
+              message: 'Signup successfully',
+              data: {
+                id: newUser.rows[0].id,
+                fullName: newUser.rows[0].fullname,
+                email: newUser.rows[0].email,
+                telephone: newUser.rows[0].telephone,
+              },
+              token,
+            });
+          })
+          .catch(() => res.status(500).json({
+            status: 'Fail',
+            message: 'Internal server error, please try again later',
+          }));
       })
-      .catch(err => res.status(500).send({
-        status: 'error',
-        message: 'Internal server error, please try agin later',
+      .catch(() => res.status(500).send({
+        status: 'Error',
+        message: 'Internal server error, please try again later',
       }));
   }
 
@@ -53,60 +70,11 @@ class Users {
  * @param {*} req
  * @param {*} res
  */
-  // static signIn(req, res) {
-  //   const getUserQuery = {
-  //     text: 'SELECT * FROM users WHERE email = $1',
-  //     values: [req.body.email.trim()],
-  //   };
-  //   dbConnection.query(getUserQuery)
-  //     .then((user) => {
-  //       if (user.rowCount !== 0) {
-  //         // return res.status(400).json({
-  //         //   status: 'fail',
-  //         //   message: 'User does not exist, please sign up to continue',
-  //         // });
-  //         if (bcrypt.compareSync(req.body.password, user.rows[0].password)) {
-  //           const token = jwt.sign(
-  //             {
-  //               name: user.rows[0].fullname,
-  //               user_id: user.rows[0].id,
-  //               email: user.rows[0].email,
-  //               status: user.rows[0].status,
-  //             },
-  //             process.env.SECRET_KEY,
-  //             {
-  //               expiresIn: '168hr',
-  //             },
-  //           );
-  //           return res.status(200).json({
-  //             status: 'success',
-  //             message: 'welcome to fast-food-fast resturant',
-  //             token,
-  //           });
-  //         }
-  //         return res.status(400).json({
-  //           status: 'fail',
-  //           message: 'User does not exist, please sign up to continue',
-  //         });
-  //       }
-
-  //       return res.status(400).json({
-  //         status: 'fail',
-  //         message: 'Wrong email or password',
-  //       });
-  //     })
-  //     .catch(error => res.status(500).json({
-  //       status: 'error',
-  //       message: 'Internal server error, please try again later',
-  //     }));
-  // }
   static signIn(req, res) {
     const getUserQuery = {
       text: 'SELECT * FROM users WHERE email = $1',
       values: [req.body.email],
     };
-    // if ((req.body.email !== undefined && req.body.email.trim().length !== 0)
-    //     && (req.body.password !== undefined && req.body.password.trim().length !== 0)) {
     return dbConnection.query(getUserQuery)
       .then((user) => {
         if (user.rowCount === 0) {
@@ -125,7 +93,7 @@ class Users {
             },
             process.env.SECRET_KEY,
             {
-              expiresIn: '24hr',
+              expiresIn: '480hr',
             },
           );
           return res.status(200).json({
@@ -137,12 +105,9 @@ class Users {
         return res.status(400).json({
           status: 'Fail',
           message: 'Wrong email or password',
-          data: user.rows[0].password,
-          pass: req.body.password.trim(),
-          password: bcrypt.compareSync(user.rows[0].password, req.body.password),
         });
       })
-      .catch(error => res.status(500).json({
+      .catch(() => res.status(500).json({
         status: 'Error',
         message: 'Internal server error, please try again later',
       }));

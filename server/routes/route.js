@@ -11,7 +11,7 @@ const router = express.Router();
 // Routing
 router.post('/auth/signup', validation.signupValidation, user.signUp);
 router.post('/auth/signin', validation.signInValidation, user.signIn);
-router.put('/updateuser/:userId', user.updateUserStatus);
+router.put('/user/:userId', user.updateUserStatus);
 router.post('/menu', validation.createMenuValidation, authentication, menu.createMenuItem);
 router.get('/menu', menu.getMenu);
 router.delete('/menu/:menuId', authentication, menu.deleteMenuItem);

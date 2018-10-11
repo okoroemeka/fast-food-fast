@@ -28,7 +28,7 @@ class Order {
         const menuId = menu.rows[0].id;
         const createOrderQuery = {
           text: 'INSERT INTO orders(delivary_address,telephone,quantity,user_id,menu_id) VALUES($1, $2, $3, $4, $5) RETURNING *',
-          values: [address, telephone.trim(), parseInt(quantity.trim(), 10), req.decoded.user_id, menuId],
+          values: [address, telephone.trim(), parseInt(quantity.trim(), 10), req.decoded.userId, menuId],
         };
         return dbConnection.query(createOrderQuery)
           .then(order => res.status(201).json({
@@ -44,9 +44,6 @@ class Order {
           .catch(err => res.status(500).json({
             status: 'Error',
             message: 'Internal server error, please try again later',
-            id: req.decoded.user_id,
-            menuId,
-            err,
           }));
       })
       .catch(err => res.status(500).json({
@@ -91,7 +88,7 @@ class Order {
         if (orders.rowCount !== 0) {
           return res.status(200).json({
             status: 'success',
-            message: 'fetch orders was successful',
+            message: 'Fetch orders was successful',
             orders: orders.rows,
           });
         }
@@ -229,7 +226,6 @@ class Order {
  * @param {*} res
  */
   static getOrderHistory(req, res) {
-    const { userId } = req.params;
     const getOrderHistoryQuery = {
       text: `SELECT
         z.quantity,
@@ -242,12 +238,18 @@ class Order {
         INNER JOIN
         menus ON menus.id = z.menu_id
         WHERE z.user_id=$1`,
-      values: [parseInt(userId, 10)],
+      values: [parseInt(req.params.userId, 10)],
     };
-    if (!validate.validateQueryParameter(userId)) {
+    if (!validate.validateQueryParameter(req.params.userId)) {
       return res.status(400).json({
         status: 'Fail',
         message: 'Wrong query parameter, use integers please',
+      });
+    }
+    if (parseInt(req.params.userId, 10) !== req.decoded.userId) {
+      return res.status(400).json({
+        status: 'Fail',
+        message: 'You can not views another users order history',
       });
     }
     return dbConnection.query(getOrderHistoryQuery)
@@ -260,7 +262,7 @@ class Order {
         }
         return res.status(200).json({
           status: 'Success',
-          message: 'fetch order history successful',
+          message: 'Fetch order history successful',
           orders: orders.rows,
         });
       })

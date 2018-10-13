@@ -2,12 +2,12 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
 import errorhandler from 'errorhandler';
-import swaggerUi from 'swagger-ui-express';
+// import swaggerUi from 'swagger-ui-express';
 import router from './routes/route';
 // const swaggerDocument = require'../docs/swagger.json';
 
 const app = express();
-const port = parseInt(process.env.PORT, 10) || 8080;
+const port = parseInt(process.env.PORT, 10) || 5080;
 
 // making use of middlewares
 app.use(bodyParser.json());

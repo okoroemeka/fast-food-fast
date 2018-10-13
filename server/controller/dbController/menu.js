@@ -1,5 +1,9 @@
+import cloudinary from 'cloudinary';
+import dotenv from 'dotenv';
 import dbConnection from '../../model/dbConfig/config';
 import validateUserType from '../../utils/validation';
+
+dotenv.config();
 
 class Menu {
   /**
@@ -8,11 +12,12 @@ class Menu {
  * @param {*} res
  */
   static createMenuItem(req, res) {
-    const { food, price, foodImage } = req.body;
-    const createItemQuery = {
-      text: 'INSERT INTO menus(food,price,food_image) VALUES($1, $2, $3) RETURNING *',
-      values: [food, parseInt(price, 10), foodImage],
-    };
+    cloudinary.config({
+      cloud_name: process.env.cloud_name,
+      api_key: process.env.api_key,
+      api_secret: process.env.api_secret,
+    });
+    const { food, price } = req.body;
     const getMenuQuery = {
       text: 'SELECT * FROM menus WHERE food=$1',
       values: [food],
@@ -26,23 +31,38 @@ class Menu {
           });
         }
         if (validateUserType.validate) {
-          return dbConnection.query(createItemQuery)
-            .then(menuItem => res.status(201).json({
-              status: 'success',
-              message: 'Menu item created successfully',
-              menu: menuItem.rows[0],
-            }))
-            .catch(err => res.status(500).json({
+          return cloudinary.v2.uploader.upload(req.file.path, { use_filename: true })
+            .then((result) => {
+              const foodImage = result.url;
+              const createItemQuery = {
+                text: 'INSERT INTO menus(food,price,food_image) VALUES($1, $2, $3) RETURNING *',
+                values: [food, parseInt(price, 10), foodImage],
+              };
+              dbConnection.query(createItemQuery)
+                .then(menuItem => res.status(201).json({
+                  status: 'Success',
+                  message: 'Menu item created successfully',
+                  menu: menuItem.rows[0],
+                }))
+                .catch(() => res.status(500).json({
+                  status: 'Error',
+                  message: 'Internal server error, please try again later',
+                }));
+            })
+            .catch(() => res.status(500).json({
               status: 'Error',
-              message: 'Internal server error, please try again later',
+              message: 'Image upload was not succesfull, due to server error, please try again'
             }));
         }
         return res.status(403).json({
           status: 'Fail',
           message: 'You are not authorised to perform this action',
         });
-      });
-    
+      })
+      .catch(err => res.status(500).json({
+        status: 'Error',
+        message: 'Internal server error, please try again later',
+      }));
   }
 
   static getMenu(req, res) {

@@ -1,4 +1,5 @@
 import express from 'express';
+import multer from 'multer';
 import user from '../controller/dbController/users';
 import menu from '../controller/dbController/menu';
 import order from '../controller/dbController/order';
@@ -7,12 +8,21 @@ import validation from '../utils/validation';
 
 // Express subrouter
 const router = express.Router();
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './server/images/uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+const upload = multer({ storage });
 
 // Routing
 router.post('/auth/signup', validation.signupValidation, user.signUp);
 router.post('/auth/signin', validation.signInValidation, user.signIn);
 router.put('/user/:userId', user.updateUserStatus);
-router.post('/menu', validation.createMenuValidation, authentication, menu.createMenuItem);
+router.post('/menu', upload.single('foodImage'), validation.createMenuValidation, menu.createMenuItem);
 router.get('/menu', menu.getMenu);
 router.delete('/menu/:menuId', authentication, menu.deleteMenuItem);
 router.get('/orders', authentication, order.getAllOrder);

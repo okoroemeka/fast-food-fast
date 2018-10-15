@@ -24,8 +24,8 @@ class Users {
       .then((users) => {
         if (users.rowCount !== 0) {
           return res.status(409).send({
-            status: 'fail',
-            message: 'user already exist',
+            status: 'Fail',
+            message: 'User already exist',
           });
         }
         return dbConnection.query(createUserQuery)
@@ -43,7 +43,7 @@ class Users {
               },
             );
             return res.status(201).send({
-              status: 'success',
+              status: 'Success',
               message: 'Signup successfully',
               data: {
                 id: newUser.rows[0].id,

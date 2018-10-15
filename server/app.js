@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(errorhandler());
 app.use(logger('dev'));
-app.use(express.static('./views'))
+app.use(express.static('./views'));
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/v1', router);
 app.set('port', port);

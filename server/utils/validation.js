@@ -13,45 +13,45 @@ const validation = {
     } = req.body;
     if (email === undefined) {
       return res.status(400).json({
-        status: 'fail',
-        message: 'please an email is required',
+        status: 'Fail',
+        message: 'Please an email is required',
       });
     }
     if (email.trim().length < 1 || !(/\S+@\S+\.\S+/.test(email))) {
       return res.status(400).json({
-        status: 'fail',
-        message: 'please email can not be empty and must follow this format[example@whatever.com]',
+        status: 'Fail',
+        message: 'Please email can not be empty and must follow this format[example@whatever.com]',
       });
     }
     if (fullname === undefined) {
       return res.status(400).json({
-        status: 'fail',
-        message: 'full name is required',
+        status: 'Fail',
+        message: 'Full name is required',
       });
     }
     if (fullname.trim().length < 1 || typeof fullname !== 'string') {
       return res.status(400).json({
-        status: 'fail',
-        message: 'full name can not be empty and must be a string',
+        status: 'Fail',
+        message: 'Full name can not be empty and must be a string',
       });
     }
     if (password === undefined) {
       return res.status(400).json({
-        status: 'fail',
-        message: 'password is needed',
+        status: 'Fail',
+        message: 'Password is needed',
       });
     }
     if (password.trim().length < 6
     || typeof password !== 'string' || passwordValidation(password) !== 100) {
       return res.status(400).json({
-        status: 'fail',
-        message: 'password length must greater than 6 and should contain uppercase,lowercase, number and any of this character[$@#&!]',
+        status: 'Fail',
+        message: 'Password length must greater than 6 and should contain uppercase,lowercase, number and any of this character[$@#&!]',
       });
     }
     if (password !== confirmPassword) {
       return res.status(400).json({
-        status: 'fail',
-        message: 'the passwords do not match',
+        status: 'Fail',
+        message: 'The passwords do not match',
       });
     }
     return next();
@@ -62,14 +62,14 @@ const validation = {
     } = req.body;
     if (email === undefined || email.trim().length < 1 || !(/\S+@\S+\.\S+/.test(email))) {
       return res.status(400).json({
-        status: 'fail',
-        message: 'please an email is required, make sure it follows this format[example@whatever.com]',
+        status: 'Fail',
+        message: 'Please an email is required, make sure it follows this format[example@whatever.com]',
       });
     }
     if (password === undefined || password.trim().length < 1) {
       return res.status(400).json({
-        status: 'fail',
-        message: 'password is required',
+        status: 'Fail',
+        message: 'Password is required',
       });
     }
     return next();
@@ -80,41 +80,41 @@ const validation = {
     const price = parseInt(req.body.price, 10);
     if (food === undefined) {
       return res.status(400).json({
-        status: 'fail',
-        message: 'food name is required',
+        status: 'Fail',
+        message: 'Food name is required',
 
       });
     }
     if (food.trim().length < 1 || typeof food !== 'string') {
       return res.status(400).json({
-        status: 'fail',
-        message: 'food name can not be empty',
+        status: 'Fail',
+        message: 'Food name can not be empty',
       });
     }
     if (req.body.price === undefined) {
       return res.status(400).json({
-        status: 'fail',
-        message: 'price is needed',
+        status: 'Fail',
+        message: 'Price is needed',
       });
     }
     if (req.body.price.trim().length < 1 || isNaN(price)) {
       return res.status(400).json({
-        status: 'fail',
-        message: 'price feild can not be empty and must be an integer',
+        status: 'Fail',
+        message: 'Price feild can not be empty and must be an integer',
       });
     }
     if (path === undefined) {
       return res.status(400).json({
-        status: 'fail',
-        message: 'food Image is required',
+        status: 'Fail',
+        message: 'Food Image is required',
         body: req.body,
         file: req.file,
       });
     }
     if (path.trim().length < 1 || typeof path !== 'string') {
       return res.status(400).json({
-        status: 'fail',
-        message: 'food Image is required',
+        status: 'Fail',
+        message: 'Food Image is required',
       });
     }
     return next();
@@ -125,64 +125,64 @@ const validation = {
     } = req.body;
     if (food === undefined) {
       return res.status(400).json({
-        status: 'fail',
-        message: 'food name is required',
+        status: 'Fail',
+        message: 'Food name is required',
       });
     }
     if (food.trim().length < 1 || typeof food !== 'string') {
       return res.status(400).json({
-        status: 'fail',
-        message: 'food feild is required',
+        status: 'Fail',
+        message: 'Food feild is required',
       });
     }
     if (street === undefined) {
       return res.status(400).json({
-        status: 'fail',
-        message: 'street address is required',
+        status: 'Fail',
+        message: 'Street address is required',
       });
     }
     if (street.trim().length < 1 || typeof street !== 'string') {
       return res.status(400).json({
-        status: 'fail',
-        message: 'street can not be empty',
+        status: 'Fail',
+        message: 'Street can not be empty',
       });
     }
     if (city === undefined) {
       return res.status(400).json({
-        status: 'fail',
-        message: 'city name is required',
+        status: 'Fail',
+        message: 'City name is required',
       });
     }
     if (city.trim().length < 1 || typeof city !== 'string') {
       return res.status(400).json({
-        status: 'fail',
-        message: 'city name can not be empty and must be a string',
+        status: 'Fail',
+        message: 'City name can not be empty and must be a string',
       });
     }
     if (telephone === undefined) {
       return res.status(400).json({
-        status: 'fail',
-        message: 'telephone number is required',
+        status: 'Fail',
+        message: 'Telephone number is required',
       });
     }
     if (telephone.trim().length < 1
     || !Number.isInteger(parseInt(telephone, 10))) {
       return res.status(400).json({
-        status: 'fail',
-        message: 'telephone feild can not be empty',
+        status: 'Fail',
+        message: 'Telephone feild can not be empty',
       });
     }
     if (quantity === undefined) {
       return res.status(400).json({
-        status: 'fail',
-        message: 'quantiy is required and must be an integer',
+        status: 'Fail',
+        message: 'Quantiy is required and must be an integer',
       });
     }
     if (req.body.quantity.trim().length === 0
     || !Number.isInteger(parseInt(quantity, 10))) {
       return res.status(400).json({
-        status: 'fail',
-        message: 'quantiy is required and must be an integer',
+        status: 'Fail',
+        message: 'Quantiy is required and must be an integer',
       });
     }
     return next();
@@ -191,14 +191,14 @@ const validation = {
     const { status } = req.body;
     if (status === undefined) {
       return res.status(400).json({
-        status: 'fail',
-        message: 'status is required',
+        status: 'Fail',
+        message: 'Status is required',
       });
     }
     if (status.trim().length === 0 || typeof status !== 'string') {
       return res.status(400).json({
-        status: 'fail',
-        message: 'status can not be empty and must be a string',
+        status: 'Fail',
+        message: 'Status can not be empty and must be a string',
       });
     }
     return next();

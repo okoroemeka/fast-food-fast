@@ -145,7 +145,6 @@ body{
 .button{
 	justify-content: center;
 }
-#explore-menu,
 #sign-up,
 #logIn-button
 	{
@@ -163,17 +162,6 @@ body{
 		margin-right: 5px;
 		margin-bottom: 10px;
 	}
-/* #logIn-button{
-	background-color: #ff9900;
-}
-#explore-menu{
-	background-color: #330000;
-}
-#explore-menu:hover{
-	border: none;
-	cursor: pointer;
-	background-color: #250202;
-} */
 /*Log in page style*/
 .sub-container{
 	justify-content: center;
@@ -232,6 +220,9 @@ body{
 	background-color: #0099cc;
 	transition-duration: 0.5s;
 }
+#response{
+	text-align: center;
+}
 .footer-container{
 	padding: 0px;
 }
@@ -248,6 +239,7 @@ body{
 .sub-container{
 	margin-bottom: 10%;
 }
+
 @media only screen and (min-width: 768px) and (max-width: 1024px){
 	.signup-container,
 	.login-container{
@@ -294,6 +286,10 @@ body{
 	  font-family: Tahoma, sans-serif;
 	  /* font-family: 'Cookie', cursive;  */
 		border: 1px solid white;
+	}
+	button#signup-page-button:hover {
+		cursor: pointer;
+		background-color: #0066ff;
 	}
 	#logIn-page-button:hover,
 	#sign-up:hover{

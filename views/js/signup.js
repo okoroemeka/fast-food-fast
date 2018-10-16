@@ -24,11 +24,10 @@ const createUser = (e) => {
     .then(user => user.json())
     .then((userData) => {
       if (userData.status === 'Success') {
-        // const userToken = userData.token;
-        sessionStorage.setItem('token', userData.token);
+        localStorage.setItem('token', userData.token);
         window.location = 'https://fast-food-fast-12.herokuapp.com/signup.html/menu.html';
       } else if (userData.status === 'Fail') {
-        document.getElementById('response').innerHTML = `<h4 style="font-weight: lighter; color:#fff; font-size:1rem,text-align:center"> ${userData.message} </h4>`;
+        document.getElementById('response').innerHTML = `<h4 style="font-weight: lighter; color:#fff; font-size:1rem;"> ${userData.message} </h4>`;
       } else {
         alert(userData.message);
       }

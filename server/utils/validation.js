@@ -75,8 +75,7 @@ const validation = {
     return next();
   },
   createMenuValidation: (req, res, next) => {
-    const { food, foodImage } = req.body;
-    const { path } = req.file;
+    const { food } = req.body;
     const price = parseInt(req.body.price, 10);
     if (food === undefined) {
       return res.status(400).json({
@@ -103,15 +102,7 @@ const validation = {
         message: 'Price feild can not be empty and must be an integer',
       });
     }
-    if (path === undefined) {
-      return res.status(400).json({
-        status: 'Fail',
-        message: 'Food Image is required',
-        body: req.body,
-        file: req.file,
-      });
-    }
-    if (path.trim().length < 1 || typeof path !== 'string') {
+    if (req.file === undefined) {
       return res.status(400).json({
         status: 'Fail',
         message: 'Food Image is required',

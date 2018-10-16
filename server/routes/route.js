@@ -22,7 +22,7 @@ const upload = multer({ storage });
 router.post('/auth/signup', validation.signupValidation, user.signUp);
 router.post('/auth/signin', validation.signInValidation, user.signIn);
 router.put('/user/:userId', user.updateUserStatus);
-router.post('/menu', upload.single('foodImage'), validation.createMenuValidation, menu.createMenuItem);
+router.post('/menu', upload.single('foodImage'), validation.createMenuValidation, authentication, menu.createMenuItem);
 router.get('/menu', menu.getMenu);
 router.delete('/menu/:menuId', authentication, menu.deleteMenuItem);
 router.get('/orders', authentication, order.getAllOrder);

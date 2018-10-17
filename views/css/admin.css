@@ -260,6 +260,7 @@ span input[type=checkbox]:hover,
     margin-top: 10px;
     width: 80px;
     height: 30px;
+    cursor: pointer;
 }
 /* The Close Button */
 #close {
@@ -287,6 +288,18 @@ span input[type=checkbox]:hover,
     }
     .admin-action-container{
         width: 83.33%
+    }
+    .accepted-list-button,
+    .order-list-button,
+    .add-menu-button{
+        width: 100%;
+        padding: 10px 32px;
+        border: none;
+        margin: 5px auto;
+        color: #ffffff;
+        background-color: #330000;
+        font-size: 18px;
+        cursor: pointer;
     }
 }
 @media only screen and (min-width: 1025px){

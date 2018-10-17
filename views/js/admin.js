@@ -1,26 +1,24 @@
 const createMenu = (e) => {
   e.preventDefault();
-  const foodImage = document.getElementById('food-image').value;
+  const foodImage = document.querySelector("input[type='file']");
   const food = document.getElementById('item-name').value;
   const price = document.getElementById('item-price').value;
-  const foodData = {
-    foodImage,
-    food,
-    price,
-  };
+  const formData = new FormData();
+  formData.append('food', food);
+  formData.append('price', price);
+  formData.append('foodImage', foodImage.files[0]);
   const fetchData = {
     method: 'POST',
     headers: {
       Accept: 'application/json, text/plain, */*',
-      // 'Content-type': 'application/json',
       'x-access-token': localStorage.getItem('token'),
     },
-    body: JSON.stringify(foodData),
+    body: formData,
   };
 
   fetch('https://fast-food-fast-12.herokuapp.com/api/v1/menu', fetchData)
     .then(res => res.json())
-    .then(menuData => console.log(menuData))
-    .catch(error => console.log(error));
+    .then(menuData => alert(menuData.message))
+    .catch(error => alert(error));
 };
 document.getElementById('add-menu').addEventListener('submit', createMenu);

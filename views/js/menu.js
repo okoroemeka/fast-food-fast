@@ -1,5 +1,6 @@
 const getMenu = () => {
   const menuContainer = document.getElementById('food-cards-sub-container');
+  let food;
   fetch('https://fast-food-fast-12.herokuapp.com/api/v1/menu')
     .then(res => res.json())
     .then((menus) => {
@@ -12,7 +13,9 @@ const getMenu = () => {
                 <div class="col-12 food-details">
                     <ul>
                         <li>
-                            <span class="facts">Name:</span> ${menuItem.food}</li>
+                            <span class="facts">Name:</span> 
+                            <span class="food">${menuItem.food}</span>
+                        </li>
                         <li>
                             <span class="facts">Price:</span>
                             <span class="Price"> &#8358; ${menuItem.price}</span>
@@ -48,6 +51,8 @@ const getMenu = () => {
           itemPrice = itemPrice.split(' ');
           itemPrice = parseInt(itemPrice[itemPrice.length - 1], 10);
 
+          // get item name
+          food = document.getElementsByClassName('food')[i].innerText;
           // display modal containing form
           menuModal.style.display = 'block';
 
@@ -85,6 +90,37 @@ const getMenu = () => {
       //  console.log(menus);
     })
     .catch(error => console.log(error));
+
+  /* Event Listener for creating Order */
+  const createOrder = (e) => {
+    e.preventDefault();
+    // const food = document.getElementById('item-name').value;
+    const quantity = document.getElementById('quantity').value;
+    const street = document.getElementById('street').value;
+    const city = document.getElementById('city').value;
+    const telephone = document.getElementById('telephone').value;
+    const orderData = {
+      food,
+      quantity,
+      street,
+      city,
+      telephone,
+    };
+    const fetchData = {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-type': 'application/json',
+        'x-access-token': localStorage.getItem('token'),
+      },
+      body: JSON.stringify(orderData),
+    };
+    fetch('https://fast-food-fast-12.herokuapp.com/api/v1/orders', fetchData)
+      .then(res => res.json())
+      .then(orderData => alert(orderData.message))
+      .catch(error => alert(error));
+  };
+  document.getElementById('create-order').addEventListener('submit', createOrder);
 };
 window.addEventListener('load', getMenu);
 

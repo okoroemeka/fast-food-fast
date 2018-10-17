@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="//normalize-css.googlecode.com/svn/trunk/normalize.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <title>Menu</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div id="navbar-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <a href="index.html" id="logo">fast-food-fast</a>
+            <ul id="main-nav">
+                <li>
+                    <a class="nav-links" href="profile.html">Profile</a>
+                </li>
+                <li>
+                    <!-- <div id="shoppingcart-icon"> -->
+                        <a class="nav-links" href="shoppingcart.html">
+                            <i class="fa fa-shopping-cart"></i>
+                        </a>
+                        <!-- <div id="item-count"><span id="count">1</span></div> -->
+                    <!-- </div> -->
+
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <section>
+        <div class="container">
+            <div class="row menu-container">
+                <div class="col-12" id="menu-banner">
+                    <div id="banner-caption-container">
+                        <div id="banner-caption">
+                            Don't ever go hungry, we are here to serve you.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row food-cards-container">
+                <div class="col-10">
+                    <div class="row food-cards-sub-container" id="food-cards-sub-container">
+                        
+                    </div>
+
+                    <!-- Pagination from W3school -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="pagination">
+                                <a href="#">&laquo;</a>
+                                <a href="#">1</a>
+                                <a class="active" href="#">2</a>
+                                <a href="#">3</a>
+                                <a href="#">&raquo;</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+                            <!-- Trigger/Open The Modal -->
+                            <div id="myModal" class="row modal">
+                                <!-- Modal content -->
+                                <div class="col-3 modal-content">
+                                    <span id="close">&times;</span>
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-12" style="text-align: center">
+                                                <h3>Details</h3>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 form-input">
+                                                <p>Item quantity</p>
+                                                <input type="number" name="item-quantity" placeholder="Enter item quantity" required="required" id="quantity" min="0">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 form-input">
+                                                <p>City</p>
+                                                <input type="text" name="picture" placeholder="Enter city" required="required">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 form-input">
+                                                <p>Street</p>
+                                                <input type="text" name="picture" placeholder="Enter street" required="required">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 form-input">
+                                                <p>Telephone</p>
+                                                <input type="number" name="item-price" placeholder="Enter phone number" required="required">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6 form-input" id="total-amount">
+
+                                            </div>
+                                            <div class="col-6 form-input">
+                                                <button type="submit" id="modal-order-button" style="background-color: #0066cc">Order</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <footer>
+        <div class="row footer-container">
+            <div class="col-12 footer">
+                <p>Designed by:okoro Emeka © 2018
+                    <a href="index.html"> Fast-food-fast </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+    <script src="js/menu.js"></script>
+</body>
+
+</html>

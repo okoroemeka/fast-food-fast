@@ -25,7 +25,7 @@ const createUser = (e) => {
     .then((userData) => {
       if (userData.status === 'Success') {
         localStorage.setItem('token', userData.token);
-        window.location = 'https://fast-food-fast-12.herokuapp.com/signup.html/menu.html';
+        window.location = 'https://fast-food-fast-12.herokuapp.com/menu.html';
       } else if (userData.status === 'Fail') {
         document.getElementById('response').innerHTML = `<h4 style="font-weight: lighter; color:#fff; font-size:1rem;"> ${userData.message} </h4>`;
       } else {

@@ -1,6 +1,6 @@
 const getMenu = () => {
   const menuContainer = document.getElementById('food-cards-sub-container');
-  let food;
+  // let food;
   fetch('https://fast-food-fast-12.herokuapp.com/api/v1/menu')
     .then(res => res.json())
     .then((menus) => {
@@ -90,7 +90,6 @@ const getMenu = () => {
       //  console.log(menus);
     })
     .catch(error => console.log(error));
-
   /* Event Listener for creating Order */
   const createOrder = (e) => {
     e.preventDefault();
@@ -117,7 +116,7 @@ const getMenu = () => {
     };
     fetch('https://fast-food-fast-12.herokuapp.com/api/v1/orders', fetchData)
       .then(res => res.json())
-      .then(orderData => alert(orderData.message))
+      .then(order => alert(order.message))
       .catch(error => alert(error));
   };
   document.getElementById('create-order').addEventListener('submit', createOrder);

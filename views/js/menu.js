@@ -117,7 +117,7 @@ const getMenu = () => {
     };
     fetch('https://fast-food-fast-12.herokuapp.com/api/v1/orders', fetchData)
       .then(res => res.json())
-      .then(orderData => alert(orderData.message))
+      .then(order => alert(order.message))
       .catch(error => alert(error));
   };
   document.getElementById('create-order').addEventListener('submit', createOrder);

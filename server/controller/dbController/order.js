@@ -61,6 +61,7 @@ class Order {
   static getAllOrder(req, res) {
     const getAllOrdersQuery = {
       text: `SELECT
+        orders.id,
         fullname, 
         delivary_address,
         telephone,

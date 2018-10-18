@@ -26,9 +26,10 @@ class Order {
         }
         const { price } = menu.rows[0];
         const menuId = menu.rows[0].id;
+        const total = parseInt(quantity.trim(), 10) * parseInt(price, 10);
         const createOrderQuery = {
-          text: 'INSERT INTO orders(delivary_address,telephone,quantity,user_id,menu_id) VALUES($1, $2, $3, $4, $5) RETURNING *',
-          values: [address, telephone.trim(), parseInt(quantity.trim(), 10), req.decoded.userId, menuId],
+          text: 'INSERT INTO orders(delivary_address,telephone,quantity,total,user_id,menu_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING *',
+          values: [address, telephone.trim(), parseInt(quantity.trim(), 10), total, req.decoded.userId, menuId],
         };
         return dbConnection.query(createOrderQuery)
           .then(order => res.status(201).json({
@@ -45,6 +46,7 @@ class Order {
             status: 'Error',
             message: 'Internal server error, please try again later',
             err,
+            total,
           }));
       })
       .catch(err => res.status(500).json({
@@ -234,6 +236,7 @@ class Order {
         z.quantity,
         food,
         price,
+        total,
         z.order_status,
         z.createdAt
         FROM
@@ -243,18 +246,6 @@ class Order {
         WHERE z.user_id=$1`,
       values: [parseInt(req.decoded.userId, 10)],
     };
-    // if (!validate.validateQueryParameter(req.params.userId)) {
-    //   return res.status(400).json({
-    //     status: 'Fail',
-    //     message: 'Wrong query parameter, use integers please',
-    //   });
-    // }
-    // if (parseInt(req.params.userId, 10) !== req.decoded.userId) {
-    //   return res.status(400).json({
-    //     status: 'Fail',
-    //     message: 'You can not views another users order history',
-    //   });
-    // }
     return dbConnection.query(getOrderHistoryQuery)
       .then((orders) => {
         if (orders.rowCount === 0) {

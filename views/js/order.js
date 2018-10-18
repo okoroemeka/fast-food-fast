@@ -1,6 +1,6 @@
 const getOrders = () => {
   const table = document.getElementById('online-order');
-  fetch('api/v1/orders', {
+  fetch('https://fast-food-fast-12.herokuapp.com/api/v1/orders', {
     headers: {
       'x-access-token': localStorage.getItem('token'),
     },

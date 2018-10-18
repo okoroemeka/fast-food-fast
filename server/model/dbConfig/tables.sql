@@ -30,6 +30,7 @@ CREATE TABLE orders(
     delivary_address VARCHAR NOT NULL,
     telephone text NOT NULL,
     quantity INT  NOT NULL,
+    total INT  NOT NULL,
     order_status VARCHAR DEFAULT 'New', 
     user_id INT REFERENCES users(id) ON DELETE CASCADE,
     menu_id INT REFERENCES menus(id) ON DELETE CASCADE,

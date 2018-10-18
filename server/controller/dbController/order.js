@@ -44,6 +44,7 @@ class Order {
           .catch(err => res.status(500).json({
             status: 'Error',
             message: 'Internal server error, please try again later',
+            err,
           }));
       })
       .catch(err => res.status(500).json({
@@ -229,6 +230,7 @@ class Order {
   static getOrderHistory(req, res) {
     const getOrderHistoryQuery = {
       text: `SELECT
+        z.id,
         z.quantity,
         food,
         price,
@@ -239,20 +241,20 @@ class Order {
         INNER JOIN
         menus ON menus.id = z.menu_id
         WHERE z.user_id=$1`,
-      values: [parseInt(req.params.userId, 10)],
+      values: [parseInt(req.decoded.userId, 10)],
     };
-    if (!validate.validateQueryParameter(req.params.userId)) {
-      return res.status(400).json({
-        status: 'Fail',
-        message: 'Wrong query parameter, use integers please',
-      });
-    }
-    if (parseInt(req.params.userId, 10) !== req.decoded.userId) {
-      return res.status(400).json({
-        status: 'Fail',
-        message: 'You can not views another users order history',
-      });
-    }
+    // if (!validate.validateQueryParameter(req.params.userId)) {
+    //   return res.status(400).json({
+    //     status: 'Fail',
+    //     message: 'Wrong query parameter, use integers please',
+    //   });
+    // }
+    // if (parseInt(req.params.userId, 10) !== req.decoded.userId) {
+    //   return res.status(400).json({
+    //     status: 'Fail',
+    //     message: 'You can not views another users order history',
+    //   });
+    // }
     return dbConnection.query(getOrderHistoryQuery)
       .then((orders) => {
         if (orders.rowCount === 0) {

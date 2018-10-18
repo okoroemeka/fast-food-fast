@@ -1,6 +1,6 @@
 const getMenu = () => {
   const menuContainer = document.getElementById('food-cards-sub-container');
-  // let food;
+  let food;
   fetch('https://fast-food-fast-12.herokuapp.com/api/v1/menu')
     .then(res => res.json())
     .then((menus) => {

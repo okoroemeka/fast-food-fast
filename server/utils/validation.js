@@ -194,12 +194,12 @@ const validation = {
     }
     return next();
   },
-  validate: (req) => {
-    if (req.decoded.status === 'admin') {
-      return true;
-    }
-    return false;
-  },
+  // validate: (req) => {
+  //   if (req.decoded.status === 'admin') {
+  //     return true;
+  //   }
+  //   return false;
+  // },
   validateQueryParameter: (id) => {
     if (Number.isInteger(parseInt(id, 10))) {
       return true;

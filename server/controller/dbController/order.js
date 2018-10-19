@@ -81,7 +81,7 @@ class Order {
         INNER JOIN
         users ON users.id = orders.user_id`,
     };
-    if (!validate.validate) {
+    if (req.decoded.status !== 'admin') {
       return res.status(403).json({
         status: 'Fail',
         message: 'You are not autthorized to perform this action',
@@ -139,7 +139,7 @@ class Order {
         message: 'Wrong query parameter, use integers please',
       });
     }
-    if (validate.validate) {
+    if (req.decoded.status === 'admin') {
       return dbConnection.query(getSpecificOrderQuery)
         .then((orders) => {
           if (orders.rowCount !== 0) {
@@ -187,7 +187,7 @@ class Order {
         message: 'Wrong query parameter, use integers please',
       });
     }
-    if (!validate.validate) {
+    if (req.decoded.status !== 'admin') {
       return res.status(403).json({
         status: 'Fail',
         message: 'You are not authorized to perform this action',

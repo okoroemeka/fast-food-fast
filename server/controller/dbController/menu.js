@@ -1,7 +1,7 @@
 import cloudinary from 'cloudinary';
 import dotenv from 'dotenv';
 import dbConnection from '../../model/dbConfig/config';
-import validateUserType from '../../utils/validation';
+// import validateUserType from '../../utils/validation';
 
 dotenv.config();
 
@@ -30,7 +30,7 @@ class Menu {
             message: 'Food is already on the menu',
           });
         }
-        if (validateUserType.validate) {
+        if (req.decoded.status === 'admin') {
           return cloudinary.v2.uploader.upload(req.file.path, { use_filename: true })
             .then((result) => {
               const foodImage = result.url;
@@ -103,7 +103,7 @@ class Menu {
       text: 'SELECT * FROM menus WHERE id=$1',
       values: [parseInt(menuId, 10)],
     };
-    if (!validateUserType.validate) {
+    if (req.decoded.status === 'admin') {
       return res.status(403).json({
         status: 'fail',
         message: 'You are not authorized to perform this action',

@@ -16,12 +16,16 @@ const userLogin = (e) => {
     body: JSON.stringify(data),
   };
 
-  fetch('https://fast-food-fast-12.herokuapp.com/api/v1/auth/signin', fetchData)
+  fetch('api/v1/auth/signin', fetchData)
     .then(user => user.json())
     .then((userData) => {
       if (userData.status === 'Success') {
         localStorage.setItem('token', userData.token);
-        window.location = 'https://fast-food-fast-12.herokuapp.com/menu.html';
+        if (userData.userStatus === 'admin') {
+          window.location = 'admin.html';
+        } else {
+          window.location = 'menu.html';
+        }
       } else if (userData.status === 'Fail') {
         document.getElementById('response').innerHTML = `<h4 style="font-weight: lighter; color:#fff; font-size:1rem;"> ${userData.message} </h4>`;
       } else {

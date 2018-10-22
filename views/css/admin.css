@@ -139,7 +139,13 @@ body{
     border-collapse: collapse;
     margin-bottom: 20px;
 }
-
+.order{
+    transition-duration: 0.1s
+}
+.order:hover{
+    background-color: rgb(229, 226, 226);
+    cursor: pointer;
+}
 thead,th,td{
     text-align: left;
     padding: 15px;
@@ -263,13 +269,15 @@ span input[type=checkbox]:hover,
     cursor: pointer;
 }
 /* The Close Button */
+#order-modal-close,
 #close {
     color: #aaaaaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
-
+#order-modal-close:hover,
+#order-modal-close:focus,
 #close:hover,
 #close:focus {
     color: #000;
@@ -279,6 +287,18 @@ span input[type=checkbox]:hover,
 #modal-order-button{
  float :right;
 }
+#order-card ul{
+    display: inline;
+    list-style-type: none;
+    color: #4d4444;
+}
+.facts{
+    font-weight: bold;
+	font-size: 1em;
+	color: #111010;
+	margin: 0px;
+}
+/* .order-modal-content{} */
 @media only screen and (min-width: 768px) and (max-width: 1024px){
     .modal-content{
         width: 50%;
@@ -352,7 +372,7 @@ span input[type=checkbox]:hover,
     display: block;
 }
 .modal-content{
-    width: 50%;
+    width: 33.33%;
 }
 #accepted-oders,
 #admin-menu{

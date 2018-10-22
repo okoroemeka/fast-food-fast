@@ -1,7 +1,7 @@
 const getMenu = () => {
   const menuContainer = document.getElementById('food-cards-sub-container');
   let food;
-  fetch('https://fast-food-fast-12.herokuapp.com/api/v1/menu')
+  fetch('api/v1/menu')
     .then(res => res.json())
     .then((menus) => {
       let outPut = '<div class="col-12" id="available-food"> <h1>Availabe Items</h1></div>';
@@ -39,7 +39,6 @@ const getMenu = () => {
 
         // Get the button that opens the modal
         const orderButtons = document.querySelectorAll('.order-now');
-        // let menubtn = document.getElementById("order-now");
 
         // Get the <span> element that closes the modal
         const menuSpan = document.getElementById('close');
@@ -114,13 +113,13 @@ const getMenu = () => {
       },
       body: JSON.stringify(orderData),
     };
-    fetch('https://fast-food-fast-12.herokuapp.com/api/v1/orders', fetchData)
+    fetch('api/v1/orders', fetchData)
       .then(res => res.json())
       .then(order => alert(order.message))
       .catch(error => alert(error));
   };
   document.getElementById('create-order').addEventListener('submit', createOrder);
 };
-window.addEventListener('load', getMenu);
+document.addEventListener('DOMContentLoaded', getMenu);
 
 console.log('connected');

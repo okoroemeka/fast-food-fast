@@ -99,6 +99,8 @@ class Users {
           return res.status(200).json({
             status: 'Success',
             message: 'Welcome to fast-food-fast resturant',
+            userStatus: user.rows[0].status,
+            userId: user.rows[0].id,
             token,
           });
         }

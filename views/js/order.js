@@ -1,3 +1,18 @@
+/**
+ * @param {*} alertText
+ */
+const alertMessage = (alertText) => {
+  const alertBox = document.getElementById('alert-box');
+  document.getElementById('message').innerText = `${alertText}`;
+  alertBox.style.display = 'block';
+};
+
+// order Id
+let orderId;
+
+/**
+ * @param {*}
+ */
 const getOrders = () => {
   const table = document.getElementById('online-order');
   fetch('api/v1/orders', {
@@ -12,15 +27,18 @@ const getOrders = () => {
                             <th>Order Id</th>
                             <th>Item</th>
                             <th>Quantity</th>
+                            <th>Status</th>
                       </tr>`;
         orders.orders.forEach((order) => {
           output += `<tr class="order" id=${order.id}>
             <td>${order.id}</td>
             <td>${order.food}</td>
             <td>${order.quantity}</td>
+            <td>${order.order_status}</td>
         </tr>`;
         });
         table.innerHTML = output;
+
         /**
         * Add event listeners to Get specific order
         * Consume Get specific order API
@@ -28,7 +46,7 @@ const getOrders = () => {
         const allOrders = document.querySelectorAll('.order');
         allOrders.forEach((order) => {
           order.addEventListener('click', () => {
-            const orderId = parseInt(order.id, 10);
+            orderId = parseInt(order.id, 10);
             fetch(`api/v1/orders/${orderId}`, {
               headers: {
                 'x-access-token': localStorage.getItem('token'),
@@ -64,34 +82,52 @@ const getOrders = () => {
                       modal.style.display = 'none';
                     }
                   };
-
-                  /**
-                   * Consuming the API for Updating order status.
-                   */
-                  // const orderButtons = document.querySelectorAll('.order-button');
-                  // orderButtons.forEach((button) => {
-                  //   button.addEventListener('click', () => {
-                  //     //Getting the button value
-                  //     const buttonValue = button.textContent;
-                  //     console.log(buttonValue, orderId);
-                  //   });
-                  // });
-                  // console.log(orderButtons);
                 } else {
-                  alert(orderData.message);
+                  alertMessage(orderData.message);
                 }
               })
-              .catch(err => alert(err));
+              .catch(err => alertMessage(err));
           });
         });
       } else if (orders.status === 'Fail') {
-        alert(orders.message);
+        alertMessage(orders.message);
       } else {
-        alert(orders.message);
+        alertMessage(orders.message);
       }
     })
-    .catch(error => alert(error));
+    .catch(error => alertMessage(error));
 };
 document.addEventListener('DOMContentLoaded', getOrders);
 
+/**
+ * Consuming the API for Updating order status.
+ */
+const orderButtons = document.querySelectorAll('.order-button');
+orderButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    // Getting the button value
+    const buttonValue = button.textContent;
+    const updateValue = (buttonValue === 'Accept') ? 'Processing' : 'Cancelled';
+    const data = {
+      status: updateValue,
+    };
+    fetch(`api/v1/orders/${orderId}`, {
+      method: 'PUT',
+      credentials: 'same-origin',
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-type': 'application/json',
+        'x-access-token': localStorage.getItem('token'),
+      },
+      body: JSON.stringify(data),
+    })
+      .then(res => res.json())
+      .then((updateData) => {
+        alertMessage(updateData.message);
+      })
+      .catch((err) => {
+        alertMessage(err);
+      });
+  });
+});
 console.log('connected');

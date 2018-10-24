@@ -1,3 +1,8 @@
+const closeButton = document.getElementById('closebtn');
+const alertBox = document.getElementById('alert-box');
+closeButton.onclick = () => {
+  alertBox.style.display = 'none';
+};
 /* navigation bar */
 const mainNav = document.getElementById('main-nav');
 const navbarToggle = document.getElementById('navbar-toggle');
@@ -17,7 +22,7 @@ const modal = document.getElementById('myModal');
 // Get the button that opens the modal
 const btn = document.getElementById('add-item');
 // Get the <span> element that closes the modal
-// const span = document.getElementsByClassName("close")[0];
+
 const span = document.getElementById('close');
 // When the user clicks the button, open the modal
 btn.onclick = function () {
@@ -61,9 +66,4 @@ orderList.addEventListener('click', function () {
   }
 });
 
-const closeButton = document.getElementById('closebtn');
-const alertBox = document.getElementById('alert-box');
-closeButton.onclick = () => {
-  alertBox.style.display = 'none';
-};
 console.log('connected');

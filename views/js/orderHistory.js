@@ -1,3 +1,15 @@
+/**
+ * @param {*} alertText
+ */
+const alertMessage = (alertText) => {
+  const alertBox = document.getElementById('alert-box');
+  document.getElementById('message').innerText = `${alertText}`;
+  alertBox.style.display = 'block';
+};
+
+/**
+ * Get order history
+ */
 const getOrderHistory = () => {
   const table = document.getElementById('order-history-table');
   fetch('api/v1/users/orders', {
@@ -29,9 +41,11 @@ const getOrderHistory = () => {
                        </tr>`;
         });
         table.innerHTML = output;
+      } else {
+        alertMessage(orders.message);
       }
     })
-    .catch(error => console.log(error));
+    .catch(error => alertMessage(error));
 };
 document.addEventListener('DOMContentLoaded', getOrderHistory);
 console.log('connected');

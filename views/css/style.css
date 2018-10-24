@@ -239,12 +239,43 @@ body{
 .sub-container{
 	margin-bottom: 10%;
 }
-
+/* alert box style */
+.alert-box{
+    display: none; 
+    height: auto;
+    position: fixed; 
+    z-index: 1; 
+    padding: 5px 10px;
+    top: 0px;
+    background-color: #4A4A4A;
+    color: #fefefe;
+    font-size: 17px;
+}
+.closebtn{
+    color: #aaaaaa;
+    font-size: 28px;
+    font-weight: bold;
+}
+.message{
+    text-align: center;
+    margin-bottom: 3%;
+}
+.closebtn:hover,
+.closebtn:focus{
+	color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
 @media only screen and (min-width: 768px) and (max-width: 1024px){
 	.signup-container,
 	.login-container{
 		 width: 75%;
 	}
+	 /* alert box*/
+	.alert-box{
+        width: 58.33%;
+        left: 25%;
+    }
 }
 @media only screen and (min-width: 1025px){
 	.navbar{
@@ -308,4 +339,8 @@ body{
 	.login-container{
 	  width: 33.33%;
 	}
+	.alert-box{
+		left: 25%;
+		width: 58.33%;
+	 }
 }

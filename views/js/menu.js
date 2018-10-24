@@ -1,3 +1,15 @@
+/**
+ * @param {*} alertText
+ */
+const alertMessage = (alertText) => {
+  const alertBox = document.getElementById('alert-box');
+  document.getElementById('message').innerText = `${alertText}`;
+  alertBox.style.display = 'block';
+};
+
+/**
+ * Get menu
+ */
 const getMenu = () => {
   const menuContainer = document.getElementById('food-cards-sub-container');
   let food;
@@ -82,17 +94,15 @@ const getMenu = () => {
           }
         };
       } else if (menus.status === 'fail') {
-        alert(`${menus.message}`);
+        alertMessage(menus.message);
       } else {
-        alert(`${menus.message}`);
+        alertMessage(menus.message);
       }
-      //  console.log(menus);
     })
     .catch(error => console.log(error));
   /* Event Listener for creating Order */
   const createOrder = (e) => {
     e.preventDefault();
-    // const food = document.getElementById('item-name').value;
     const quantity = document.getElementById('quantity').value;
     const street = document.getElementById('street').value;
     const city = document.getElementById('city').value;
@@ -115,8 +125,8 @@ const getMenu = () => {
     };
     fetch('api/v1/orders', fetchData)
       .then(res => res.json())
-      .then(order => alert(order.message))
-      .catch(error => alert(error));
+      .then(order => alertMessage(order.message))
+      .catch(error => alertMessage(error));
   };
   document.getElementById('create-order').addEventListener('submit', createOrder);
 };

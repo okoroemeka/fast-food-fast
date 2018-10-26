@@ -1,3 +1,16 @@
+/**
+ * @param {*} alertText
+ */
+const menuAlertMessage = (alertText) => {
+  const alertBox = document.getElementById('alert-box');
+  document.getElementById('message').innerText = `${alertText}`;
+  alertBox.style.display = 'block';
+};
+
+/**
+ * @return {*} createMenu
+ * @param {*} e
+ */
 const createMenu = (e) => {
   e.preventDefault();
   const foodImage = document.querySelector("input[type='file']");
@@ -15,10 +28,61 @@ const createMenu = (e) => {
     },
     body: formData,
   };
-
-  fetch('https://fast-food-fast-12.herokuapp.com/api/v1/menu', fetchData)
+  fetch('api/v1/menu', fetchData)
     .then(res => res.json())
-    .then(menuData => alert(menuData.message))
-    .catch(error => alert(error));
+    .then(menuData => menuAlertMessage(menuData.message))
+    .catch(error => menuAlertMessage(error));
 };
 document.getElementById('add-menu').addEventListener('submit', createMenu);
+
+
+const getMenu = () => {
+  fetch('api/v1/menu')
+    .then(res => res.json())
+    .then((allMenu) => {
+      const table = document.getElementById('menu-item');
+      if (allMenu.status === 'success') {
+        let outPut = `<tr>
+                        <th>Item</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                     </tr>`;
+        allMenu.menu.forEach((menuItem) => {
+          outPut += `<tr>
+                      <td>${menuItem.food}</td>
+                      <td>&#8358;${menuItem.price}</td>
+                      <td>
+                          <button class="edit-item">Edit</button>
+                          <button class="delete-item" id="D-${menuItem.id}">Delete</button>
+                      </td>
+                    </tr>`;
+        });
+        table.innerHTML = outPut;
+
+        /* Consume  Delete menu item API */
+        const deleteButtons = document.querySelectorAll('.delete-item');
+        deleteButtons.forEach((deleteButton) => {
+          deleteButton.addEventListener('click', () => {
+            const menuId = parseInt(deleteButton.id.split('-')[1], 10);
+            fetch(`api/v1/menu/${menuId}`, {
+              method: 'DELETE',
+              headers: {
+                'x-access-token': localStorage.getItem('token'),
+              },
+            })
+              .then(res => res.json())
+              .then((menu) => {
+                menuAlertMessage(menu.message);
+              })
+              .catch((error) => {
+                menuAlertMessage(error);
+              });
+          });
+        });
+      } else {
+        menuAlertMessage(allMenu.message);
+      }
+    })
+    .catch(err => menuAlertMessage(err));
+};
+document.getElementById('add-menu-button').addEventListener('click', getMenu);

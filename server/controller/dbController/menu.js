@@ -103,7 +103,7 @@ class Menu {
       text: 'SELECT * FROM menus WHERE id=$1',
       values: [parseInt(menuId, 10)],
     };
-    if (req.decoded.status === 'admin') {
+    if (req.decoded.status !== 'admin') {
       return res.status(403).json({
         status: 'fail',
         message: 'You are not authorized to perform this action',
@@ -118,7 +118,7 @@ class Menu {
         }
         return dbConnection.query(deleteQuery)
           .then(deletedData => res.status(200).json({
-            status: 'success',
+            status: 'Success',
             message: 'Menu item deleted successfully',
           }))
           .catch(() => res.status(500).json({

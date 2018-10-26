@@ -67,25 +67,7 @@
                                 </div>
 
                                 <div class="add-menu-item">
-                                    <table class="table table-responsive">
-                                        <thead>
-                                            <tr>
-                                                <th>Item</th>
-                                                <th>Price</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <!-- <tr>
-                                                <td>Fried rice and chicken</td>
-                                                <td>&#8358; 2500</td>
-                                                <td>
-                                                    <button class="edit-item">Edit</button>
-                                                    <button class="delete-item">Delete</button>
-                                                </td>
-                                            </tr> -->
-                                        </tbody>
-                                    </table>
+                                    <table class="table table-responsive" id="menu-item"></table>
                                 </div>
                                 <div class="menu-card-button">
                                     <button class="item-modal" id="add-item">Add</button>
@@ -211,7 +193,9 @@
                     <div class="row alert-modal">
                         <div class="col-12 alert-box" id="alert-box">
                             <span class="closebtn" id="closebtn">&times;</span>
-                            <div class="row"><div class="col-12 message" id="message"></div></div>
+                            <div class="row">
+                                <div class="col-12 message" id="message"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -231,8 +215,9 @@
         </div>
     </footer>
     <script src="js/main.js"></script>
-    <script src="js/admin.js"></script>
     <script src="js/order.js"></script>
+    <script src="js/admin.js"></script>
+    <!-- <script src="js/order.js"></script> -->
 </body>
 
 </html>

@@ -5,6 +5,7 @@ import menu from '../controller/dbController/menu';
 import order from '../controller/dbController/order';
 import authentication from '../utils/auth';
 import validation from '../utils/validation';
+import reUsable from '../utils/reusables';
 
 // Express subrouter
 const router = express.Router();
@@ -24,6 +25,7 @@ router.post('/auth/signin', validation.signInValidation, user.signIn);
 router.put('/user/:userId', user.updateUserStatus);
 router.post('/menu', upload.single('foodImage'), validation.createMenuValidation, authentication, menu.createMenuItem);
 router.get('/menu', menu.getMenu);
+router.put('/menu/:menuId', upload.single('foodImage'), reUsable.imageUpload, authentication, menu.editMenuItem);
 router.delete('/menu/:menuId', authentication, menu.deleteMenuItem);
 router.get('/orders', authentication, order.getAllOrder);
 router.get('/orders/:orderId', authentication, order.getSpecificOrder);

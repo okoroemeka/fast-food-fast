@@ -32,7 +32,7 @@ const createUser = (e) => {
     body: JSON.stringify(data),
   };
 
-  fetch('api/v1/auth/signup', fetchData)
+  fetch('https://fast-food-fast-12.herokuapp.com/api/v1/auth/signup', fetchData)
     .then(user => user.json())
     .then((userData) => {
       if (userData.status === 'Success') {

@@ -28,7 +28,7 @@ const createMenu = (e) => {
     },
     body: formData,
   };
-  fetch('api/v1/menu', fetchData)
+  fetch('https://fast-food-fast-12.herokuapp.com/api/v1/menu', fetchData)
     .then(res => res.json())
     .then(menuData => menuAlertMessage(menuData.message))
     .catch(error => menuAlertMessage(error));
@@ -37,7 +37,7 @@ document.getElementById('add-menu').addEventListener('submit', createMenu);
 
 // Get available Menu
 const getMenu = () => {
-  fetch('api/v1/menu')
+  fetch('https://fast-food-fast-12.herokuapp.com/api/v1/menu')
     .then(res => res.json())
     .then((allMenu) => {
       const table = document.getElementById('menu-item');
@@ -64,7 +64,7 @@ const getMenu = () => {
         deleteButtons.forEach((deleteButton) => {
           deleteButton.addEventListener('click', () => {
             const menuId = parseInt(deleteButton.id.split('-')[1], 10);
-            fetch(`api/v1/menu/${menuId}`, {
+            fetch(`https://fast-food-fast-12.herokuapp.com/api/v1/menu/${menuId}`, {
               method: 'DELETE',
               headers: {
                 'x-access-token': localStorage.getItem('token'),
@@ -106,7 +106,7 @@ const getMenu = () => {
                 },
                 body: formData,
               };
-              fetch(`api/v1/menu/${editId}`, editData)
+              fetch(`https://fast-food-fast-12.herokuapp.com/api/v1/menu/${editId}`, editData)
                 .then(res => res.json())
                 .then(editInfo => menuAlertMessage(editInfo.message))
                 .catch(err => menuAlertMessage(err));

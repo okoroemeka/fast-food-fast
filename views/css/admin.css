@@ -156,7 +156,7 @@ thead,th,td{
 .delete-item,
 .edit-item,
 #modal-order-button,
-#add-button,
+#action-button,
 #modal-order-button,
 #add-item
 {
@@ -260,7 +260,7 @@ span input[type=checkbox]:hover,
     font-size: 15px;
     font-weight: bold;
 }
-#add-button{
+#action-button{
     margin-top: 10px;
     width: 80px;
     height: 30px;

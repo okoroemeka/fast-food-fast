@@ -35,7 +35,7 @@ const createMenu = (e) => {
 };
 document.getElementById('add-menu').addEventListener('submit', createMenu);
 
-
+// Get available Menu
 const getMenu = () => {
   fetch('api/v1/menu')
     .then(res => res.json())
@@ -52,7 +52,7 @@ const getMenu = () => {
                       <td>${menuItem.food}</td>
                       <td>&#8358;${menuItem.price}</td>
                       <td>
-                          <button class="edit-item">Edit</button>
+                          <button class="edit-item" id="E-${menuItem.id}">Edit</button>
                           <button class="delete-item" id="D-${menuItem.id}">Delete</button>
                       </td>
                     </tr>`;
@@ -77,6 +77,45 @@ const getMenu = () => {
               .catch((error) => {
                 menuAlertMessage(error);
               });
+          });
+        });
+
+        /** Consume Edit menu */
+        const editButtons = document.querySelectorAll('.edit-item');
+        editButtons.forEach((editButton) => {
+          editButton.addEventListener('click', () => {
+            const editId = parseInt(editButton.id.split('-')[1], 10);
+            const editModal = document.getElementById('myModal');
+            document.getElementById('form-header').innerText = 'Edit Menu';
+            
+            const addButton = document.getElementById('action-button');
+            addButton.innerText = 'Update';
+            addButton.addEventListener('click', () => {
+              const foodImage = document.querySelector("input[type='file']");
+              const food = document.getElementById('item-name').value;
+              const price = document.getElementById('item-price').value;
+              const formData = new FormData();
+              formData.append('food', food);
+              formData.append('price', price);
+              formData.append('foodImage', foodImage.files[0]);
+              const editData = {
+                method: 'PUT',
+                headers: {
+                  Accept: 'application/json, text/plain, */*',
+                  'x-access-token': localStorage.getItem('token'),
+                },
+                body: formData,
+              };
+              fetch(`api/v1/menu/${editId}`, editData)
+                .then(res => res.json())
+                .then(editInfo => menuAlertMessage(editInfo.message))
+                .catch(err => menuAlertMessage(err));
+            });
+            // console.log(editId);
+            editModal.style.display = 'block';
+            closeSpan.onclick = () => {
+              editModal.style.display = 'none';
+            };
           });
         });
       } else {

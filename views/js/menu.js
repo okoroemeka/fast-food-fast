@@ -13,7 +13,7 @@ const alertMessage = (alertText) => {
 const getMenu = () => {
   const menuContainer = document.getElementById('food-cards-sub-container');
   let food;
-  fetch('api/v1/menu')
+  fetch('https://fast-food-fast-12.herokuapp.com/api/v1/menu')
     .then(res => res.json())
     .then((menus) => {
       let outPut = '<div class="col-12" id="available-food"> <h1>Availabe Items</h1></div>';
@@ -123,7 +123,7 @@ const getMenu = () => {
       },
       body: JSON.stringify(orderData),
     };
-    fetch('api/v1/orders', fetchData)
+    fetch('https://fast-food-fast-12.herokuapp.com/api/v1/orders', fetchData)
       .then(res => res.json())
       .then(order => alertMessage(order.message))
       .catch(error => alertMessage(error));

@@ -15,7 +15,7 @@ let orderId;
  */
 const getOrders = () => {
   const table = document.getElementById('online-order');
-  fetch('api/v1/orders', {
+  fetch('https://fast-food-fast-12.herokuapp.com/api/v1/orders', {
     headers: {
       'x-access-token': localStorage.getItem('token'),
     },
@@ -47,7 +47,7 @@ const getOrders = () => {
         allOrders.forEach((order) => {
           order.addEventListener('click', () => {
             orderId = parseInt(order.id, 10);
-            fetch(`api/v1/orders/${orderId}`, {
+            fetch(`https://fast-food-fast-12.herokuapp.com/api/v1/orders/${orderId}`, {
               headers: {
                 'x-access-token': localStorage.getItem('token'),
               },
@@ -111,7 +111,7 @@ orderButtons.forEach((button) => {
     const data = {
       status: updateValue,
     };
-    fetch(`api/v1/orders/${orderId}`, {
+    fetch(`https://fast-food-fast-12.herokuapp.com/api/v1/orders/${orderId}`, {
       method: 'PUT',
       credentials: 'same-origin',
       headers: {

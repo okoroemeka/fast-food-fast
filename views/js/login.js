@@ -28,7 +28,7 @@ const userLogin = (e) => {
     body: JSON.stringify(data),
   };
 
-  fetch('api/v1/auth/signin', fetchData)
+  fetch('https://fast-food-fast-12.herokuapp.com/api/v1/auth/signin', fetchData)
     .then(user => user.json())
     .then((userData) => {
       if (userData.status === 'Success') {

@@ -12,7 +12,7 @@ const alertMessage = (alertText) => {
  */
 const getOrderHistory = () => {
   const table = document.getElementById('order-history-table');
-  fetch('api/v1/users/orders', {
+  fetch('https://fast-food-fast-12.herokuapp.com/api/v1/users/orders', {
     headers: {
       'x-access-token': localStorage.getItem('token'),
     },

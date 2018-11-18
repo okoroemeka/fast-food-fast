@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /**
  * @param {*} alertText
  */
@@ -6,7 +7,6 @@ const alertMessage = (alertText) => {
   document.getElementById('message').innerText = `${alertText}`;
   alertBox.style.display = 'block';
 };
-
 /**
  * Get menu
  */
@@ -46,14 +46,8 @@ const getMenu = () => {
         </div>`;
         });
         menuContainer.innerHTML = outPut;
-        /* pop up */
-        const menuModal = document.getElementById('myModal');
-
         // Get the button that opens the modal
         const orderButtons = document.querySelectorAll('.order-now');
-
-        // Get the <span> element that closes the modal
-        const menuSpan = document.getElementById('close');
 
         // When the user clicks the button, open the modal
         orderButtons.forEach((button, i, orderButtons) => button.addEventListener('click', () => {
@@ -61,74 +55,49 @@ const getMenu = () => {
           let itemPrice = document.getElementsByClassName('Price')[i].innerText;
           itemPrice = itemPrice.split(' ');
           itemPrice = parseInt(itemPrice[itemPrice.length - 1], 10);
-
+          const product = [];
           // get item name
           food = document.getElementsByClassName('food')[i].innerText;
-          // display modal containing form
-          menuModal.style.display = 'block';
-
-          const inputElement = document.getElementById('quantity');
-
-          // clear input area
-          inputElement.value = '';
-
-          // clear item total container
-          document.getElementById('total-amount').innerText = '';
-
-          // tracking changes in quantity input and adding event listener.
-          inputElement.oninput = () => {
-            const quantity = document.getElementById('quantity').value;
-            document.getElementById('total-amount').innerHTML = `Total: &#8358;${itemPrice * quantity}`;
+          const orderedProduct = {
+            food,
+            price: itemPrice,
+            quantity: 1,
           };
+          product.push(orderedProduct);
+          localStorage.setItem('product', JSON.stringify(product));
+          window.location = 'shoppingcart.html';
         }));
 
-        // When the user clicks on <span> (x), close the modal
-        menuSpan.onclick = () => {
-          menuModal.style.display = 'none';
-        };
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = (event) => {
-          if (event.target === modal) {
-            menuModal.style.display = 'none';
-          }
-        };
+        /**
+         *  HANDLING ADD TO CART FUNCTIONALITY
+         */
+        const cartButtons = document.querySelectorAll('.add-to-cart');
+        const counter = document.getElementById('count');
+        const product = [];
+        cartButtons.forEach((button, i, cartButtons) => {
+          button.addEventListener('click', () => {
+            const foodItem = document.getElementsByClassName('food')[i].innerText;
+            let cartItemPrice = document.getElementsByClassName('Price')[i].innerText;
+            cartItemPrice = cartItemPrice.split(' ');
+            cartItemPrice = parseInt(cartItemPrice[cartItemPrice.length - 1], 10);
+            const orderedProduct = {
+              food: foodItem,
+              price: cartItemPrice,
+              quantity: 1,
+            };
+            product.push(orderedProduct);
+            localStorage.setItem('product', JSON.stringify(product));
+            const productCount = JSON.parse(localStorage.getItem('product'));
+            counter.innerText = productCount.length;
+          });
+        });
       } else if (menus.status === 'fail') {
         alertMessage(menus.message);
       } else {
         alertMessage(menus.message);
       }
     })
-    .catch(error => console.log(error));
-  /* Event Listener for creating Order */
-  const createOrder = (e) => {
-    e.preventDefault();
-    const quantity = document.getElementById('quantity').value;
-    const street = document.getElementById('street').value;
-    const city = document.getElementById('city').value;
-    const telephone = document.getElementById('telephone').value;
-    const orderData = {
-      food,
-      quantity,
-      street,
-      city,
-      telephone,
-    };
-    const fetchData = {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json, text/plain, */*',
-        'Content-type': 'application/json',
-        'x-access-token': localStorage.getItem('token'),
-      },
-      body: JSON.stringify(orderData),
-    };
-    fetch('https://fast-food-fast-12.herokuapp.com/api/v1/orders', fetchData)
-      .then(res => res.json())
-      .then(order => alertMessage(order.message))
-      .catch(error => alertMessage(error));
-  };
-  document.getElementById('create-order').addEventListener('submit', createOrder);
+    .catch(error => alertMessage(error));
 };
 document.addEventListener('DOMContentLoaded', getMenu);
 

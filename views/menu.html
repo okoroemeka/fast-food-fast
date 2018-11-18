@@ -25,12 +25,13 @@
                     <a class="nav-links" href="profile.html">Profile</a>
                 </li>
                 <li>
-                    <!-- <div id="shoppingcart-icon"> -->
-                        <a class="nav-links" href="shoppingcart.html">
-                            <i class="fa fa-shopping-cart"></i>
-                        </a>
-                        <!-- <div id="item-count"><span id="count">1</span></div> -->
-                    <!-- </div> -->
+
+                    <a class="nav-links" href="shoppingcart.html">
+                        <i class="fa fa-shopping-cart" id="shoppingcart-icon">
+                            <div id="item-count"><span id="count">0</span></div>
+                        </i>
+                    </a>
+
 
                 </li>
             </ul>
@@ -50,73 +51,13 @@
             <div class="row food-cards-container">
                 <div class="col-10">
                     <div class="row food-cards-sub-container" id="food-cards-sub-container"></div>
-
-                    <!-- Pagination from W3school -->
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="pagination">
-                                <a href="#">&laquo;</a>
-                                <a href="#">1</a>
-                                <a class="active" href="#">2</a>
-                                <a href="#">3</a>
-                                <a href="#">&raquo;</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-5">
-                            <!-- Trigger/Open The Modal -->
-                            <div id="myModal" class="row modal">
-                                <!-- Modal content -->
-                                <div class="col-3 modal-content">
-                                    <span id="close">&times;</span>
-                                    <form id="create-order">
-                                        <div class="row">
-                                            <div class="col-12" style="text-align: center">
-                                                <h3>Details</h3>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12 form-input">
-                                                <p>Item quantity</p>
-                                                <input type="number" name="item-quantity" placeholder="Enter item quantity" required="required" id="quantity" min="0">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12 form-input">
-                                                <p>City</p>
-                                                <input type="text" name="picture" placeholder="Enter city" required="required" id="city">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12 form-input">
-                                                <p>Street</p>
-                                                <input type="text" name="picture" placeholder="Enter street" required="required" id="street">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12 form-input">
-                                                <p>Telephone</p>
-                                                <input type="number" name="item-price" placeholder="Enter phone number" required="required" id="telephone">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6 form-input" id="total-amount">
-
-                                            </div>
-                                            <div class="col-6 form-input">
-                                                <button type="submit" id="modal-order-button" style="background-color: #0066cc">Order</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- ALERT BOX -->
                     <div class="row alert-modal">
                         <div class="col-12 alert-box" id="alert-box">
                             <span class="closebtn" id="closebtn">&times;</span>
-                            <div class="row"><div class="col-12 message" id="message"></div></div>
+                            <div class="row">
+                                <div class="col-12 message" id="message"></div>
+                            </div>
                         </div>
                     </div>
                 </div>

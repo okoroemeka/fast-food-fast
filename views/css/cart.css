@@ -259,6 +259,33 @@ input[type=number]{
 	color: #ffffff;
 }
 
+/* alert box style */
+.alert-box{
+    display: none; 
+    height: auto;
+    position: fixed; 
+    z-index: 1; 
+    padding: 5px 10px;
+    top: 0px;
+    background-color: #4A4A4A;
+    color: #fefefe;
+    font-size: 17px;
+}
+.closebtn{
+    color: #aaaaaa;
+    font-size: 28px;
+    font-weight: bold;
+}
+.closebtn:hover,
+.closebtn:focus{
+	color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+.message{
+    text-align: center;
+    margin-bottom: 3%;
+}
 @media only screen and (min-width: 768px) and (max-width: 1024px){
 	#cart-subcontainer{
         width: 83.33%; 
@@ -266,6 +293,11 @@ input[type=number]{
 	.modal-content{
 		width: 50%;
 	}
+	/* alert box*/
+    .alert-box{
+        width: 58.33%;
+        left: 25%;
+    }
 }
 @media only screen and (min-width: 1025px){
   .navbar{
@@ -317,4 +349,9 @@ input[type=number]{
 	.modal-content{
 		width: 25%;
 	}
+	/* alert box */
+	.alert-box{
+		left: 25%;
+		width: 58.33%;
+	 }
 }

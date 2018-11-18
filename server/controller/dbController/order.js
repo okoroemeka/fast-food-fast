@@ -9,46 +9,23 @@ class Order {
      */
   static createOrder(req, res) {
     const {
-      food, quantity, telephone,
+      telephone, product,
     } = req.body;
     const address = `${req.body.street}, ${req.body.city}`;
-    const getMenuQuery = {
-      text: 'SELECT * FROM menus WHERE food=$1',
-      values: [food.trim()],
+    let total = 0;
+    product.forEach((item) => {
+      total += parseInt(item.price, 10) * parseInt(item.quantity, 10);
+    });
+    const createOrderQuery = {
+      text: 'INSERT INTO orders(delivary_address, telephone, product, total, user_id) VALUES($1, $2, $3, $4, $5) RETURNING *',
+      values: [address, telephone, product, total, req.decoded.userId],
     };
-    dbConnection.query(getMenuQuery)
-      .then((menu) => {
-        if (menu.rowCount < 1) {
-          return res.status(404).json({
-            status: 'Fail',
-            message: 'Sorry, this food has been removed from the menu',
-          });
-        }
-        const { price } = menu.rows[0];
-        const menuId = menu.rows[0].id;
-        const total = parseInt(quantity.trim(), 10) * parseInt(price, 10);
-        const createOrderQuery = {
-          text: 'INSERT INTO orders(delivary_address,telephone,quantity,total,user_id,menu_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING *',
-          values: [address, telephone.trim(), parseInt(quantity.trim(), 10), total, req.decoded.userId, menuId],
-        };
-        return dbConnection.query(createOrderQuery)
-          .then(order => res.status(201).json({
-            status: 'Success',
-            message: 'Order placed successfully',
-            order: {
-              food: order.rows[0].food,
-              address,
-              quantity: order.rows[0].quantity,
-              totalCost: order.rows[0].quantity * parseInt(price, 10),
-            },
-          }))
-          .catch(err => res.status(500).json({
-            status: 'Error',
-            message: 'Internal server error, please try again later',
-            err,
-            total,
-          }));
-      })
+    dbConnection.query(createOrderQuery)
+      .then(data => res.status(200).json({
+        status: 'Success',
+        message: 'Order placed successfully',
+        order: data.rows,
+      }))
       .catch(err => res.status(500).json({
         status: 'Error',
         message: 'Internal server error, please try again later',
@@ -68,16 +45,13 @@ class Order {
         fullname, 
         delivary_address,
         telephone,
-        quantity,
-        food,
-        price,
+        product,
+        total,
         order_status,
         orders.createdAt,
         orders.updatedAt
         FROM
         orders
-        INNER JOIN
-        menus ON menus.id = orders.menu_id
         INNER JOIN
         users ON users.id = orders.user_id`,
     };
@@ -120,15 +94,12 @@ class Order {
         fullname, 
         delivary_address,
         telephone,
-        quantity,
-        food,
-        price,
+        product,
+        total,
         order_status,
         or_io.createdAt
         FROM
         orders or_io
-        INNER JOIN
-        menus ON menus.id = or_io.menu_id
         INNER JOIN
         users ON users.id = or_io.user_id WHERE or_io.id=$1`,
       values: [parseInt(orderId, 10)],
@@ -154,7 +125,7 @@ class Order {
             mesage: 'Order not found',
           });
         })
-        .catch(err => res.status(500).json({
+        .catch(() => res.status(500).json({
           status: 'Error',
           message: 'Internal server error, please try again later',
         }));
@@ -233,16 +204,12 @@ class Order {
     const getOrderHistoryQuery = {
       text: `SELECT
         z.id,
-        z.quantity,
-        food,
-        price,
+        product,
         total,
         z.order_status,
         z.createdAt
         FROM
         orders z
-        INNER JOIN
-        menus ON menus.id = z.menu_id
         WHERE z.user_id=$1`,
       values: [parseInt(req.decoded.userId, 10)],
     };

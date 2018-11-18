@@ -25,20 +25,20 @@ const getOrderHistory = () => {
                         <th>Id</th>
                         <th>Quantity</th>
                         <th>Price</th>
-                        <th>Total</th>
                         <th>Date</th>
                         <th>Status</th> 
                     </tr>`;
         orders.orders.forEach((order) => {
-          output += `<tr>
-                        <td>${order.food}</td>
+          order.product.forEach((item) => {
+            output += `<tr>
+                        <td>${item.food}</td>
                         <td>${order.id}</td>
-                        <td>${order.quantity}</td>
-                        <td>&#8358; ${order.price}</td>
-                        <td>&#8358; ${order.total}</td>
+                        <td>${item.quantity}</td>
+                        <td>&#8358; ${item.price}</td>
                         <td>${order.createdat.split('T')[0]}</td>
                         <td>${order.order_status}</td>
                        </tr>`;
+          });
         });
         table.innerHTML = output;
       } else {

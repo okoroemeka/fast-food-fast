@@ -6,6 +6,8 @@ CREATE TABLE users(
 	id SERIAL PRIMARY KEY,
 	fullname VARCHAR NOT NULL,
 	email VARCHAR NOT NULL,
+    -- delivary_address VARCHAR NOT NULL,
+    -- telephone text NOT NULL,
 	password VARCHAR  NOT NULL,
     status VARCHAR DEFAULT 'regular',
 	image_url VARCHAR,
@@ -29,11 +31,11 @@ CREATE TABLE orders(
     id SERIAL PRIMARY KEY,
     delivary_address VARCHAR NOT NULL,
     telephone text NOT NULL,
-    quantity INT  NOT NULL,
-    total INT  NOT NULL,
+    product jsonb ARRAY NOT NULL,
+    total INT  NOT NULL, 
     order_status VARCHAR DEFAULT 'New', 
     user_id INT REFERENCES users(id) ON DELETE CASCADE,
-    menu_id INT REFERENCES menus(id) ON DELETE CASCADE,
+    -- menu_id INT REFERENCES menus(id) ON DELETE CASCADE,
     createdAt timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updatedAt timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

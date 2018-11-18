@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /**
  * @param {*} alertText
  */
@@ -25,16 +26,21 @@ const getOrders = () => {
       if (orders.status === 'success') {
         let output = `<tr>
                             <th>Order Id</th>
-                            <th>Item</th>
-                            <th>Quantity</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>telephone</th>
                             <th>Status</th>
+                            <th>Date</th>
+
                       </tr>`;
         orders.orders.forEach((order) => {
           output += `<tr class="order" id=${order.id}>
             <td>${order.id}</td>
-            <td>${order.food}</td>
-            <td>${order.quantity}</td>
+            <td>${order.fullname}</td>
+            <td>${order.delivary_address}</td>
+            <td>${order.telephone}</td>
             <td>${order.order_status}</td>
+            <td>${order.createdat.split('T')[0]}</td>
         </tr>`;
         });
         table.innerHTML = output;
@@ -55,18 +61,17 @@ const getOrders = () => {
               .then(res => res.json())
               .then((orderData) => {
                 if (orderData.status === 'Success') {
-                  const orderOutput = `<div class="col-12" id='order-card'>
-                                        <ul>
-                                            <li><span class='facts'>Food</span>:<span> ${orderData.order.food}</span></li>
-                                            <li><span class='facts'>Quantity</span>:<span> ${orderData.order.quantity}</span></li>
-                                            <li><span class='facts'>Customers name</span>:<span> ${orderData.order.fullname}</span></li>
-                                            <li><span class='facts'>Customers Address</span>:<span> ${orderData.order.delivary_address}</span></li>
-                                            <li><span class='facts'>Phone</span>:<span> ${orderData.order.telephone}</span></li>
-                                            <li><span class='facts'>Order status</span>:<span> ${orderData.order.order_status}</span></li>
-                                            <li><span class='facts'>Order Date</span>:<span> ${orderData.order.createdat.split('T')[0]}</span></li>
-                                        </ul>
-                                    </div>`;
-                  document.getElementById('specific-order').innerHTML = orderOutput;
+                  let orderOutput = '<h1>Ordered Items</h1>';
+                  orderData.order.product.forEach((items) => {
+                    orderOutput += `<ul>
+                      <li><span class='facts'>Food</span>:<span> ${items.food}</span></li>
+                      <li><span class='facts'>Quantity</span>:<span> ${items.quantity}</span></li>
+                      <li><span class='facts'>Order status</span>:<span> ${orderData.order.order_status}</span></li>
+                  </ul>
+                  <br/>`;
+                  });
+                  orderOutput += `<h4>total: &#8358; ${orderData.order.total}</h4>`;
+                  document.getElementById('order-card').innerHTML = orderOutput;
                   const modal = document.getElementById('orderModal');
                   modal.style.display = 'block';
                   const orderModalClose = document.getElementById('order-modal-close');

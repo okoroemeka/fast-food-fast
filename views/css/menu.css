@@ -101,7 +101,7 @@ body{
 .fa-shopping-cart{
 	/* line-height: 2rem;
 	padding: 5px; */
-	font-size: 25px;
+	font-size: 28px;
 }
 #shoppingcart-icon{
 	position: relative;
@@ -109,9 +109,10 @@ body{
 #item-count{
 	position: absolute;
 	top: -10px;
-	right: 140px;
+	right: -8px;
 	height: 20px;
 	width: 20px;
+	font-size: 16px;
 	border-radius: 100%;
 	background-color: #ff9900;
 	color: #fff;
@@ -537,16 +538,19 @@ thead,th,td{
   .food-card{
 	width: 25%;
   }
-  /* #item-count{
+  #shoppingcart-icon{
+	  position: relative;
+  }
+  #item-count{
 	position: absolute;
-	top:15px;
-	right:15px;
+	top: -12px;
+	right: -10px;
 	height: 20px;
 	width: 20px;
 	border-radius: 100%;
 	background-color: #ff9900;
 	color: #fff;
-} */
+}
   .order-button button:hover{
 	background-color: #0033cc;
   }

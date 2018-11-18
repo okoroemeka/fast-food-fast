@@ -112,20 +112,8 @@ const validation = {
   },
   createOrderValidation: (req, res, next) => {
     const {
-      food, street, city, telephone, quantity,
+      street, city, telephone,
     } = req.body;
-    if (food === undefined) {
-      return res.status(400).json({
-        status: 'Fail',
-        message: 'Food name is required',
-      });
-    }
-    if (food.trim().length < 1 || typeof food !== 'string') {
-      return res.status(400).json({
-        status: 'Fail',
-        message: 'Food feild is required',
-      });
-    }
     if (street === undefined) {
       return res.status(400).json({
         status: 'Fail',
@@ -161,19 +149,6 @@ const validation = {
       return res.status(400).json({
         status: 'Fail',
         message: 'Telephone feild can not be empty',
-      });
-    }
-    if (quantity === undefined) {
-      return res.status(400).json({
-        status: 'Fail',
-        message: 'Quantiy is required and must be an integer',
-      });
-    }
-    if (req.body.quantity.trim().length === 0
-    || !Number.isInteger(parseInt(quantity, 10))) {
-      return res.status(400).json({
-        status: 'Fail',
-        message: 'Quantiy is required and must be an integer',
       });
     }
     return next();

@@ -88,7 +88,6 @@ class Order {
  */
   static getSpecificOrder(req, res) {
     const { orderId } = req.params;
-    // orderId = parseInt(orderId, 10);
     const getSpecificOrderQuery = {
       text: `SELECT
         fullname, 
@@ -232,6 +231,46 @@ class Order {
         message: 'Internal server error',
         err,
       }));
+  }
+
+  /**
+ *  @returns {object} deleteOrderHistory
+ * @param {*} req
+ * @param {*} res
+ */
+  static deleteOrder(req, res) {
+    const userId = parseInt(req.decoded.userId, 10);
+    const { orderId } = req.params;
+    const getSpecificOrderQuery = {
+      text: 'SELECT * FROM orders WHERE id=$1',
+      values: [parseInt(orderId, 10)],
+    };
+    const deleteOrderquery = {
+      text: 'DELETE FROM orders z WHERE z.id=$1 AND z.user_id=$2',
+      values: [parseInt(orderId, 10), userId],
+    };
+    return dbConnection.query(getSpecificOrderQuery)
+      .then((order) => {
+        if (order.rowCount === 0) {
+          return res.status(404).json({
+            status: 'Fail',
+            message: 'The order you want to delete does not exist',
+          });
+        }
+        return dbConnection.query(deleteOrderquery)
+          .then(() => res.status(200).json({
+            status: 'success',
+            message: 'Order deleted successfully',
+          }))
+          .catch(error => res.status(500).json({
+            status: 'error',
+            message: error.message,
+          }));
+      })
+      .catch(error => res.status(500).json({
+        status: 'error',
+        message: error.message,
+      }))
   }
 }
 export default Order;

@@ -32,6 +32,7 @@ router.get('/orders/:orderId', authentication, order.getSpecificOrder);
 router.post('/orders', validation.createOrderValidation, authentication, order.createOrder);
 router.put('/orders/:orderId', validation.validateStatus, authentication, order.updateOrderStatus);
 router.get('/users/orders', authentication, order.getOrderHistory);
+router.delete('/orders/:orderId', authentication, order.deleteOrder);
 
 
 export default router;

@@ -59,7 +59,7 @@ class Menu {
           message: 'You are not authorised to perform this action',
         });
       })
-      .catch(err => res.status(500).json({
+      .catch(() => res.status(500).json({
         status: 'Error',
         message: 'Internal server error, please try again later',
       }));
@@ -82,7 +82,7 @@ class Menu {
           message: 'No food in the menu',
         });
       })
-      .catch(err => res.status(500).json({
+      .catch(() => res.status(500).json({
         status: 'error',
         message: 'Internal server error, please try again later',
       }));
@@ -171,7 +171,7 @@ class Menu {
           });
         }
         return dbConnection.query(deleteQuery)
-          .then(deletedData => res.status(200).json({
+          .then(() => res.status(200).json({
             status: 'Success',
             message: 'Menu item deleted successfully',
           }))
